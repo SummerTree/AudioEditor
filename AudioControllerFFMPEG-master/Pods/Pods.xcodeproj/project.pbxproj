@@ -1,0 +1,1098 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		9518866687192F3882112448B34BCCC5 /* mobile-ffmpeg-full-gpl */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 3816DE9EE554F9B5FD59FF0CB26591B0 /* Build configuration list for PBXAggregateTarget "mobile-ffmpeg-full-gpl" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = "mobile-ffmpeg-full-gpl";
+			productName = "mobile-ffmpeg-full-gpl";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		08451916ECE3653923E7BA46D6A87134 /* String-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6E104B07855A88619EF0A94AF9347 /* String-Extension.swift */; };
+		0856DB2D1094141E78E61DDAD657CF5F /* Pods-AudioControllerFFMPEG-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 451B4CF4C13B3CFCD64AF0547F11F758 /* Pods-AudioControllerFFMPEG-dummy.m */; };
+		0D0FC58383E3FBA168FF36EF689C1438 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51808A18A964446539652BE75EC092AA /* UIKit.framework */; };
+		12436FF09177BC5C2DEF8CFDADC92464 /* ZKProgressHUDEffectStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9FE19A9466C2259B6DB949F1DDD887 /* ZKProgressHUDEffectStyle.swift */; };
+		196465354E0E5906E7274AE3B628F3E6 /* ICGVideoTrimmerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 455F5640FFBC89F294A8BB22D4143C6F /* ICGVideoTrimmerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2DAAAF741B72F303D16E0C60C91F6406 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503EC7FE8C5E17944165C81BF0578492 /* Foundation.framework */; };
+		32C4B7F62189A461E1750332FE347CBB /* ZKProgressHUDMaskStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB358E3DD3453727BB09D0CF154425E /* ZKProgressHUDMaskStyle.swift */; };
+		3696698F4693E8F8AD17E066C605759C /* Pods-AudioControllerFFMPEG-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E5C77DAA991D65DA00AC1FA9F28F96 /* Pods-AudioControllerFFMPEG-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D4FAF8F0EE0FBC0C7CE5810B99BA2F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503EC7FE8C5E17944165C81BF0578492 /* Foundation.framework */; };
+		5485438737FC94226D4897365F0F7A65 /* ZKProgressHUD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4920ECEA3C05C671BACF66C25186EFAA /* ZKProgressHUD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57C38278A2DF3D76BE53633CC81DF69D /* UIView-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96285B6746FF095E73DB92607204EF6 /* UIView-Extension.swift */; };
+		65BDCC05D809DAE2DCF16CEF713AB1E4 /* ZKProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF74A440577B3ADB74FFAA1855203A33 /* ZKProgressHUD.swift */; };
+		695697AAB36E8BF7EEA5AE82B74136FE /* ICGRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75FEA3D77E574CA300B2A259D50ED1D2 /* ICGRulerView.m */; };
+		7355E516992F5718D1F24896EEFE22B6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2204D10A3E856149FF706A0157A05B01 /* AVFoundation.framework */; };
+		7954F915460D02491F5CB712055C6BC5 /* ICGRulerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 967B90A682D198A6DDED5C012931A2A6 /* ICGRulerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7CD787D5C52AED579263502F9FF55B35 /* ICGVideoTrimmer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BB1A2C95DA35B11116A116FA1F60126 /* ICGVideoTrimmer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7EDD9ACA88DCD380312BE53B6EB31598 /* ZKProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 99219FB9382712FAB8B5B0B14A1A67B1 /* ZKProgressHUD-dummy.m */; };
+		87E4A6C61CBC9355F50ACC274F96A92E /* ZKProgressHUDAnimationShowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AF034440E13C6F1B00E279E6240B61 /* ZKProgressHUDAnimationShowStyle.swift */; };
+		8D3F051960617545CE10F01264F988E1 /* ICGThumbView.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C13CD14087D8A244D3339C6A737CDD8 /* ICGThumbView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8F48947D24C8501D00427B50 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F48947C24C8501D00427B50 /* CoreServices.framework */; };
+		A59B98727493B07C77734C1AADA91730 /* ZKProgressHUDConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72251521C8C4E4DCDD93AE8B537EAC44 /* ZKProgressHUDConfig.swift */; };
+		AB0A7804C7ED091A25BE5EDEDA6DE728 /* ZKProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DCE8C6587094D78D491E3B9183762B35 /* ZKProgressHUD.bundle */; };
+		B2927B4C01C4DFF60A2CBD34FFFFD716 /* UIWindow-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E7EEF12CDC6AC62F4E2CA4CA4AD25E /* UIWindow-Extension.swift */; };
+		B94B3039861CDDFD0F06F5C2677078D5 /* ZKPrigressHUDImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E4678773E7EDA3AC507B4017B301A0 /* ZKPrigressHUDImageType.swift */; };
+		C1024E9A1309F341E7BB284FC6CFF7D5 /* ZKProgressHUDAnimationStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3990A7730B242D66D598FF588AAC8B7 /* ZKProgressHUDAnimationStyle.swift */; };
+		C910AF91C7297755C0676D91B04E96B1 /* ZKGifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4672057A8AD1C3F5459F32B6F0A0DA /* ZKGifView.swift */; };
+		CB5494CB96AB214B1A048334979DFFBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 503EC7FE8C5E17944165C81BF0578492 /* Foundation.framework */; };
+		CDC3003144E724B7D9F88DBA5B369E8D /* ICGVideoTrimmerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8612FD6C2AB8770FD3E78C544E61078D /* ICGVideoTrimmerView.m */; };
+		CE716E1A5E4520429737E53ECB207530 /* ZKProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B65FE6F14B8CACC641913E45FCD9FB /* ZKProgressView.swift */; };
+		D6F73D34EB5A3A967FA6D3B5FBDB668E /* ICGThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB2F0CCA74C27C657A039ADF33C52B /* ICGThumbView.m */; };
+		DEF17BC15C99762CD2C693C651A0CF16 /* ICGVideoTrimmer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D37A6D11462B3D2E7B5DFF204537203F /* ICGVideoTrimmer-dummy.m */; };
+		F495DA2B697D4AA3253F2EF48FA99A3E /* ZKProgressHUDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799520617EB0061C55803D75C2E1022E /* ZKProgressHUDType.swift */; };
+		F809B87C82EDF2B6244323594DEC42D0 /* ICGVideoTrimmer.h in Headers */ = {isa = PBXBuildFile; fileRef = 62FA6547A431F9018F91A61273260AAA /* ICGVideoTrimmer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		253197A5DCE208241225E5510C96ACF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9518866687192F3882112448B34BCCC5;
+			remoteInfo = "mobile-ffmpeg-full-gpl";
+		};
+		570281ED368AD7C79B83C0CE4B763CD0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED35DBC4444F7F4FCFEA05DA40769B50;
+			remoteInfo = ICGVideoTrimmer;
+		};
+		C3CB031036B78F38B6C41BE808A49EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 75094B1E3FD1A5CF540C49315CA26505;
+			remoteInfo = ZKProgressHUD;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		034B831F14F0E0989228B11C60401136 /* fontconfig.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = fontconfig.xcframework; sourceTree = "<group>"; };
+		07C65EA56F7DBC25663BFB7E50DB67CD /* libavcodec.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libavcodec.xcframework; sourceTree = "<group>"; };
+		07FB776C5CA1657C3A1E13AF85368F49 /* ZKProgressHUD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ZKProgressHUD.release.xcconfig; sourceTree = "<group>"; };
+		0A093C9DE22888B36602270FC88A7FF3 /* x265.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = x265.xcframework; sourceTree = "<group>"; };
+		0C098F684EC4055D64EE4E3053F711B0 /* libwebpmux.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libwebpmux.xcframework; sourceTree = "<group>"; };
+		0D64511128AB2062DF3974EC8E50D213 /* opus.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = opus.xcframework; sourceTree = "<group>"; };
+		0DF631BCC6DBF3047D3555B261680F60 /* ICGVideoTrimmer-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ICGVideoTrimmer-Info.plist"; sourceTree = "<group>"; };
+		0F41D76B6EF50CC625B6D75F226A2B44 /* libavutil.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libavutil.xcframework; sourceTree = "<group>"; };
+		10807CB7A79196DF2D93063D73679715 /* libtheoraenc.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libtheoraenc.xcframework; sourceTree = "<group>"; };
+		160A5D12197B9A5AAE4E27291179D800 /* kvazaar.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = kvazaar.xcframework; sourceTree = "<group>"; };
+		1970ADB244D9A87D6D410AD0C23AFE54 /* libswscale.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libswscale.xcframework; sourceTree = "<group>"; };
+		1B4B8C494DF3E238B02F2B991DBC5D74 /* Pods-AudioControllerFFMPEG-artifacts-Release-output-files.xcfilelist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcfilelist; path = "Pods-AudioControllerFFMPEG-artifacts-Release-output-files.xcfilelist"; sourceTree = "<group>"; };
+		1C25BE6D25554A7540FFCC5DB094BCF5 /* Pods-AudioControllerFFMPEG.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AudioControllerFFMPEG.debug.xcconfig"; sourceTree = "<group>"; };
+		20A99B8113240FC407286CE7F403349D /* libavdevice.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libavdevice.xcframework; sourceTree = "<group>"; };
+		2204D10A3E856149FF706A0157A05B01 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		23E7EEF12CDC6AC62F4E2CA4CA4AD25E /* UIWindow-Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIWindow-Extension.swift"; path = "ZKProgressHUD/UIWindow-Extension.swift"; sourceTree = "<group>"; };
+		2BB1A2C95DA35B11116A116FA1F60126 /* ICGVideoTrimmer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ICGVideoTrimmer-umbrella.h"; sourceTree = "<group>"; };
+		2C13CD14087D8A244D3339C6A737CDD8 /* ICGThumbView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ICGThumbView.h; path = Source/ICGThumbView.h; sourceTree = "<group>"; };
+		2C40C7B37538A34205CA310F6D2E3967 /* gmp.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = gmp.xcframework; sourceTree = "<group>"; };
+		2FE7FCAA93E16A45900E537DD172A88A /* Pods-AudioControllerFFMPEG-artifacts-Release-input-files.xcfilelist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcfilelist; path = "Pods-AudioControllerFFMPEG-artifacts-Release-input-files.xcfilelist"; sourceTree = "<group>"; };
+		300C90B412FA56286FC36048E72F3431 /* jpeg.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = jpeg.xcframework; sourceTree = "<group>"; };
+		353EAD78EF5613D90D854C9A39290725 /* Pods-AudioControllerFFMPEG-artifacts-Debug-input-files.xcfilelist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcfilelist; path = "Pods-AudioControllerFFMPEG-artifacts-Debug-input-files.xcfilelist"; sourceTree = "<group>"; };
+		39E5C77DAA991D65DA00AC1FA9F28F96 /* Pods-AudioControllerFFMPEG-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AudioControllerFFMPEG-umbrella.h"; sourceTree = "<group>"; };
+		3E2530EE6701DA60245C07313854B16A /* libsndfile.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libsndfile.xcframework; sourceTree = "<group>"; };
+		3FB358E3DD3453727BB09D0CF154425E /* ZKProgressHUDMaskStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKProgressHUDMaskStyle.swift; path = ZKProgressHUD/ZKProgressHUDMaskStyle.swift; sourceTree = "<group>"; };
+		449F4B6B5C09A25CC2BCDE62B57652A8 /* mobile-ffmpeg-full-gpl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "mobile-ffmpeg-full-gpl.debug.xcconfig"; sourceTree = "<group>"; };
+		451B4CF4C13B3CFCD64AF0547F11F758 /* Pods-AudioControllerFFMPEG-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AudioControllerFFMPEG-dummy.m"; sourceTree = "<group>"; };
+		455F5640FFBC89F294A8BB22D4143C6F /* ICGVideoTrimmerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ICGVideoTrimmerView.h; path = Source/ICGVideoTrimmerView.h; sourceTree = "<group>"; };
+		4920ECEA3C05C671BACF66C25186EFAA /* ZKProgressHUD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZKProgressHUD-umbrella.h"; sourceTree = "<group>"; };
+		4A4672057A8AD1C3F5459F32B6F0A0DA /* ZKGifView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKGifView.swift; path = ZKProgressHUD/ZKGifView.swift; sourceTree = "<group>"; };
+		4A8BDF42450C869C12F21FBC80953861 /* Pods-AudioControllerFFMPEG-artifacts-Debug-output-files.xcfilelist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcfilelist; path = "Pods-AudioControllerFFMPEG-artifacts-Debug-output-files.xcfilelist"; sourceTree = "<group>"; };
+		503EC7FE8C5E17944165C81BF0578492 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		51808A18A964446539652BE75EC092AA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		56662885A9B09C9FC34E1E6888B536D2 /* expat.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = expat.xcframework; sourceTree = "<group>"; };
+		5A015CD06CB7695074C05DF28793485F /* ZKProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ZKProgressHUD-prefix.pch"; sourceTree = "<group>"; };
+		5E2A9EB61276DE525EB8BF251AF7A91B /* libvorbisenc.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libvorbisenc.xcframework; sourceTree = "<group>"; };
+		62FA6547A431F9018F91A61273260AAA /* ICGVideoTrimmer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ICGVideoTrimmer.h; path = Source/ICGVideoTrimmer.h; sourceTree = "<group>"; };
+		68ECA10281DCC4BB011FB65D49CB7779 /* libilbc.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libilbc.xcframework; sourceTree = "<group>"; };
+		69A35CF23B3D7F8D6E587E69E033219A /* gnutls.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = gnutls.xcframework; sourceTree = "<group>"; };
+		6CD2EFE558EB375F0B4A41CBC28A8584 /* ICGVideoTrimmer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ICGVideoTrimmer-prefix.pch"; sourceTree = "<group>"; };
+		6D819657F256212BC7B3C1DD2136574E /* libxml2.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libxml2.xcframework; sourceTree = "<group>"; };
+		72251521C8C4E4DCDD93AE8B537EAC44 /* ZKProgressHUDConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKProgressHUDConfig.swift; path = ZKProgressHUD/ZKProgressHUDConfig.swift; sourceTree = "<group>"; };
+		73D26354E6344F9EE7EE749F0A3960B3 /* soxr.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = soxr.xcframework; sourceTree = "<group>"; };
+		75FEA3D77E574CA300B2A259D50ED1D2 /* ICGRulerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ICGRulerView.m; path = Source/ICGRulerView.m; sourceTree = "<group>"; };
+		7646CC8EF41A93F591DFD1ACBC9768B2 /* giflib.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = giflib.xcframework; sourceTree = "<group>"; };
+		798A8CB85E2A7ADA265231D6DBBB0E1C /* Pods-AudioControllerFFMPEG-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AudioControllerFFMPEG-frameworks.sh"; sourceTree = "<group>"; };
+		799520617EB0061C55803D75C2E1022E /* ZKProgressHUDType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKProgressHUDType.swift; path = ZKProgressHUD/ZKProgressHUDType.swift; sourceTree = "<group>"; };
+		7AC369FD1946C4B4B25A15DFB54FB60A /* libvpx.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libvpx.xcframework; sourceTree = "<group>"; };
+		7DA58BD5822F319376B12B993C60F116 /* libpng.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libpng.xcframework; sourceTree = "<group>"; };
+		7F62BC1AF51617D7EABA9171E7DDCD4E /* freetype.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = freetype.xcframework; sourceTree = "<group>"; };
+		83227A7759A3933F4B123FC39BE15945 /* shine.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = shine.xcframework; sourceTree = "<group>"; };
+		83A64ED3291235E52D4BE08A190BDF0A /* mobileffmpeg.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = mobileffmpeg.xcframework; sourceTree = "<group>"; };
+		840599567D6E8DA3ECD9C5D42C69EB4C /* libogg.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libogg.xcframework; sourceTree = "<group>"; };
+		85AF034440E13C6F1B00E279E6240B61 /* ZKProgressHUDAnimationShowStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKProgressHUDAnimationShowStyle.swift; path = ZKProgressHUD/ZKProgressHUDAnimationShowStyle.swift; sourceTree = "<group>"; };
+		8612FD6C2AB8770FD3E78C544E61078D /* ICGVideoTrimmerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ICGVideoTrimmerView.m; path = Source/ICGVideoTrimmerView.m; sourceTree = "<group>"; };
+		87710569BA589463E9B61165C3206386 /* ZKProgressHUD-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ZKProgressHUD-Info.plist"; sourceTree = "<group>"; };
+		88E4678773E7EDA3AC507B4017B301A0 /* ZKPrigressHUDImageType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKPrigressHUDImageType.swift; path = ZKProgressHUD/ZKPrigressHUDImageType.swift; sourceTree = "<group>"; };
+		89094F3F0BC61F0AD383161F7255A1B8 /* x264.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = x264.xcframework; sourceTree = "<group>"; };
+		8E0D0E0D2CAD7CA5DC7B904B07F9DB1B /* ICGVideoTrimmer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ICGVideoTrimmer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F48947C24C8501D00427B50 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		92884834E5AE5D73CE57EA4A17C550F3 /* libswresample.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libswresample.xcframework; sourceTree = "<group>"; };
+		967B90A682D198A6DDED5C012931A2A6 /* ICGRulerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ICGRulerView.h; path = Source/ICGRulerView.h; sourceTree = "<group>"; };
+		989CB23A76E3403910E37BFE8C7AC74B /* mobile-ffmpeg-full-gpl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "mobile-ffmpeg-full-gpl.release.xcconfig"; sourceTree = "<group>"; };
+		98B65FE6F14B8CACC641913E45FCD9FB /* ZKProgressView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKProgressView.swift; path = ZKProgressHUD/ZKProgressView.swift; sourceTree = "<group>"; };
+		99219FB9382712FAB8B5B0B14A1A67B1 /* ZKProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ZKProgressHUD-dummy.m"; sourceTree = "<group>"; };
+		9A414A770569EFF0F1A743697447AE15 /* Pods-AudioControllerFFMPEG-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AudioControllerFFMPEG-Info.plist"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9DF1D4E2A603B4BA81A77C97D78D2E8F /* libaom.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libaom.xcframework; sourceTree = "<group>"; };
+		A00DEFC03B7A07D49C7751393ADA98EF /* libavfilter.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libavfilter.xcframework; sourceTree = "<group>"; };
+		A05CE15D2F2F64982F67A2524BF55464 /* libwebpdemux.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libwebpdemux.xcframework; sourceTree = "<group>"; };
+		A1A3EC4EC4F566DF637D8B33D1A6616D /* fribidi.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = fribidi.xcframework; sourceTree = "<group>"; };
+		A35EA901F57A07347E87063FEB5EAE60 /* libtheora.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libtheora.xcframework; sourceTree = "<group>"; };
+		A3990A7730B242D66D598FF588AAC8B7 /* ZKProgressHUDAnimationStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKProgressHUDAnimationStyle.swift; path = ZKProgressHUD/ZKProgressHUDAnimationStyle.swift; sourceTree = "<group>"; };
+		A4BF19850E8C0B36A4DED1C4BE133108 /* ICGVideoTrimmer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ICGVideoTrimmer.debug.xcconfig; sourceTree = "<group>"; };
+		A55BF07EB1AC214C513FFB773B87F2AC /* ZKProgressHUD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ZKProgressHUD.debug.xcconfig; sourceTree = "<group>"; };
+		ABF18A074272316405126651FD97D178 /* ZKProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZKProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF74A440577B3ADB74FFAA1855203A33 /* ZKProgressHUD.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKProgressHUD.swift; path = ZKProgressHUD/ZKProgressHUD.swift; sourceTree = "<group>"; };
+		B7B650F66AF876D81A05D34B416C01F6 /* libhogweed.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libhogweed.xcframework; sourceTree = "<group>"; };
+		B96363D2476C9A9407579531E59AD68C /* lame.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = lame.xcframework; sourceTree = "<group>"; };
+		BC5AD753CF952C7E2C041D21A6351CBB /* libvorbis.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libvorbis.xcframework; sourceTree = "<group>"; };
+		C12C9319F1020B2F8334EBE2565FC8AA /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		C1648EB9E35B9AA30C8E7D5D7D09795E /* Pods_AudioControllerFFMPEG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioControllerFFMPEG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1F2555D50907BA5A6B648558FA75443 /* Pods-AudioControllerFFMPEG-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AudioControllerFFMPEG-acknowledgements.plist"; sourceTree = "<group>"; };
+		C74D606744C7087B8C373F64ACB88890 /* snappy.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = snappy.xcframework; sourceTree = "<group>"; };
+		C76F47EB30EAA4A26883876969BFF333 /* ZKProgressHUD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ZKProgressHUD.modulemap; sourceTree = "<group>"; };
+		C8ADB30CF78C13CB1131B83F21535191 /* ICGVideoTrimmer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ICGVideoTrimmer.release.xcconfig; sourceTree = "<group>"; };
+		CA6379EB825F2FEB615C44D59713A8AA /* libwebp.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libwebp.xcframework; sourceTree = "<group>"; };
+		CB240F0D548ECA20D3C012BA13B5C1AC /* Pods-AudioControllerFFMPEG-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AudioControllerFFMPEG-acknowledgements.markdown"; sourceTree = "<group>"; };
+		CF2866967122F57CD76C21C57ED5D35D /* Pods-AudioControllerFFMPEG.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AudioControllerFFMPEG.modulemap"; sourceTree = "<group>"; };
+		CF9FE19A9466C2259B6DB949F1DDD887 /* ZKProgressHUDEffectStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ZKProgressHUDEffectStyle.swift; path = ZKProgressHUD/ZKProgressHUDEffectStyle.swift; sourceTree = "<group>"; };
+		D195DCD94E78F8AA41DCC27E6041382E /* speex.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = speex.xcframework; sourceTree = "<group>"; };
+		D30581770F638DFEE83D30A2DCC1AFD1 /* ICGVideoTrimmer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ICGVideoTrimmer.modulemap; sourceTree = "<group>"; };
+		D37A6D11462B3D2E7B5DFF204537203F /* ICGVideoTrimmer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ICGVideoTrimmer-dummy.m"; sourceTree = "<group>"; };
+		D425D1CF30D5917E959FEEBBE499149A /* wavpack.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = wavpack.xcframework; sourceTree = "<group>"; };
+		D7CCEEA90A6C25EBED4F28B7787257E7 /* libavformat.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libavformat.xcframework; sourceTree = "<group>"; };
+		DA0AD0C8B3A7F9397B1B543F1FE8B02A /* tiff.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = tiff.xcframework; sourceTree = "<group>"; };
+		DCE8C6587094D78D491E3B9183762B35 /* ZKProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = ZKProgressHUD.bundle; path = ZKProgressHUD/ZKProgressHUD.bundle; sourceTree = "<group>"; };
+		DD71EA0C4819F124B3232B0B999B1D15 /* libvidstab.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libvidstab.xcframework; sourceTree = "<group>"; };
+		DE05D48CB1BFF61EA7405EF773CC0EF7 /* libvorbisfile.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libvorbisfile.xcframework; sourceTree = "<group>"; };
+		DFD7ED0CFC0C29987F39B5389989AD86 /* Pods-AudioControllerFFMPEG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AudioControllerFFMPEG.release.xcconfig"; sourceTree = "<group>"; };
+		E14164CFE18F194499A6ADA686C7636E /* libopencore-amrnb.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = "libopencore-amrnb.xcframework"; sourceTree = "<group>"; };
+		E15A6CB4C37E2820B648E0F6B9885488 /* Pods-AudioControllerFFMPEG-artifacts.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AudioControllerFFMPEG-artifacts.sh"; sourceTree = "<group>"; };
+		E33237B130618B26F4CB76D1342A592F /* libass.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libass.xcframework; sourceTree = "<group>"; };
+		EDA2E9CAE1C44532030727115C9F5913 /* libtheoradec.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libtheoradec.xcframework; sourceTree = "<group>"; };
+		F1AB2F0CCA74C27C657A039ADF33C52B /* ICGThumbView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ICGThumbView.m; path = Source/ICGThumbView.m; sourceTree = "<group>"; };
+		F5F850AE918F0648463B204D1B051B7B /* xvidcore.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = xvidcore.xcframework; sourceTree = "<group>"; };
+		F80750BFF98E664ABF89263DFD714E08 /* libnettle.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = libnettle.xcframework; sourceTree = "<group>"; };
+		F9587E71F5CA21776B2355617AFEDF82 /* twolame.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = twolame.xcframework; sourceTree = "<group>"; };
+		F96285B6746FF095E73DB92607204EF6 /* UIView-Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView-Extension.swift"; path = "ZKProgressHUD/UIView-Extension.swift"; sourceTree = "<group>"; };
+		FA696F92E139C37BA3B05FFCF1A113A9 /* libopencore-amrwb.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = "libopencore-amrwb.xcframework"; sourceTree = "<group>"; };
+		FAE6E104B07855A88619EF0A94AF9347 /* String-Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String-Extension.swift"; path = "ZKProgressHUD/String-Extension.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D40581E0FF50A55DA6FA58EA596E22D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2DAAAF741B72F303D16E0C60C91F6406 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8838B080E02671D88CB1E9D165D16F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7355E516992F5718D1F24896EEFE22B6 /* AVFoundation.framework in Frameworks */,
+				4D4FAF8F0EE0FBC0C7CE5810B99BA2F8 /* Foundation.framework in Frameworks */,
+				8F48947D24C8501D00427B50 /* CoreServices.framework in Frameworks */,
+				0D0FC58383E3FBA168FF36EF689C1438 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAAA24A7FF514EBE007C4A26A0665DCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB5494CB96AB214B1A048334979DFFBD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0041A2A4862FCFD59522A27713D52DC9 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7984CFD678BB8D02798B9A9280CD6CB4 /* Pods-AudioControllerFFMPEG */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		09440E877520CA55F8FEC6A503112126 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				449F4B6B5C09A25CC2BCDE62B57652A8 /* mobile-ffmpeg-full-gpl.debug.xcconfig */,
+				989CB23A76E3403910E37BFE8C7AC74B /* mobile-ffmpeg-full-gpl.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/mobile-ffmpeg-full-gpl";
+			sourceTree = "<group>";
+		};
+		7984CFD678BB8D02798B9A9280CD6CB4 /* Pods-AudioControllerFFMPEG */ = {
+			isa = PBXGroup;
+			children = (
+				CF2866967122F57CD76C21C57ED5D35D /* Pods-AudioControllerFFMPEG.modulemap */,
+				CB240F0D548ECA20D3C012BA13B5C1AC /* Pods-AudioControllerFFMPEG-acknowledgements.markdown */,
+				C1F2555D50907BA5A6B648558FA75443 /* Pods-AudioControllerFFMPEG-acknowledgements.plist */,
+				E15A6CB4C37E2820B648E0F6B9885488 /* Pods-AudioControllerFFMPEG-artifacts.sh */,
+				353EAD78EF5613D90D854C9A39290725 /* Pods-AudioControllerFFMPEG-artifacts-Debug-input-files.xcfilelist */,
+				4A8BDF42450C869C12F21FBC80953861 /* Pods-AudioControllerFFMPEG-artifacts-Debug-output-files.xcfilelist */,
+				2FE7FCAA93E16A45900E537DD172A88A /* Pods-AudioControllerFFMPEG-artifacts-Release-input-files.xcfilelist */,
+				1B4B8C494DF3E238B02F2B991DBC5D74 /* Pods-AudioControllerFFMPEG-artifacts-Release-output-files.xcfilelist */,
+				451B4CF4C13B3CFCD64AF0547F11F758 /* Pods-AudioControllerFFMPEG-dummy.m */,
+				798A8CB85E2A7ADA265231D6DBBB0E1C /* Pods-AudioControllerFFMPEG-frameworks.sh */,
+				9A414A770569EFF0F1A743697447AE15 /* Pods-AudioControllerFFMPEG-Info.plist */,
+				39E5C77DAA991D65DA00AC1FA9F28F96 /* Pods-AudioControllerFFMPEG-umbrella.h */,
+				1C25BE6D25554A7540FFCC5DB094BCF5 /* Pods-AudioControllerFFMPEG.debug.xcconfig */,
+				DFD7ED0CFC0C29987F39B5389989AD86 /* Pods-AudioControllerFFMPEG.release.xcconfig */,
+			);
+			name = "Pods-AudioControllerFFMPEG";
+			path = "Target Support Files/Pods-AudioControllerFFMPEG";
+			sourceTree = "<group>";
+		};
+		7E13988FAD1903F240A38BB2420C6E9A /* ZKProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				FAE6E104B07855A88619EF0A94AF9347 /* String-Extension.swift */,
+				F96285B6746FF095E73DB92607204EF6 /* UIView-Extension.swift */,
+				23E7EEF12CDC6AC62F4E2CA4CA4AD25E /* UIWindow-Extension.swift */,
+				4A4672057A8AD1C3F5459F32B6F0A0DA /* ZKGifView.swift */,
+				88E4678773E7EDA3AC507B4017B301A0 /* ZKPrigressHUDImageType.swift */,
+				AF74A440577B3ADB74FFAA1855203A33 /* ZKProgressHUD.swift */,
+				85AF034440E13C6F1B00E279E6240B61 /* ZKProgressHUDAnimationShowStyle.swift */,
+				A3990A7730B242D66D598FF588AAC8B7 /* ZKProgressHUDAnimationStyle.swift */,
+				72251521C8C4E4DCDD93AE8B537EAC44 /* ZKProgressHUDConfig.swift */,
+				CF9FE19A9466C2259B6DB949F1DDD887 /* ZKProgressHUDEffectStyle.swift */,
+				3FB358E3DD3453727BB09D0CF154425E /* ZKProgressHUDMaskStyle.swift */,
+				799520617EB0061C55803D75C2E1022E /* ZKProgressHUDType.swift */,
+				98B65FE6F14B8CACC641913E45FCD9FB /* ZKProgressView.swift */,
+				D514D311C0ED988389E420F9457AB795 /* Resources */,
+				9951642889B5D3821CD2327B86FEA963 /* Support Files */,
+			);
+			path = ZKProgressHUD;
+			sourceTree = "<group>";
+		};
+		844967BA5887CE49C7C1EB108E6191AC /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				2204D10A3E856149FF706A0157A05B01 /* AVFoundation.framework */,
+				503EC7FE8C5E17944165C81BF0578492 /* Foundation.framework */,
+				C12C9319F1020B2F8334EBE2565FC8AA /* MobileCoreServices.framework */,
+				51808A18A964446539652BE75EC092AA /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		92204C653F56CA56CC26F259F1806256 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D30581770F638DFEE83D30A2DCC1AFD1 /* ICGVideoTrimmer.modulemap */,
+				D37A6D11462B3D2E7B5DFF204537203F /* ICGVideoTrimmer-dummy.m */,
+				0DF631BCC6DBF3047D3555B261680F60 /* ICGVideoTrimmer-Info.plist */,
+				6CD2EFE558EB375F0B4A41CBC28A8584 /* ICGVideoTrimmer-prefix.pch */,
+				2BB1A2C95DA35B11116A116FA1F60126 /* ICGVideoTrimmer-umbrella.h */,
+				A4BF19850E8C0B36A4DED1C4BE133108 /* ICGVideoTrimmer.debug.xcconfig */,
+				C8ADB30CF78C13CB1131B83F21535191 /* ICGVideoTrimmer.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ICGVideoTrimmer";
+			sourceTree = "<group>";
+		};
+		9817DCF6E64E237AF1F4B0F96F78BB34 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				56662885A9B09C9FC34E1E6888B536D2 /* expat.xcframework */,
+				034B831F14F0E0989228B11C60401136 /* fontconfig.xcframework */,
+				7F62BC1AF51617D7EABA9171E7DDCD4E /* freetype.xcframework */,
+				A1A3EC4EC4F566DF637D8B33D1A6616D /* fribidi.xcframework */,
+				7646CC8EF41A93F591DFD1ACBC9768B2 /* giflib.xcframework */,
+				2C40C7B37538A34205CA310F6D2E3967 /* gmp.xcframework */,
+				69A35CF23B3D7F8D6E587E69E033219A /* gnutls.xcframework */,
+				300C90B412FA56286FC36048E72F3431 /* jpeg.xcframework */,
+				160A5D12197B9A5AAE4E27291179D800 /* kvazaar.xcframework */,
+				B96363D2476C9A9407579531E59AD68C /* lame.xcframework */,
+				9DF1D4E2A603B4BA81A77C97D78D2E8F /* libaom.xcframework */,
+				E33237B130618B26F4CB76D1342A592F /* libass.xcframework */,
+				07C65EA56F7DBC25663BFB7E50DB67CD /* libavcodec.xcframework */,
+				20A99B8113240FC407286CE7F403349D /* libavdevice.xcframework */,
+				A00DEFC03B7A07D49C7751393ADA98EF /* libavfilter.xcframework */,
+				D7CCEEA90A6C25EBED4F28B7787257E7 /* libavformat.xcframework */,
+				0F41D76B6EF50CC625B6D75F226A2B44 /* libavutil.xcframework */,
+				B7B650F66AF876D81A05D34B416C01F6 /* libhogweed.xcframework */,
+				68ECA10281DCC4BB011FB65D49CB7779 /* libilbc.xcframework */,
+				F80750BFF98E664ABF89263DFD714E08 /* libnettle.xcframework */,
+				840599567D6E8DA3ECD9C5D42C69EB4C /* libogg.xcframework */,
+				E14164CFE18F194499A6ADA686C7636E /* libopencore-amrnb.xcframework */,
+				FA696F92E139C37BA3B05FFCF1A113A9 /* libopencore-amrwb.xcframework */,
+				7DA58BD5822F319376B12B993C60F116 /* libpng.xcframework */,
+				3E2530EE6701DA60245C07313854B16A /* libsndfile.xcframework */,
+				92884834E5AE5D73CE57EA4A17C550F3 /* libswresample.xcframework */,
+				1970ADB244D9A87D6D410AD0C23AFE54 /* libswscale.xcframework */,
+				A35EA901F57A07347E87063FEB5EAE60 /* libtheora.xcframework */,
+				EDA2E9CAE1C44532030727115C9F5913 /* libtheoradec.xcframework */,
+				10807CB7A79196DF2D93063D73679715 /* libtheoraenc.xcframework */,
+				DD71EA0C4819F124B3232B0B999B1D15 /* libvidstab.xcframework */,
+				BC5AD753CF952C7E2C041D21A6351CBB /* libvorbis.xcframework */,
+				5E2A9EB61276DE525EB8BF251AF7A91B /* libvorbisenc.xcframework */,
+				DE05D48CB1BFF61EA7405EF773CC0EF7 /* libvorbisfile.xcframework */,
+				7AC369FD1946C4B4B25A15DFB54FB60A /* libvpx.xcframework */,
+				CA6379EB825F2FEB615C44D59713A8AA /* libwebp.xcframework */,
+				A05CE15D2F2F64982F67A2524BF55464 /* libwebpdemux.xcframework */,
+				0C098F684EC4055D64EE4E3053F711B0 /* libwebpmux.xcframework */,
+				6D819657F256212BC7B3C1DD2136574E /* libxml2.xcframework */,
+				83A64ED3291235E52D4BE08A190BDF0A /* mobileffmpeg.xcframework */,
+				0D64511128AB2062DF3974EC8E50D213 /* opus.xcframework */,
+				83227A7759A3933F4B123FC39BE15945 /* shine.xcframework */,
+				C74D606744C7087B8C373F64ACB88890 /* snappy.xcframework */,
+				73D26354E6344F9EE7EE749F0A3960B3 /* soxr.xcframework */,
+				D195DCD94E78F8AA41DCC27E6041382E /* speex.xcframework */,
+				DA0AD0C8B3A7F9397B1B543F1FE8B02A /* tiff.xcframework */,
+				F9587E71F5CA21776B2355617AFEDF82 /* twolame.xcframework */,
+				D425D1CF30D5917E959FEEBBE499149A /* wavpack.xcframework */,
+				89094F3F0BC61F0AD383161F7255A1B8 /* x264.xcframework */,
+				0A093C9DE22888B36602270FC88A7FF3 /* x265.xcframework */,
+				F5F850AE918F0648463B204D1B051B7B /* xvidcore.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9951642889B5D3821CD2327B86FEA963 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C76F47EB30EAA4A26883876969BFF333 /* ZKProgressHUD.modulemap */,
+				99219FB9382712FAB8B5B0B14A1A67B1 /* ZKProgressHUD-dummy.m */,
+				87710569BA589463E9B61165C3206386 /* ZKProgressHUD-Info.plist */,
+				5A015CD06CB7695074C05DF28793485F /* ZKProgressHUD-prefix.pch */,
+				4920ECEA3C05C671BACF66C25186EFAA /* ZKProgressHUD-umbrella.h */,
+				A55BF07EB1AC214C513FFB773B87F2AC /* ZKProgressHUD.debug.xcconfig */,
+				07FB776C5CA1657C3A1E13AF85368F49 /* ZKProgressHUD.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ZKProgressHUD";
+			sourceTree = "<group>";
+		};
+		A4AFD133065C51DF886891D29E410022 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E0D0E0D2CAD7CA5DC7B904B07F9DB1B /* ICGVideoTrimmer.framework */,
+				C1648EB9E35B9AA30C8E7D5D7D09795E /* Pods_AudioControllerFFMPEG.framework */,
+				ABF18A074272316405126651FD97D178 /* ZKProgressHUD.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A8658B4E757F0C30EF93CA5D2E15369C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CC89377499EB54070171FF905B3AD61F /* ICGVideoTrimmer */,
+				F26C4B615D890BDD005FC164F2AA1716 /* mobile-ffmpeg-full-gpl */,
+				7E13988FAD1903F240A38BB2420C6E9A /* ZKProgressHUD */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8F48947C24C8501D00427B50 /* CoreServices.framework */,
+				844967BA5887CE49C7C1EB108E6191AC /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CC89377499EB54070171FF905B3AD61F /* ICGVideoTrimmer */ = {
+			isa = PBXGroup;
+			children = (
+				967B90A682D198A6DDED5C012931A2A6 /* ICGRulerView.h */,
+				75FEA3D77E574CA300B2A259D50ED1D2 /* ICGRulerView.m */,
+				2C13CD14087D8A244D3339C6A737CDD8 /* ICGThumbView.h */,
+				F1AB2F0CCA74C27C657A039ADF33C52B /* ICGThumbView.m */,
+				62FA6547A431F9018F91A61273260AAA /* ICGVideoTrimmer.h */,
+				455F5640FFBC89F294A8BB22D4143C6F /* ICGVideoTrimmerView.h */,
+				8612FD6C2AB8770FD3E78C544E61078D /* ICGVideoTrimmerView.m */,
+				92204C653F56CA56CC26F259F1806256 /* Support Files */,
+			);
+			path = ICGVideoTrimmer;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				BA4F31F07263C99FC76E66D632A59F09 /* Frameworks */,
+				A8658B4E757F0C30EF93CA5D2E15369C /* Pods */,
+				A4AFD133065C51DF886891D29E410022 /* Products */,
+				0041A2A4862FCFD59522A27713D52DC9 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D514D311C0ED988389E420F9457AB795 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DCE8C6587094D78D491E3B9183762B35 /* ZKProgressHUD.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		F26C4B615D890BDD005FC164F2AA1716 /* mobile-ffmpeg-full-gpl */ = {
+			isa = PBXGroup;
+			children = (
+				9817DCF6E64E237AF1F4B0F96F78BB34 /* Frameworks */,
+				09440E877520CA55F8FEC6A503112126 /* Support Files */,
+			);
+			path = "mobile-ffmpeg-full-gpl";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4F2D4132C10016BC7868C67FDEDF55F3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7954F915460D02491F5CB712055C6BC5 /* ICGRulerView.h in Headers */,
+				8D3F051960617545CE10F01264F988E1 /* ICGThumbView.h in Headers */,
+				7CD787D5C52AED579263502F9FF55B35 /* ICGVideoTrimmer-umbrella.h in Headers */,
+				F809B87C82EDF2B6244323594DEC42D0 /* ICGVideoTrimmer.h in Headers */,
+				196465354E0E5906E7274AE3B628F3E6 /* ICGVideoTrimmerView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4E72A24779867948731DC551D29B32B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5485438737FC94226D4897365F0F7A65 /* ZKProgressHUD-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B26F2F6A8E0E723D1AE51D3C724DF07A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3696698F4693E8F8AD17E066C605759C /* Pods-AudioControllerFFMPEG-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		75094B1E3FD1A5CF540C49315CA26505 /* ZKProgressHUD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80E9FBB01CFDBD6CD7CF2FC9373D9385 /* Build configuration list for PBXNativeTarget "ZKProgressHUD" */;
+			buildPhases = (
+				A4E72A24779867948731DC551D29B32B /* Headers */,
+				905284289116441E75D34D4B65A76B81 /* Sources */,
+				D40581E0FF50A55DA6FA58EA596E22D2 /* Frameworks */,
+				DE47B27E51CAAFB57EB6AF618BE56A46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZKProgressHUD;
+			productName = ZKProgressHUD;
+			productReference = ABF18A074272316405126651FD97D178 /* ZKProgressHUD.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		7736E40DC2A0419F678F473957C38AAE /* Pods-AudioControllerFFMPEG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 710C3BB699E35C50B7F739A2373E1BF8 /* Build configuration list for PBXNativeTarget "Pods-AudioControllerFFMPEG" */;
+			buildPhases = (
+				B26F2F6A8E0E723D1AE51D3C724DF07A /* Headers */,
+				173C8F278EFFDEC7BE0081C3A6674285 /* Sources */,
+				FAAA24A7FF514EBE007C4A26A0665DCB /* Frameworks */,
+				BF556CE1453022ADF0EAEE60CA36ED38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F19CD0EEAAE640B8255711F19DE7BD48 /* PBXTargetDependency */,
+				D2ABA23715A385CED0FC567C1BEEFB91 /* PBXTargetDependency */,
+				2650E365523ACEE7D4F4FB1B4953D241 /* PBXTargetDependency */,
+			);
+			name = "Pods-AudioControllerFFMPEG";
+			productName = "Pods-AudioControllerFFMPEG";
+			productReference = C1648EB9E35B9AA30C8E7D5D7D09795E /* Pods_AudioControllerFFMPEG.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ED35DBC4444F7F4FCFEA05DA40769B50 /* ICGVideoTrimmer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AA03004B3D3E05523EAE62B1D72A391 /* Build configuration list for PBXNativeTarget "ICGVideoTrimmer" */;
+			buildPhases = (
+				4F2D4132C10016BC7868C67FDEDF55F3 /* Headers */,
+				BB9714FBE42A0F896ECA578F86A238A3 /* Sources */,
+				D8838B080E02671D88CB1E9D165D16F1 /* Frameworks */,
+				300F37CA55534817E20B27ACF728E88C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ICGVideoTrimmer;
+			productName = ICGVideoTrimmer;
+			productReference = 8E0D0E0D2CAD7CA5DC7B904B07F9DB1B /* ICGVideoTrimmer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 10.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = A4AFD133065C51DF886891D29E410022 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED35DBC4444F7F4FCFEA05DA40769B50 /* ICGVideoTrimmer */,
+				9518866687192F3882112448B34BCCC5 /* mobile-ffmpeg-full-gpl */,
+				7736E40DC2A0419F678F473957C38AAE /* Pods-AudioControllerFFMPEG */,
+				75094B1E3FD1A5CF540C49315CA26505 /* ZKProgressHUD */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		300F37CA55534817E20B27ACF728E88C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF556CE1453022ADF0EAEE60CA36ED38 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE47B27E51CAAFB57EB6AF618BE56A46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB0A7804C7ED091A25BE5EDEDA6DE728 /* ZKProgressHUD.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		173C8F278EFFDEC7BE0081C3A6674285 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0856DB2D1094141E78E61DDAD657CF5F /* Pods-AudioControllerFFMPEG-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		905284289116441E75D34D4B65A76B81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08451916ECE3653923E7BA46D6A87134 /* String-Extension.swift in Sources */,
+				57C38278A2DF3D76BE53633CC81DF69D /* UIView-Extension.swift in Sources */,
+				B2927B4C01C4DFF60A2CBD34FFFFD716 /* UIWindow-Extension.swift in Sources */,
+				C910AF91C7297755C0676D91B04E96B1 /* ZKGifView.swift in Sources */,
+				B94B3039861CDDFD0F06F5C2677078D5 /* ZKPrigressHUDImageType.swift in Sources */,
+				7EDD9ACA88DCD380312BE53B6EB31598 /* ZKProgressHUD-dummy.m in Sources */,
+				65BDCC05D809DAE2DCF16CEF713AB1E4 /* ZKProgressHUD.swift in Sources */,
+				87E4A6C61CBC9355F50ACC274F96A92E /* ZKProgressHUDAnimationShowStyle.swift in Sources */,
+				C1024E9A1309F341E7BB284FC6CFF7D5 /* ZKProgressHUDAnimationStyle.swift in Sources */,
+				A59B98727493B07C77734C1AADA91730 /* ZKProgressHUDConfig.swift in Sources */,
+				12436FF09177BC5C2DEF8CFDADC92464 /* ZKProgressHUDEffectStyle.swift in Sources */,
+				32C4B7F62189A461E1750332FE347CBB /* ZKProgressHUDMaskStyle.swift in Sources */,
+				F495DA2B697D4AA3253F2EF48FA99A3E /* ZKProgressHUDType.swift in Sources */,
+				CE716E1A5E4520429737E53ECB207530 /* ZKProgressView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB9714FBE42A0F896ECA578F86A238A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				695697AAB36E8BF7EEA5AE82B74136FE /* ICGRulerView.m in Sources */,
+				D6F73D34EB5A3A967FA6D3B5FBDB668E /* ICGThumbView.m in Sources */,
+				DEF17BC15C99762CD2C693C651A0CF16 /* ICGVideoTrimmer-dummy.m in Sources */,
+				CDC3003144E724B7D9F88DBA5B369E8D /* ICGVideoTrimmerView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2650E365523ACEE7D4F4FB1B4953D241 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "mobile-ffmpeg-full-gpl";
+			target = 9518866687192F3882112448B34BCCC5 /* mobile-ffmpeg-full-gpl */;
+			targetProxy = 253197A5DCE208241225E5510C96ACF8 /* PBXContainerItemProxy */;
+		};
+		D2ABA23715A385CED0FC567C1BEEFB91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ZKProgressHUD;
+			target = 75094B1E3FD1A5CF540C49315CA26505 /* ZKProgressHUD */;
+			targetProxy = C3CB031036B78F38B6C41BE808A49EB5 /* PBXContainerItemProxy */;
+		};
+		F19CD0EEAAE640B8255711F19DE7BD48 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ICGVideoTrimmer;
+			target = ED35DBC4444F7F4FCFEA05DA40769B50 /* ICGVideoTrimmer */;
+			targetProxy = 570281ED368AD7C79B83C0CE4B763CD0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		257497152829C177993B5EC99C1D227A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		33436925170392D7FF38070D76B47BF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A55BF07EB1AC214C513FFB773B87F2AC /* ZKProgressHUD.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ZKProgressHUD/ZKProgressHUD-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ZKProgressHUD/ZKProgressHUD-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/ZKProgressHUD/ZKProgressHUD.modulemap";
+				PRODUCT_MODULE_NAME = ZKProgressHUD;
+				PRODUCT_NAME = ZKProgressHUD;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		36C9FF9DA52F3D6F7A1F9ECD3EC90DE1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DFD7ED0CFC0C29987F39B5389989AD86 /* Pods-AudioControllerFFMPEG.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-AudioControllerFFMPEG/Pods-AudioControllerFFMPEG-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AudioControllerFFMPEG/Pods-AudioControllerFFMPEG.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		44352C9AFAAAEE48AE998371F0A40D79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 989CB23A76E3403910E37BFE8C7AC74B /* mobile-ffmpeg-full-gpl.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		72913ACF0C9B30F58B640DEE745CFFC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4BF19850E8C0B36A4DED1C4BE133108 /* ICGVideoTrimmer.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ICGVideoTrimmer/ICGVideoTrimmer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ICGVideoTrimmer/ICGVideoTrimmer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/ICGVideoTrimmer/ICGVideoTrimmer.modulemap";
+				PRODUCT_MODULE_NAME = ICGVideoTrimmer;
+				PRODUCT_NAME = ICGVideoTrimmer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8052EB3CA49BEC23E2AF1BD13A4ADE21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8ADB30CF78C13CB1131B83F21535191 /* ICGVideoTrimmer.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ICGVideoTrimmer/ICGVideoTrimmer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ICGVideoTrimmer/ICGVideoTrimmer-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/ICGVideoTrimmer/ICGVideoTrimmer.modulemap";
+				PRODUCT_MODULE_NAME = ICGVideoTrimmer;
+				PRODUCT_NAME = ICGVideoTrimmer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B2BE82BE7FC8921087506787D1B9EA6C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 449F4B6B5C09A25CC2BCDE62B57652A8 /* mobile-ffmpeg-full-gpl.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C333B52E8C9DEBA5E4DD496F4145E823 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C25BE6D25554A7540FFCC5DB094BCF5 /* Pods-AudioControllerFFMPEG.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-AudioControllerFFMPEG/Pods-AudioControllerFFMPEG-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AudioControllerFFMPEG/Pods-AudioControllerFFMPEG.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D3554E5F8894FFD426E27AA6162B4692 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07FB776C5CA1657C3A1E13AF85368F49 /* ZKProgressHUD.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ZKProgressHUD/ZKProgressHUD-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ZKProgressHUD/ZKProgressHUD-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/ZKProgressHUD/ZKProgressHUD.modulemap";
+				PRODUCT_MODULE_NAME = ZKProgressHUD;
+				PRODUCT_NAME = ZKProgressHUD;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		DD8F832993327D1DD8046C3CBCBD97CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3816DE9EE554F9B5FD59FF0CB26591B0 /* Build configuration list for PBXAggregateTarget "mobile-ffmpeg-full-gpl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2BE82BE7FC8921087506787D1B9EA6C /* Debug */,
+				44352C9AFAAAEE48AE998371F0A40D79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3AA03004B3D3E05523EAE62B1D72A391 /* Build configuration list for PBXNativeTarget "ICGVideoTrimmer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72913ACF0C9B30F58B640DEE745CFFC7 /* Debug */,
+				8052EB3CA49BEC23E2AF1BD13A4ADE21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD8F832993327D1DD8046C3CBCBD97CD /* Debug */,
+				257497152829C177993B5EC99C1D227A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		710C3BB699E35C50B7F739A2373E1BF8 /* Build configuration list for PBXNativeTarget "Pods-AudioControllerFFMPEG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C333B52E8C9DEBA5E4DD496F4145E823 /* Debug */,
+				36C9FF9DA52F3D6F7A1F9ECD3EC90DE1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80E9FBB01CFDBD6CD7CF2FC9373D9385 /* Build configuration list for PBXNativeTarget "ZKProgressHUD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33436925170392D7FF38070D76B47BF4 /* Debug */,
+				D3554E5F8894FFD426E27AA6162B4692 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

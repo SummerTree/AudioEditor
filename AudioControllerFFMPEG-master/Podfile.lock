@@ -1,0 +1,24 @@
+PODS:
+  - ICGVideoTrimmer (1.1)
+  - mobile-ffmpeg-full-gpl (4.3.2)
+  - ZKProgressHUD (5.0.1)
+
+DEPENDENCIES:
+  - ICGVideoTrimmer (~> 1.1)
+  - mobile-ffmpeg-full-gpl (~> 4.3.2)
+  - ZKProgressHUD (= 5.0.1)
+
+SPEC REPOS:
+  trunk:
+    - ICGVideoTrimmer
+    - mobile-ffmpeg-full-gpl
+    - ZKProgressHUD
+
+SPEC CHECKSUMS:
+  ICGVideoTrimmer: 1f54de0595af56af2a406f20cdb33c1c440d15cd
+  mobile-ffmpeg-full-gpl: ce51d476b7ff03ad67a58e2c95ab9100553d1a54
+  ZKProgressHUD: f1833e23655834d4459c711e94e924e49bc77442
+
+PODFILE CHECKSUM: b4d87498ea79b546de0b8c45aeec69fda9ae0fd2
+
+COCOAPODS: 1.9.3
