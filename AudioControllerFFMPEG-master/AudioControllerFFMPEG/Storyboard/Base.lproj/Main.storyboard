@@ -215,6 +215,7 @@
                         <outlet property="formView" destination="fFi-Kv-udz" id="phx-lA-6Ag"/>
                         <outlet property="lblEndTime" destination="Paz-Oh-SIC" id="5Ix-d8-DgU"/>
                         <outlet property="lblStartTime" destination="NgH-Mh-KHl" id="Ujg-0m-WBM"/>
+                        <outlet property="playerView" destination="Jq4-5I-49h" id="6dV-Fv-SSX"/>
                         <outlet property="tableView" destination="MDW-uc-Ruq" id="AOa-tn-Z8q"/>
                         <outlet property="trimmerView" destination="fFi-Kv-udz" id="9fr-FJ-gRe"/>
                     </connections>

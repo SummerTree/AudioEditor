@@ -16,6 +16,7 @@ import MediaPlayer
 class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerControllerDelegate {
     
     
+    @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var lblEndTime: UILabel!
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var btnPlay: UIButton!
@@ -45,13 +46,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var mediaPicker: MPMediaPickerController?
     var myMusicPlayer: MPMusicPlayerController?
     var audioPlayer: AVAudioPlayer?
-    
+    var videoPlayer: AVPlayer!
     var isPlay = false
     var isRecord = false
     var recordNum = 0
     var arrURL = [URL]()
     var recordURL:URL?
     var selectedMusic: Int!
+    var hasChooseMusic = false
     
     override func viewDidLoad() {
         
@@ -76,7 +78,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         asset = AVAsset(url: URL(fileURLWithPath: path))
         
-        addAudioPlayer(with: URL(fileURLWithPath: path))
+        addVieoPlayer(asset: asset, playerView: playerView)
+        
+        if hasChooseMusic {
+            addAudioPlayer(with: URL(fileURLWithPath: path))
+        }
         
         initTrimmerView(asset: asset)
         
@@ -103,11 +109,73 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
         player.enableRate = true
         player.numberOfLoops = -1
-        endTime = CGFloat(player.duration)
+        
+        initMedia() 
+    }
+    
+    private func addVieoPlayer(asset: AVAsset, playerView: UIView) {
+        let playerItem = AVPlayerItem(asset: asset)
+        videoPlayer = AVPlayer(playerItem: playerItem)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(itemDidFinishPlaying(_:)),
+        name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        
+        let layer: AVPlayerLayer = AVPlayerLayer(player: videoPlayer)
+        layer.backgroundColor = UIColor.white.cgColor
+        layer.frame = CGRect(x: 0, y: 0, width: playerView.frame.width, height: playerView.frame.height)
+        layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        playerView.layer.addSublayer(layer)
+        endTime = CGFloat(CMTimeGetSeconds((videoPlayer.currentItem?.asset.duration)!))
         startTime = 0
         initMedia()
+    }
+    
+    @objc func itemDidFinishPlaying(_ notification: Notification) {
+        if let start = self.startTime {
+            videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(start), preferredTimescale: 600))
+            videoPlayer.pause()
+            if hasChooseMusic {
+                player.currentTime = Double(start)
+                player.pause()
+            }
+           }
+       }
+    
+    // MARK: Playback time checker
+    
+    func startPlaybackTimeChecker() {
+        stopPlaybackTimeChecker()
+        playbackTimeCheckerTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(onPlaybackTimeChecker), userInfo: nil, repeats: true)
         
     }
+    
+    func stopPlaybackTimeChecker(){
+        playbackTimeCheckerTimer?.invalidate()
+        playbackTimeCheckerTimer = nil
+    }
+    
+    @objc func onPlaybackTimeChecker() {
+        
+        guard let start = startTime, let endTime = endTime, let videoPlayer = videoPlayer else {
+            return
+        }
+
+        let playBackTime = CGFloat(CMTimeGetSeconds(videoPlayer.currentTime()))
+        trimmerView.seek(toTime: playBackTime)
+
+        if playBackTime >= endTime {
+            videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(start), preferredTimescale: 600), toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+            videoPlayer.pause()
+            if hasChooseMusic {
+                player.currentTime = Double(start)
+                
+                player.pause()
+            }
+            trimmerView.seek(toTime: start)
+            changeIconBtnPlay()
+        }
+    }
+    
     
     func setLabelTime() {
         lblStartTime.text = CMTimeMakeWithSeconds(Float64(startTime!), preferredTimescale: 600).positionalTime
@@ -150,7 +218,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         self.trimmerView.delegate = self
         self.trimmerView.themeColor = .white
         self.trimmerView.showsRulerView = false
-        self.trimmerView.maxLength = CGFloat(player.duration)
+        self.trimmerView.maxLength = CGFloat(CMTimeGetSeconds((videoPlayer.currentItem?.asset.duration)!))
         self.trimmerView.trackerColor = .white
         self.trimmerView.thumbWidth = 10
         self.trimmerView.resetSubviews()
@@ -258,39 +326,12 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     
     func changeIconBtnPlay() {
-        if player.isPlaying {
+        if videoPlayer.isPlaying {
             btnPlay.setImage(UIImage(named: "icon_pause"), for: .normal)
         } else {
             btnPlay.setImage(UIImage(named: "icon_play"), for: .normal)
         }
-    }
-    
-    // MARK: Playback time checker
-    
-    func startPlaybackTimeChecker() {
-        stopPlaybackTimeChecker()
-        playbackTimeCheckerTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(onPlaybackTimeChecker), userInfo: nil, repeats: true)
-        
-    }
-    
-    func stopPlaybackTimeChecker(){
-        playbackTimeCheckerTimer?.invalidate()
-        playbackTimeCheckerTimer = nil
-    }
-    
-    @objc func onPlaybackTimeChecker() {
-        guard let start = startTime, let end = endTime else {
-            return
-        }
-        
-        let playbackTime = CGFloat(player.currentTime)
-        trimmerView.seek(toTime: playbackTime)
-        
-        
-        if Float(playbackTime) >= Float(end) {
-            player.currentTime = Double(start)
-            trimmerView.seek(toTime: start)
-        }
+        print("Change Icon")
     }
     
     
@@ -298,11 +339,17 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     //MARK: Handle IBAction
     @IBAction func playAudio(_ sender: Any) {
         
-        if player.isPlaying {
-            player.pause()
+        if videoPlayer.isPlaying {
+            if hasChooseMusic {
+                player.pause()
+            }
+            videoPlayer.pause()
             stopPlaybackTimeChecker()
         } else {
-            player.play()
+            if hasChooseMusic {
+                player.play()
+            }
+            videoPlayer.play()
             startPlaybackTimeChecker()
         }
         changeIconBtnPlay()
@@ -319,7 +366,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: ({action in
             
-            self.player.pause()
+            if self.hasChooseMusic {
+                self.player.pause()
+            }
+            
             
             let hour = Date().toString(dateFormat: "HH:mm:ss")
             let date = Date().toString(dateFormat: "YYYY:MM:dd")
@@ -501,8 +551,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        player.currentTime = 0
-        player.pause()
+        if hasChooseMusic {
+            player.currentTime = 0
+            player.pause()
+        }
+        videoPlayer.seek(to: CMTime.zero)
+        videoPlayer.pause()
         
         switch indexPath.row {
         case 0:
@@ -532,11 +586,16 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     // MARK: Rewrite func for TrimmerView
     
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
-        player.pause()
+        
+        if hasChooseMusic {
+            player.pause()
+            player.currentTime = Double(startTime)
+        }
+        
+        videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 600))
+        videoPlayer.pause()
+        
         changeIconBtnPlay()
-        
-        player.currentTime = Double(startTime)
-        
         self.startTime = startTime
         self.endTime = endTime
         setLabelTime()
@@ -575,6 +634,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
             if indexPath.row < arrURL.count {
                 cell.textLabel?.text = arrURL[indexPath.row].absoluteString
                 selectedMusic = indexPath.row
+                hasChooseMusic = true
+                addAudioPlayer(with: arrURL[selectedMusic])
             }
         }
         return cell

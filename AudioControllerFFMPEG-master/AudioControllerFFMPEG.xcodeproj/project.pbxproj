@@ -17,6 +17,7 @@
 		8F48947924C82EE900427B50 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947824C82EE900427B50 /* SplitViewController.swift */; };
 		8F48947B24C84A5300427B50 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947A24C84A5300427B50 /* Time.swift */; };
 		8F51D07224D556E50008EC35 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51D07124D556E40008EC35 /* MediaModel.swift */; };
+		8F51D07424D568170008EC35 /* AB.mov in Resources */ = {isa = PBXBuildFile; fileRef = 8F51D07324D568170008EC35 /* AB.mov */; };
 		8FB9961B24C59B74009FE54D /* gene.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FB9961A24C59B74009FE54D /* gene.mp3 */; };
 		8FBD00E824C936F4005903AA /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD00E724C936F4005903AA /* ConfigViewController.swift */; };
 		8FDCDC8F24BC561400BA003D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDCDC8E24BC561400BA003D /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 		8F48947824C82EE900427B50 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		8F48947A24C84A5300427B50 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		8F51D07124D556E40008EC35 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
+		8F51D07324D568170008EC35 /* AB.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = AB.mov; sourceTree = "<group>"; };
 		8FB9961A24C59B74009FE54D /* gene.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gene.mp3; sourceTree = "<group>"; };
 		8FBD00E724C936F4005903AA /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		8FDCDC8B24BC561400BA003D /* AudioControllerFFMPEG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioControllerFFMPEG.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,6 +282,7 @@
 				8FDCDC9724BC561600BA003D /* Assets.xcassets */,
 				8FE5CC6224BD960300841402 /* small.mp4 */,
 				8FE5CC6124BD960200841402 /* example.mp3 */,
+				8F51D07324D568170008EC35 /* AB.mov */,
 				8FB9961A24C59B74009FE54D /* gene.mp3 */,
 			);
 			path = Assets;
@@ -404,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FDCDC9B24BC561600BA003D /* LaunchScreen.storyboard in Resources */,
+				8F51D07424D568170008EC35 /* AB.mov in Resources */,
 				184964B424D3FC1B0065C127 /* RoiRemix.mp3 in Resources */,
 				8FE5CC6424BD960300841402 /* small.mp4 in Resources */,
 				8FB9961B24C59B74009FE54D /* gene.mp3 in Resources */,
