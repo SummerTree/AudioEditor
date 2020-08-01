@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import ICGVideoTrimmer
 
 protocol PassVolumeBackDelegate {
     func passVolumeBack(volume: Float)
@@ -15,6 +16,7 @@ protocol PassVolumeBackDelegate {
 
 class VolumeViewController: UIViewController {
     
+    @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var sliderVolume: UISlider!
 
@@ -37,8 +39,12 @@ class VolumeViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        let pathURL = URL(fileURLWithPath: path)
+        
         super.viewDidAppear(animated)
-        addAudioPlayer(with: URL(fileURLWithPath: path))
+        addAudioPlayer(with: pathURL)
+        initTrimmerView(asset: AVAsset(url: pathURL))
         player.pause()
         changeIconBtnPlay()
     }
@@ -62,6 +68,17 @@ class VolumeViewController: UIViewController {
         player.enableRate = true
         initMedia()
     }
+    
+    private func initTrimmerView(asset: AVAsset) {
+           self.trimmerView.asset = asset
+           self.trimmerView.delegate = self
+           self.trimmerView.themeColor = .white
+           self.trimmerView.showsRulerView = false
+           self.trimmerView.maxLength = CGFloat(player.duration)
+           self.trimmerView.trackerColor = .white
+           self.trimmerView.thumbWidth = 10
+           self.trimmerView.resetSubviews()
+       }
     
     func initMedia() {
            if volume == nil {
@@ -112,5 +129,13 @@ class VolumeViewController: UIViewController {
             sliderVolume.value = volume
             player.volume = volume * volumeRate
         }
+    }
+}
+
+extension VolumeViewController: ICGVideoTrimmerDelegate {
+    func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
+        player.pause()
+        changeIconBtnPlay()
+        player.currentTime = Double(startTime)
     }
 }

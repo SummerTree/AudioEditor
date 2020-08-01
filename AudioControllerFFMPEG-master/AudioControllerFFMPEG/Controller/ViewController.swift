@@ -80,11 +80,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         initTrimmerView(asset: asset)
         
-        if arrURL.count > 0 {
-            for i in 0..<arrURL.count{
-                print(arrURL[i])
-            }
-        }
+//        if arrURL.count > 0 {
+//            for i in 0..<arrURL.count{
+//                print(arrURL[i])
+//            }
+//        }
         if arrURL.count > 0 {
             collectionView.reloadData()
             tableView.reloadData()
