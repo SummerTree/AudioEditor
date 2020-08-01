@@ -16,6 +16,7 @@
 		8F48947724C8237800427B50 /* HandleOuputFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947624C8237800427B50 /* HandleOuputFile.swift */; };
 		8F48947924C82EE900427B50 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947824C82EE900427B50 /* SplitViewController.swift */; };
 		8F48947B24C84A5300427B50 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947A24C84A5300427B50 /* Time.swift */; };
+		8F51D07224D556E50008EC35 /* MediaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F51D07124D556E40008EC35 /* MediaModel.swift */; };
 		8FB9961B24C59B74009FE54D /* gene.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FB9961A24C59B74009FE54D /* gene.mp3 */; };
 		8FBD00E824C936F4005903AA /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD00E724C936F4005903AA /* ConfigViewController.swift */; };
 		8FDCDC8F24BC561400BA003D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDCDC8E24BC561400BA003D /* AppDelegate.swift */; };
@@ -68,6 +69,7 @@
 		8F48947624C8237800427B50 /* HandleOuputFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleOuputFile.swift; sourceTree = "<group>"; };
 		8F48947824C82EE900427B50 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		8F48947A24C84A5300427B50 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		8F51D07124D556E40008EC35 /* MediaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaModel.swift; sourceTree = "<group>"; };
 		8FB9961A24C59B74009FE54D /* gene.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gene.mp3; sourceTree = "<group>"; };
 		8FBD00E724C936F4005903AA /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		8FDCDC8B24BC561400BA003D /* AudioControllerFFMPEG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioControllerFFMPEG.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -267,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				8FFB832124BD4FFF0045C6CF /* ModelItem.swift */,
+				8F51D07124D556E40008EC35 /* MediaModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				184964BD24D3FC900065C127 /* PBViewController.swift in Sources */,
 				8FDCDC8F24BC561400BA003D /* AppDelegate.swift in Sources */,
 				8FFB832224BD4FFF0045C6CF /* ModelItem.swift in Sources */,
+				8F51D07224D556E50008EC35 /* MediaModel.swift in Sources */,
 				8F48947724C8237800427B50 /* HandleOuputFile.swift in Sources */,
 				8FFB831F24BD4F320045C6CF /* ButtonCell.swift in Sources */,
 				8FFB832A24BD50A10045C6CF /* DeleteViewcontroller.swift in Sources */,

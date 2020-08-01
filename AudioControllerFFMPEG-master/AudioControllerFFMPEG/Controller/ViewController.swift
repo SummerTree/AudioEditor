@@ -265,20 +265,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
     }
     
-    
-    
-    //MARK: Handle IBAction
-    @IBAction func playAudio(_ sender: Any) {
-        
-        if player.isPlaying {
-            player.pause()
-            stopPlaybackTimeChecker()
-        } else {
-            player.play()
-            startPlaybackTimeChecker()
-        }
-        changeIconBtnPlay()
-    }
+    // MARK: Playback time checker
     
     func startPlaybackTimeChecker() {
         stopPlaybackTimeChecker()
@@ -305,6 +292,22 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             trimmerView.seek(toTime: start)
         }
     }
+    
+    
+    
+    //MARK: Handle IBAction
+    @IBAction func playAudio(_ sender: Any) {
+        
+        if player.isPlaying {
+            player.pause()
+            stopPlaybackTimeChecker()
+        } else {
+            player.play()
+            startPlaybackTimeChecker()
+        }
+        changeIconBtnPlay()
+    }
+    
     
     
     @IBAction func saveChange(_ sender: Any) {
