@@ -91,9 +91,8 @@ class VolumeViewController: UIViewController {
     
     
     @IBAction func saveChange(_ sender: Any) {
-        self.dismiss(animated: true) {
-            self.delegate.passVolumeBack(volume: self.volume)
-        }
+        self.delegate.passVolumeBack(volume: self.volume)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func changeVolume(_ sender: Any) {

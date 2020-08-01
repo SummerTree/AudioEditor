@@ -241,8 +241,8 @@
 		8FFB831524BD46F50045C6CF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				184964BB24D3FC900065C127 /* AppMusicViewController.swift */,
 				8FDCDC9224BC561400BA003D /* ViewController.swift */,
+				184964BB24D3FC900065C127 /* AppMusicViewController.swift */,
 				8FFB832524BD50840045C6CF /* VolumeViewController.swift */,
 				8FFB832724BD50900045C6CF /* SpeedViewController.swift */,
 				8FFB832924BD50A10045C6CF /* DeleteViewcontroller.swift */,

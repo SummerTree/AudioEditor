@@ -96,8 +96,7 @@ class SpeedViewController: UIViewController {
     }
     
     @IBAction func saveChange(_ sender: Any) {
-        self.dismiss(animated: true) {
-            self.delegate.passSpeedData(speed: self.rate)
-        }
+        self.delegate.passSpeedData(speed: self.rate)
+        self.navigationController?.popViewController(animated: true)
     }
 }

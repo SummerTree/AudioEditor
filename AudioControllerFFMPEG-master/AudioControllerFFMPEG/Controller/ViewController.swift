@@ -48,10 +48,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     var isPlay = false
     var isRecord = false
-    var playingState = "Play"
     var recordNum = 0
     var arrURL = [URL]()
     var recordURL:URL?
+    var selectedMusic: Int!
     
     override func viewDidLoad() {
         
@@ -66,7 +66,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         path = fileManage.getFilePath(name: "small", type: "mp4")
         
         initCollectionView()
-        
         
     }
     
@@ -90,8 +89,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             collectionView.reloadData()
             tableView.reloadData()
         }
-        
-        print(arrURL.count)
+
     }
     
     
@@ -202,10 +200,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.volumeRate = volumeRate
         view.rate = rate
         view.steps = steps
-        view.path = self.path
-        self.modalPresentationStyle = .overCurrentContext
-        self.present(view, animated: true)
-        
+        view.path = arrURL[selectedMusic].path
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     func gotoEditRate() {
@@ -216,8 +212,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.rate = rate
         view.steps = steps
         view.path = self.path
-        self.modalPresentationStyle = .overCurrentContext
-        self.present(view, animated: true)
+        view.path = arrURL[selectedMusic].path
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     func gotoDeleteAudioFile() {
@@ -226,7 +222,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.volumeRate = volumeRate
         view.rate = rate
         view.steps = steps
-        view.path = self.path
+        view.path = self.arrURL[selectedMusic].path
         self.navigationController?.pushViewController(view, animated: true)
     }
     
@@ -558,8 +554,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func passAudioURLBack(path: String) {
-        self.path = path
-        self.arrURL.append(URL(fileURLWithPath: self.path))
+
+        self.arrURL.append(URL(fileURLWithPath: path))
     }
 }
 
@@ -575,10 +571,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         if arrURL.count != 0 {
             if indexPath.row < arrURL.count {
                 cell.textLabel?.text = arrURL[indexPath.row].absoluteString
+                selectedMusic = indexPath.row
             }
         }
         return cell
     }
-    
-    
 }
