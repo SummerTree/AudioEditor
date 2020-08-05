@@ -56,7 +56,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var hasChooseMusic = false
     
     override func viewDidLoad() {
-        
+        	
         super.viewDidLoad()
         
         collectionView.delegate = self
@@ -65,12 +65,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         tableView.delegate = self
         tableView.dataSource = self
         
-        path = fileManage.getFilePath(name: "small", type: "mp4")
+        path = fileManage.getFilePath(name: "AB", type: "mov")
         
         initCollectionView()
         
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -86,16 +85,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         initTrimmerView(asset: asset)
         
-//        if arrURL.count > 0 {
-//            for i in 0..<arrURL.count{
-//                print(arrURL[i])
-//            }
-//        }
         if arrURL.count > 0 {
             collectionView.reloadData()
             tableView.reloadData()
         }
-
+        
     }
     
     
@@ -117,8 +111,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         let playerItem = AVPlayerItem(asset: asset)
         videoPlayer = AVPlayer(playerItem: playerItem)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(itemDidFinishPlaying(_:)),
-        name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.itemDidFinishPlaying(_:)),
+                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         
         let layer: AVPlayerLayer = AVPlayerLayer(player: videoPlayer)
         layer.backgroundColor = UIColor.white.cgColor
@@ -138,8 +132,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 player.currentTime = Double(start)
                 player.pause()
             }
-           }
-       }
+        }
+        changeIconBtnPlay()
+    }
     
     // MARK: Playback time checker
     
@@ -159,20 +154,18 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         guard let start = startTime, let endTime = endTime, let videoPlayer = videoPlayer else {
             return
         }
-
+        
         let playBackTime = CGFloat(CMTimeGetSeconds(videoPlayer.currentTime()))
         trimmerView.seek(toTime: playBackTime)
-
+        
         if playBackTime >= endTime {
             videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(start), preferredTimescale: 600), toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
             videoPlayer.pause()
             if hasChooseMusic {
                 player.currentTime = Double(start)
-                
                 player.pause()
             }
             trimmerView.seek(toTime: start)
-            changeIconBtnPlay()
         }
     }
     
@@ -223,17 +216,16 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         self.trimmerView.thumbWidth = 10
         self.trimmerView.resetSubviews()
         setLabelTime()
- 
+        
     }
     
-    //-----------
+    // MARK: Display media picker
     
     func displayMediaPickerAndPlayItem(){
         mediaPicker = MPMediaPickerController(mediaTypes: .anyAudio)
         
         if let picker = mediaPicker{
-            
-            print("Successfully instantiated a media picker")
+            //            print("Successfully instantiated a media picker")
             picker.delegate = self
             view.addSubview(picker.view)
             present(picker, animated: true, completion: nil)
@@ -331,7 +323,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         } else {
             btnPlay.setImage(UIImage(named: "icon_play"), for: .normal)
         }
-        print("Change Icon")
     }
     
     
@@ -376,7 +367,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             let type = ".mp4"
             
             let output = self.fileManage.createUrlInApp(name: "\(date)_\(hour)\(type)")
-
+            
             let newVolume = self.volume! * self.volumeRate
             let newSpeed = self.rate! * self.steps
             
@@ -402,7 +393,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         present(alert, animated: true, completion: nil)
     }
     
-    //MARK: RECORD AUDIO
+    //MARK: Record audio file
     
     // Get permission
     func recordPermission(){
@@ -616,7 +607,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func passAudioURLBack(path: String) {
-
+        
         self.arrURL.append(URL(fileURLWithPath: path))
     }
 }
