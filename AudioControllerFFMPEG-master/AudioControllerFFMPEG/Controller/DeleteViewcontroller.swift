@@ -10,7 +10,6 @@ import UIKit
 import ICGVideoTrimmer
 import ZKProgressHUD
 
-
 class DeleteViewController: UIViewController {
     
     @IBOutlet weak var lblEndTime: UILabel!
@@ -139,8 +138,14 @@ class DeleteViewController: UIViewController {
         changeIconBtnPlay()
     }
     
+    
+    @IBAction func removeItem(_ sender: Any) {
+        print("REMOVE PRESSED")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func saveChange(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
         player.currentTime = 0
         player.pause()
         changeIconBtnPlay()

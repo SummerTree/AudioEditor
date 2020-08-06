@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController modalPresentationStyle="overFullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="AudioControllerFFMPEG" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainView" modalPresentationStyle="overFullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="AudioControllerFFMPEG" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -232,13 +232,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTO-IZ-J5W">
-                                <rect key="frame" x="0.0" y="82" width="414" height="414"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="mTO-IZ-J5W" secondAttribute="height" id="lmb-Se-gKc"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hLI-rf-OfL" userLabel="Save">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                 <subviews>
@@ -281,9 +274,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUB-oO-YBf">
-                                                <rect key="frame" x="282" y="93" width="122" height="100"/>
+                                                <rect key="frame" x="282" y="118" width="122" height="50"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="P1q-Tp-V5x"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="P1q-Tp-V5x"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <state key="normal" title="DELETE">
@@ -293,14 +286,30 @@
                                                     <action selector="deleteSelectedAudioFile:" destination="uUF-I5-svO" eventType="touchUpInside" id="rv7-ng-JFk"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5m2-BV-Gva">
+                                                <rect key="frame" x="10" y="118" width="84" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="41v-3A-I4f"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <state key="normal" title="REMOVE">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="removeItem:" destination="uUF-I5-svO" eventType="touchUpInside" id="vEu-fu-ZO5"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="dUB-oO-YBf" secondAttribute="trailing" constant="10" id="8nv-pz-AjY"/>
                                             <constraint firstItem="4iz-CH-EGT" firstAttribute="centerX" secondItem="IVs-Vf-cYT" secondAttribute="centerX" id="Rix-Y1-KoZ"/>
+                                            <constraint firstItem="5m2-BV-Gva" firstAttribute="leading" secondItem="IVs-Vf-cYT" secondAttribute="leading" constant="10" id="V0L-wj-7Wz"/>
+                                            <constraint firstItem="5m2-BV-Gva" firstAttribute="centerY" secondItem="IVs-Vf-cYT" secondAttribute="centerY" id="Zco-zA-1gj"/>
                                             <constraint firstItem="4iz-CH-EGT" firstAttribute="centerY" secondItem="IVs-Vf-cYT" secondAttribute="centerY" id="czj-7m-EK5"/>
                                             <constraint firstItem="dUB-oO-YBf" firstAttribute="centerY" secondItem="IVs-Vf-cYT" secondAttribute="centerY" id="eU9-Dn-7Ss"/>
                                             <constraint firstItem="dUB-oO-YBf" firstAttribute="leading" relation="lessThanOrEqual" secondItem="4iz-CH-EGT" secondAttribute="trailing" constant="50" id="iSE-Yh-BqO"/>
+                                            <constraint firstItem="4iz-CH-EGT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5m2-BV-Gva" secondAttribute="trailing" constant="8" symbolic="YES" id="uWw-65-Eas"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qiN-ox-LJZ" userLabel="View Crop">
@@ -369,6 +378,13 @@
                                     <constraint firstItem="IVs-Vf-cYT" firstAttribute="leading" secondItem="bx9-9V-5ef" secondAttribute="leading" id="ezE-Ww-npX"/>
                                     <constraint firstAttribute="trailing" secondItem="IVs-Vf-cYT" secondAttribute="trailing" id="n9k-rF-lKS"/>
                                     <constraint firstItem="IVs-Vf-cYT" firstAttribute="top" secondItem="bx9-9V-5ef" secondAttribute="top" id="vhy-G4-zLO"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTO-IZ-J5W">
+                                <rect key="frame" x="0.0" y="82" width="414" height="414"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="mTO-IZ-J5W" secondAttribute="height" id="lmb-Se-gKc"/>
                                 </constraints>
                             </view>
                         </subviews>

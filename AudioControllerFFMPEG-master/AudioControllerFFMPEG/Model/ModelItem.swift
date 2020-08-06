@@ -20,3 +20,9 @@ struct Song {
     let image:String
     let artist:String
 }
+
+struct SaveParameter {
+    let volume: Float
+    let rate: Float
+    let quality: String
+}

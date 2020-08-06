@@ -28,7 +28,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var playbackTimeCheckerTimer: Timer?
     var trimmerPositionChangedTimer: Timer?
     var arr = [ModelItem]()
-    var player = AVAudioPlayer()
+    var Audios = [AVAudioPlayer]()
     var volume: Float?
     var volumeRate: Float = 0.1
     var rate: Float?
@@ -52,11 +52,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var recordNum = 0
     var arrURL = [URL]()
     var recordURL:URL?
-    var selectedMusic: Int!
+    var position: Int!
     var hasChooseMusic = false
+    var isRemove: Bool = false
+    var hasChangeMedia: Bool = false
     
     override func viewDidLoad() {
-        	
+        
         super.viewDidLoad()
         
         collectionView.delegate = self
@@ -68,7 +70,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         path = fileManage.getFilePath(name: "AB", type: "mov")
         
         initCollectionView()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,34 +77,41 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         super.viewDidAppear(animated)
         
         asset = AVAsset(url: URL(fileURLWithPath: path))
-        
         addVieoPlayer(asset: asset, playerView: playerView)
-        
-        if hasChooseMusic {
-            addAudioPlayer(with: URL(fileURLWithPath: path))
-        }
-        
         initTrimmerView(asset: asset)
         
-        if arrURL.count > 0 {
-            collectionView.reloadData()
-            tableView.reloadData()
-        }
+        position = -1
         
+        if arrURL.count > 0 || isRemove {
+            tableView.reloadData()
+            collectionView.reloadData()
+        }
     }
     
     
     // MARK: Add AudioPlayer
     
-    private func addAudioPlayer(with url: URL) {
-        do {
-            try player = AVAudioPlayer(contentsOf: url)
-        } catch {
-            print("Couldn't load file")
+    private func getAudios() {
+        let iAudio = Audios.count - 1
+        let iURL = arrURL.count - 1
+        if iAudio < iURL {
+            for i in 0...iURL {
+                if i > iAudio {
+                    do {
+                        let audio = try AVAudioPlayer(contentsOf: arrURL[i])
+                        audio.enableRate = true
+                        audio.numberOfLoops = -1
+                        Audios.append(audio)
+                    } catch {
+                        Audios.append(AVAudioPlayer())
+                    }
+                }
+            }
         }
-        player.enableRate = true
-        player.numberOfLoops = -1
-        
+    }
+    
+    private func addAudioPlayer() {
+        getAudios()
         initMedia() 
     }
     
@@ -129,8 +137,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(start), preferredTimescale: 600))
             videoPlayer.pause()
             if hasChooseMusic {
-                player.currentTime = Double(start)
-                player.pause()
+                Audios[position].currentTime = Double(start)
+                Audios[position].pause()
             }
         }
         changeIconBtnPlay()
@@ -162,12 +170,18 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(start), preferredTimescale: 600), toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
             videoPlayer.pause()
             if hasChooseMusic {
-                player.currentTime = Double(start)
-                player.pause()
+                Audios[position].currentTime = Double(start)
+                Audios[position].pause()
+            } else {
+                for audio in Audios {
+                    audio.currentTime = Double(start)
+                    audio.pause()
+                }
             }
             trimmerView.seek(toTime: start)
         }
     }
+    
     
     
     func setLabelTime() {
@@ -183,13 +197,24 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         if rate == nil {
             rate = 4.0
         }
-        setMedia()
+        
+        if hasChangeMedia {
+            setMedia()
+        } else {
+            for audio in Audios {
+                audio.rate = 4 * steps
+                audio.volume = 60 * volumeRate
+            }
+        }
+        
         changeIconBtnPlay()
     }
     
     func setMedia() {
-        player.rate = rate! * steps
-        player.volume = volumeRate * volume!
+        if position >= 0 {
+            Audios[position].volume = volume! * volumeRate
+            Audios[position].rate = rate! * steps
+        }
     }
     
     //MARK: Init View, Player...
@@ -241,7 +266,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
     }
     
-    
     // MARK: Navigate to another view
     
     func MusicInApp(){
@@ -256,41 +280,41 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func gotoEditVolume() {
         let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VolumeView") as! VolumeViewController
         view.delegate = self
-        view.volume = volume
+        view.volume = Audios[position].volume / volumeRate
+        view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
-        view.rate = rate
         view.steps = steps
-        view.path = arrURL[selectedMusic].path
+        view.path = arrURL[position].path
         self.navigationController?.pushViewController(view, animated: true)
     }
     
     func gotoEditRate() {
         let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeedView") as! SpeedViewController
         view.delegate = self
-        view.volume = volume
+        view.volume = Audios[position].volume / volumeRate
+        view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
-        view.rate = rate
         view.steps = steps
         view.path = self.path
-        view.path = arrURL[selectedMusic].path
+        view.path = arrURL[position].path
         self.navigationController?.pushViewController(view, animated: true)
     }
     
     func gotoDeleteAudioFile() {
         let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DeleteView") as! DeleteViewController
-        view.volume = volume
+        view.volume = Audios[position].volume / volumeRate
+        view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
-        view.rate = rate
         view.steps = steps
-        view.path = self.arrURL[selectedMusic].path
+        view.path = self.arrURL[position].path
         self.navigationController?.pushViewController(view, animated: true)
     }
     
     func gotoSplitView() {
         let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplitView") as! SplitViewController
-        view.volume = volume
+        view.volume = Audios[position].volume / volumeRate
+        view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
-        view.rate = rate
         view.steps = steps
         view.path = self.path
         self.navigationController?.pushViewController(view, animated: true)
@@ -332,13 +356,21 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         if videoPlayer.isPlaying {
             if hasChooseMusic {
-                player.pause()
+                Audios[position].pause()
+            } else {
+                for audio in Audios {
+                    audio.pause()
+                }
             }
             videoPlayer.pause()
             stopPlaybackTimeChecker()
         } else {
             if hasChooseMusic {
-                player.play()
+                Audios[position].play()
+            } else {
+                for audio in Audios {
+                    audio.play()
+                }
             }
             videoPlayer.play()
             startPlaybackTimeChecker()
@@ -358,9 +390,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: ({action in
             
             if self.hasChooseMusic {
-                self.player.pause()
+                for audio in self.Audios {
+                    audio.pause()
+                }
             }
-            
             
             let hour = Date().toString(dateFormat: "HH:mm:ss")
             let date = Date().toString(dateFormat: "YYYY:MM:dd")
@@ -368,10 +401,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             
             let output = self.fileManage.createUrlInApp(name: "\(date)_\(hour)\(type)")
             
-            let newVolume = self.volume! * self.volumeRate
-            let newSpeed = self.rate! * self.steps
+            let parameter = SaveParameter(volume: self.volume! * self.volumeRate, rate: self.rate! * self.steps, quality: self.quality)
             
-            let str = "-y -i \(self.path!) -filter_complex \"[0:a]volume=\(newVolume),atempo=\(newSpeed)[a];[0:v]setpts=PTS*1/\(newSpeed),scale=\(self.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
+            let str = "-y -i \(self.path!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
             
             let serialQueue = DispatchQueue(label: "serialQueue")
             
@@ -498,10 +530,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PassVolumeBackDelegate, PassSpeedBackDelegate, ICGVideoTrimmerDelegate, PassQualityDelegate, PassAudioURLBackDelegate{
-    
-    
-    
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PassVolumeBackDelegate, PassSpeedBackDelegate, ICGVideoTrimmerDelegate, PassQualityDelegate, PassAudioURLBackDelegate {
     
     // MARK: Rewrite func for CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -511,7 +540,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ButtonCell", for: indexPath) as? ButtonCell {
             let data = arr[indexPath.row]
-            let hasAudio = arrURL.count != 0
+            let hasAudio = arrURL.count != 0 && position != -1
             
             cell.updateView(hasAudio: indexPath.row < 3 || hasAudio)
             
@@ -542,9 +571,13 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        hasChangeMedia = true
+        
         if hasChooseMusic {
-            player.currentTime = 0
-            player.pause()
+            for audio in Audios {
+                audio.currentTime = 0
+                audio.pause()
+            }
         }
         videoPlayer.seek(to: CMTime.zero)
         videoPlayer.pause()
@@ -578,9 +611,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
         
-        if hasChooseMusic {
-            player.pause()
-            player.currentTime = Double(startTime)
+        for audio in Audios {
+            audio.pause()
+            audio.currentTime = Double(startTime)
         }
         
         videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 600))
@@ -613,8 +646,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 }
 
 
-//MARK: TableView
+//MARK: Rewrite func for TableView
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -624,11 +658,31 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         if arrURL.count != 0 {
             if indexPath.row < arrURL.count {
                 cell.textLabel?.text = arrURL[indexPath.row].absoluteString
-                selectedMusic = indexPath.row
-                hasChooseMusic = true
-                addAudioPlayer(with: arrURL[selectedMusic])
+                addAudioPlayer()
             }
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if arrURL.count > 0 {
+            // Pause all Audio and video
+            for audio in Audios {
+                audio.pause()
+            }
+            videoPlayer.pause()
+            
+            if indexPath.row != position {
+                position = indexPath.row
+                hasChooseMusic = true
+            } else {
+                tableView.deselectRow(at: indexPath, animated: true)
+                position = -1
+                hasChooseMusic = false
+            }
+            collectionView.reloadData()
+            changeIconBtnPlay()
+        }
     }
 }
