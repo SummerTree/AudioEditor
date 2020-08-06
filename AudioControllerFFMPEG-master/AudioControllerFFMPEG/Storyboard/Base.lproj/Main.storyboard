@@ -975,7 +975,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MG7-el-pfj" userLabel="Picker">
-                                <rect key="frame" x="0.0" y="333" width="414" height="240"/>
+                                <rect key="frame" x="0.0" y="343" width="414" height="220"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qgj-7O-NrG">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="145"/>
@@ -1005,16 +1005,27 @@
                                         </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBC-Li-UVs">
-                                        <rect key="frame" x="314" y="145" width="100" height="95"/>
+                                        <rect key="frame" x="339" y="145" width="75" height="75"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="aNe-Qh-j9v"/>
+                                            <constraint firstAttribute="width" secondItem="LBC-Li-UVs" secondAttribute="height" id="d4d-xx-CxA"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <state key="normal" title="Ok">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Save">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="goBackToRoot:" destination="ZgX-kc-oqc" eventType="touchUpInside" id="wQ7-1z-uND"/>
+                                            <action selector="saveQuality:" destination="ZgX-kc-oqc" eventType="touchUpInside" id="eUf-li-YBk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Y7-mE-cye">
+                                        <rect key="frame" x="244" y="145" width="75" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="5Y7-mE-cye" secondAttribute="height" id="1Oy-Dp-3jU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="Cancel:" destination="ZgX-kc-oqc" eventType="touchUpInside" id="FaW-8J-ktD"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1025,10 +1036,13 @@
                                     <constraint firstItem="LBC-Li-UVs" firstAttribute="top" secondItem="qgj-7O-NrG" secondAttribute="bottom" id="6os-mZ-n2O"/>
                                     <constraint firstAttribute="bottom" secondItem="LBC-Li-UVs" secondAttribute="bottom" id="7TS-kI-gSl"/>
                                     <constraint firstAttribute="trailing" secondItem="qgj-7O-NrG" secondAttribute="trailing" id="B86-hG-u8X"/>
-                                    <constraint firstItem="LBC-Li-UVs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MG7-el-pfj" secondAttribute="leading" constant="20" symbolic="YES" id="G4H-XE-w27"/>
+                                    <constraint firstItem="LBC-Li-UVs" firstAttribute="leading" secondItem="5Y7-mE-cye" secondAttribute="trailing" constant="20" id="HPH-P0-xyZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Y7-mE-cye" secondAttribute="bottom" id="Id5-RQ-1HC"/>
                                     <constraint firstAttribute="trailing" secondItem="LBC-Li-UVs" secondAttribute="trailing" id="aAQ-gW-6a8"/>
                                     <constraint firstItem="qgj-7O-NrG" firstAttribute="leading" secondItem="MG7-el-pfj" secondAttribute="leading" id="bOJ-OT-sDF"/>
-                                    <constraint firstAttribute="height" constant="240" id="bo9-Aa-9ht"/>
+                                    <constraint firstAttribute="height" constant="220" id="bo9-Aa-9ht"/>
+                                    <constraint firstItem="5Y7-mE-cye" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MG7-el-pfj" secondAttribute="leading" constant="20" symbolic="YES" id="dIZ-TO-YKj"/>
+                                    <constraint firstItem="5Y7-mE-cye" firstAttribute="top" secondItem="qgj-7O-NrG" secondAttribute="bottom" id="nXX-Nb-q5f"/>
                                 </constraints>
                             </view>
                         </subviews>

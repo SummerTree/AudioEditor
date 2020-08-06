@@ -10,6 +10,8 @@ import UIKit
 
 protocol PassQualityDelegate {
     func getQuality(quality: String)
+    
+    func isSave(isSave: Bool)
 }
 
 class ConfigViewController: UIViewController {
@@ -27,14 +29,19 @@ class ConfigViewController: UIViewController {
         tableView.dataSource = self
     }
     
-    @IBAction func goBackToRoot(_ sender: Any) {
+    @IBAction func saveQuality(_ sender: Any) {
         self.dismiss(animated: true) {
             let x = (self.myQuality as String)
             self.delegate.getQuality(quality: x)
+            self.delegate.isSave(isSave: true)
         }
-        
     }
     
+    @IBAction func Cancel(_ sender: Any) {
+        self.dismiss(animated: true) {
+            self.delegate.isSave(isSave: false)
+        }
+    }
 }
 
 extension ConfigViewController: UITableViewDelegate, UITableViewDataSource {

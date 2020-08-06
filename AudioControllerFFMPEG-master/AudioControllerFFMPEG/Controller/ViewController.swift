@@ -399,47 +399,48 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     @IBAction func saveChange(_ sender: Any) {
         
-        let alert = UIAlertController(title: "Do you want to save all changes?", message: "", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "No", style: .default, handler: ({action in
-        })))
-        
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: ({action in
-            
-            if self.hasChooseMusic {
-                for audio in self.Audios {
-                    audio.pause()
-                }
-            }
-            
-            let hour = Date().toString(dateFormat: "HH:mm:ss")
-            let date = Date().toString(dateFormat: "YYYY:MM:dd")
-            let type = ".mp4"
-            
-            let output = self.fileManage.createUrlInApp(name: "\(date)_\(hour)\(type)")
-            
-            let parameter = SaveParameter(volume: self.volume! * self.volumeRate, rate: self.rate! * self.steps, quality: self.quality)
-            
-            let str = "-y -i \(self.path!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
-            
-            let serialQueue = DispatchQueue(label: "serialQueue")
-            
-            DispatchQueue.main.async {
-                ZKProgressHUD.show()
-            }
-            
-            serialQueue.async {
-                MobileFFmpeg.execute(str)
-                let x = (self.fileManage.saveToDocumentDirectory(url: output))
-                self.fileManage.moveToLibrary(destinationURL: x)
-                DispatchQueue.main.async {
-                    ZKProgressHUD.dismiss()
-                    ZKProgressHUD.showSuccess()
-                }
-                
-            }
-        })))
-        present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "Do you want to save all changes?", message: "", preferredStyle: .alert)
+//
+//        alert.addAction(UIAlertAction(title: "No", style: .default, handler: ({action in
+//        })))
+//
+//        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: ({action in
+//
+//            if self.hasChooseMusic {
+//                for audio in self.Audios {
+//                    audio.pause()
+//                }
+//            }
+//
+//            let hour = Date().toString(dateFormat: "HH:mm:ss")
+//            let date = Date().toString(dateFormat: "YYYY:MM:dd")
+//            let type = ".mp4"
+//
+//            let output = self.fileManage.createUrlInApp(name: "\(date)_\(hour)\(type)")
+//
+//            let parameter = SaveParameter(volume: self.volume! * self.volumeRate, rate: self.rate! * self.steps, quality: self.quality)
+//
+//            let str = "-y -i \(self.path!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
+//
+//            let serialQueue = DispatchQueue(label: "serialQueue")
+//
+//            DispatchQueue.main.async {
+//                ZKProgressHUD.show()
+//            }
+//
+//            serialQueue.async {
+//                MobileFFmpeg.execute(str)
+//                let x = (self.fileManage.saveToDocumentDirectory(url: output))
+//                self.fileManage.moveToLibrary(destinationURL: x)
+//                DispatchQueue.main.async {
+//                    ZKProgressHUD.dismiss()
+//                    ZKProgressHUD.showSuccess()
+//                }
+//
+//            }
+//        })))
+//        present(alert, animated: true, completion: nil)
+        chooseQuality()
     }
     
     //MARK: Record audio file
@@ -653,6 +654,43 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func getQuality(quality: String) {
         self.quality = quality
+    }
+    
+    func isSave(isSave: Bool) {
+        if isSave {
+            if self.hasChooseMusic {
+                for audio in self.Audios {
+                    audio.pause()
+                }
+            }
+            
+            let hour = Date().toString(dateFormat: "HH:mm:ss")
+            let date = Date().toString(dateFormat: "YYYY:MM:dd")
+            let type = ".mp4"
+            
+            let output = self.fileManage.createUrlInApp(name: "\(date)_\(hour)\(type)")
+            
+            let parameter = SaveParameter(volume: self.volume! * self.volumeRate, rate: self.rate! * self.steps, quality: self.quality)
+            
+            let str = "-y -i \(self.path!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
+            
+            let serialQueue = DispatchQueue(label: "serialQueue")
+            
+            DispatchQueue.main.async {
+                ZKProgressHUD.show()
+            }
+            
+            serialQueue.async {
+                MobileFFmpeg.execute(str)
+                let x = (self.fileManage.saveToDocumentDirectory(url: output))
+                self.fileManage.moveToLibrary(destinationURL: x)
+                DispatchQueue.main.async {
+                    ZKProgressHUD.dismiss()
+                    ZKProgressHUD.showSuccess()
+                }
+                
+            }
+        }
     }
     
     func passAudioURLBack(path: String) {
