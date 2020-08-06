@@ -80,6 +80,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         initTrimmerView(asset: asset)
         
         position = -1
+        
         hasChooseMusic = false
         
         if arrURL.count > 0 || isRemove {
@@ -334,7 +335,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         let outputTemp = fileManage.createUrlInApp(name: "temp.mp3")
         let outputDuplicate = fileManage.createUrlInApp(name: "Duplicate.mp3")
-        let cmd = "-i \(path!) -vn -ac 2 -ar 44100 -ab 320k -f mp3 \(outputTemp)"
+        let cmd = "-i \(arrURL[position]) -vn -ac 2 -ar 44100 -ab 320k -f mp3 \(outputTemp)"
         let cmd2 = "-i \"concat:\(outputTemp)|\(outputTemp)\" -c copy \(outputDuplicate)"
         
         let serialQueue = DispatchQueue(label: "serialQueue")
@@ -346,8 +347,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         serialQueue.async {
             MobileFFmpeg.execute(cmd)
             MobileFFmpeg.execute(cmd2)
-            print(outputDuplicate)
+            self.arrURL[self.position] = outputDuplicate
+            print(self.arrURL[self.position])
             DispatchQueue.main.async {
+                self.tableView.reloadData()
                 ZKProgressHUD.dismiss()
                 ZKProgressHUD.showSuccess()
             }
@@ -652,7 +655,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         self.quality = quality
     }
     
-    func passAudioURLBack(path: String) {     
+    func passAudioURLBack(path: String) {
         if(arrURL.count < 4) {
             self.arrURL.append(URL(fileURLWithPath: path))
         } else {
