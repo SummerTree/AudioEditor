@@ -885,7 +885,7 @@
                                                 </connections>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77g-sC-pbv">
-                                                <rect key="frame" x="38" y="0.0" width="55.5" height="40"/>
+                                                <rect key="frame" x="20" y="0.0" width="55.5" height="40"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -903,7 +903,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysg-kV-P6W" userLabel="Lbl Start Time">
-                                                <rect key="frame" x="98.5" y="0.0" width="0.0" height="40"/>
+                                                <rect key="frame" x="80.5" y="0.0" width="0.0" height="40"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -911,25 +911,23 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="VUt-sm-e3R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ysg-kV-P6W" secondAttribute="trailing" constant="8" symbolic="YES" id="1s3-ES-Cn6"/>
                                             <constraint firstAttribute="trailing" secondItem="bfm-2W-yhK" secondAttribute="trailing" id="4tO-zH-z5o"/>
-                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="JNc-2S-MI1" secondAttribute="bottom" id="9il-Li-wPo"/>
-                                            <constraint firstItem="77g-sC-pbv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WZD-ge-3sE" secondAttribute="leading" constant="20" symbolic="YES" id="Hah-Gh-ffs"/>
-                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="77g-sC-pbv" secondAttribute="bottom" id="HeY-v3-nti"/>
+                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="JNc-2S-MI1" secondAttribute="bottom" id="FXr-AZ-Ihc"/>
                                             <constraint firstItem="bfm-2W-yhK" firstAttribute="leading" secondItem="WZD-ge-3sE" secondAttribute="leading" id="ICc-qZ-EkA"/>
                                             <constraint firstAttribute="height" constant="100" id="JSm-nE-0Pl"/>
-                                            <constraint firstItem="ysg-kV-P6W" firstAttribute="top" secondItem="WZD-ge-3sE" secondAttribute="top" id="Pww-w8-014"/>
-                                            <constraint firstItem="VUt-sm-e3R" firstAttribute="leading" secondItem="77g-sC-pbv" secondAttribute="trailing" constant="247" id="TP1-L5-jEs"/>
-                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="77g-sC-pbv" secondAttribute="bottom" id="VTm-rq-BUe"/>
+                                            <constraint firstItem="JNc-2S-MI1" firstAttribute="leading" secondItem="VUt-sm-e3R" secondAttribute="trailing" constant="5" id="Lbg-my-Ja4"/>
+                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="VUt-sm-e3R" secondAttribute="bottom" id="MAD-1t-Wfo"/>
+                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="ysg-kV-P6W" secondAttribute="bottom" id="P8o-pv-9DL"/>
+                                            <constraint firstItem="JNc-2S-MI1" firstAttribute="top" secondItem="WZD-ge-3sE" secondAttribute="top" id="QeA-WZ-WMR"/>
+                                            <constraint firstItem="VUt-sm-e3R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ysg-kV-P6W" secondAttribute="trailing" constant="8" symbolic="YES" id="QvM-4L-Ge3"/>
+                                            <constraint firstItem="ysg-kV-P6W" firstAttribute="top" secondItem="WZD-ge-3sE" secondAttribute="top" id="QxF-MP-1jp"/>
+                                            <constraint firstItem="ysg-kV-P6W" firstAttribute="leading" secondItem="77g-sC-pbv" secondAttribute="trailing" constant="5" id="SYZ-7r-VYw"/>
+                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="77g-sC-pbv" secondAttribute="bottom" id="T5r-CY-7w2"/>
+                                            <constraint firstItem="77g-sC-pbv" firstAttribute="top" secondItem="WZD-ge-3sE" secondAttribute="top" id="T9n-oV-rnG"/>
+                                            <constraint firstAttribute="trailing" secondItem="JNc-2S-MI1" secondAttribute="trailing" constant="20" id="WBn-E9-Qc7"/>
                                             <constraint firstAttribute="bottom" secondItem="bfm-2W-yhK" secondAttribute="bottom" id="Yu9-Rg-v2s"/>
-                                            <constraint firstItem="ysg-kV-P6W" firstAttribute="leading" secondItem="77g-sC-pbv" secondAttribute="trailing" constant="5" id="aE5-dt-F3x"/>
-                                            <constraint firstItem="JNc-2S-MI1" firstAttribute="top" secondItem="WZD-ge-3sE" secondAttribute="top" id="bwo-ad-Qq0"/>
-                                            <constraint firstItem="VUt-sm-e3R" firstAttribute="top" secondItem="WZD-ge-3sE" secondAttribute="top" id="feF-ny-Mg3"/>
-                                            <constraint firstAttribute="trailing" secondItem="JNc-2S-MI1" secondAttribute="trailing" constant="20" id="i22-6B-LnO"/>
-                                            <constraint firstItem="77g-sC-pbv" firstAttribute="top" secondItem="WZD-ge-3sE" secondAttribute="top" id="k5w-eP-yTU"/>
-                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="ysg-kV-P6W" secondAttribute="bottom" id="lm9-97-pWM"/>
-                                            <constraint firstItem="JNc-2S-MI1" firstAttribute="leading" secondItem="VUt-sm-e3R" secondAttribute="trailing" constant="5" id="z7g-88-gCS"/>
-                                            <constraint firstItem="bfm-2W-yhK" firstAttribute="top" secondItem="VUt-sm-e3R" secondAttribute="bottom" id="zjZ-8c-3V4"/>
+                                            <constraint firstItem="77g-sC-pbv" firstAttribute="leading" secondItem="WZD-ge-3sE" secondAttribute="leading" constant="20" id="Znu-Uz-ZP7"/>
+                                            <constraint firstItem="VUt-sm-e3R" firstAttribute="top" secondItem="WZD-ge-3sE" secondAttribute="top" id="lsF-9N-NnT"/>
                                         </constraints>
                                     </view>
                                 </subviews>

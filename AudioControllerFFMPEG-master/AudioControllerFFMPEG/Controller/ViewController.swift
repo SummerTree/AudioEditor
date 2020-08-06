@@ -58,7 +58,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var hasChangeMedia: Bool = false
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         collectionView.delegate = self
@@ -81,6 +80,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         initTrimmerView(asset: asset)
         
         position = -1
+        hasChooseMusic = false
         
         if arrURL.count > 0 || isRemove {
             tableView.reloadData()
@@ -316,7 +316,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
-        view.path = self.path
+        view.path = self.arrURL[position].path
         self.navigationController?.pushViewController(view, animated: true)
     }
     
@@ -331,13 +331,27 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     
     func dupicateAudioFile() {
-        let outputURL = fileManage.createUrlInApp(name: "Duplicate.mp3")
         
-        // CMD to duplicate audio file
-        let cmd = "-i \(path!) -vn -ac 2 -ar 44100 -ab 320k -f mp3 \(outputURL)"
-        MobileFFmpeg.execute(cmd)
+        let outputTemp = fileManage.createUrlInApp(name: "temp.mp3")
+        let outputDuplicate = fileManage.createUrlInApp(name: "Duplicate.mp3")
+        let cmd = "-i \(path!) -vn -ac 2 -ar 44100 -ab 320k -f mp3 \(outputTemp)"
+        let cmd2 = "-i \"concat:\(outputTemp)|\(outputTemp)\" -c copy \(outputDuplicate)"
         
-        print(fileManage.saveToDocumentDirectory(url: outputURL))
+        let serialQueue = DispatchQueue(label: "serialQueue")
+        
+        DispatchQueue.main.async {
+            ZKProgressHUD.show()
+        }
+        
+        serialQueue.async {
+            MobileFFmpeg.execute(cmd)
+            MobileFFmpeg.execute(cmd2)
+            print(outputDuplicate)
+            DispatchQueue.main.async {
+                ZKProgressHUD.dismiss()
+                ZKProgressHUD.showSuccess()
+            }
+        }
     }
     
     
@@ -483,7 +497,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         audioRecorder = nil
         if success {
             arrURL.append(recordURL!)
-            print(recordURL!)
             tableView.reloadData()
             collectionView.reloadData()
             do {
@@ -525,7 +538,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         MobileFFmpeg.execute(str)
         
         print(fileManage.saveToDocumentDirectory(url: output))
-        fileManage.moveToLibrary(destinationURL: output)
+//        fileManage.moveToLibrary(destinationURL: output)
     }
     
 }
@@ -639,9 +652,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         self.quality = quality
     }
     
-    func passAudioURLBack(path: String) {
-        
-        self.arrURL.append(URL(fileURLWithPath: path))
+    func passAudioURLBack(path: String) {     
+        if(arrURL.count < 4) {
+            self.arrURL.append(URL(fileURLWithPath: path))
+        } else {
+            print("Number of audio file more than 4")
+        }
     }
 }
 
@@ -650,7 +666,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return arrURL.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -667,6 +683,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if arrURL.count > 0 {
+                    
             // Pause all Audio and video
             for audio in Audios {
                 audio.pause()
@@ -685,4 +702,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
             changeIconBtnPlay()
         }
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            arrURL.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
+
