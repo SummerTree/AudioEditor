@@ -34,7 +34,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var rate: Float?
     var steps: Float = 0.25
     var fileManage = HandleOutputFile()
-    var path: String!
     var asset: AVAsset!
     var quality: String = "1280:720"
     var startTime: CGFloat?
@@ -43,6 +42,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
     
+    var urlVideo: URL!
+    var urlAudio: URL!
     var mediaPicker: MPMediaPickerController?
     var myMusicPlayer: MPMusicPlayerController?
     var audioPlayer: AVAudioPlayer?
@@ -66,7 +67,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         tableView.delegate = self
         tableView.dataSource = self
         
-        path = fileManage.getFilePath(name: "AB", type: "mov")
+        urlVideo = URL(fileURLWithPath: fileManage.getFilePath(name: "AB", type: "mov"))
         
         initCollectionView()
     }
@@ -75,7 +76,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         super.viewDidAppear(animated)
         
-        asset = AVAsset(url: URL(fileURLWithPath: path))
+        asset = AVAsset(url: urlVideo)
         addVieoPlayer(asset: asset, playerView: playerView)
         
         initTrimmerView(asset: asset)
@@ -143,6 +144,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             if hasChooseMusic {
                 Audios[position].currentTime = Double(start)
                 Audios[position].pause()
+            } else {
+                for audio in Audios {
+                    audio.currentTime = Double(start)
+                    audio.pause()
+                }
             }
         }
         changeIconBtnPlay()
@@ -285,8 +291,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
-        view.path = arrURL[position].path
-        self.navigationController?.pushViewController(view, animated: true)
+        view.url = arrURL[position]
+        view.modalPresentationStyle = .overCurrentContext
+        self.present(view, animated: true)
     }
     
     func gotoEditRate() {
@@ -296,9 +303,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
-        view.path = self.path
-        view.path = arrURL[position].path
-        self.navigationController?.pushViewController(view, animated: true)
+        view.url = arrURL[position]
+        view.modalPresentationStyle = .overCurrentContext
+        self.present(view, animated: true)
     }
     
     func gotoDeleteAudioFile() {
@@ -307,9 +314,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
-        view.path = self.arrURL[position].path
+        view.url = self.arrURL[position]
         view.delegate = self
-        self.navigationController?.pushViewController(view, animated: true)
+        view.modalPresentationStyle = .overCurrentContext
+        self.present(view, animated: true)
     }
     
     func gotoSplitView() {
@@ -318,7 +326,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
-        view.path = self.arrURL[position].path
+        view.url = self.arrURL[position]
         self.navigationController?.pushViewController(view, animated: true)
     }
     
@@ -491,7 +499,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         MobileFFmpeg.execute(extract)
         
         // Merge 2 audio file
-        let final = "-i \(outputVideo) -i \(path!)  -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputFinal)"
+        let final = "-i \(outputVideo) -i \(self.urlVideo!)  -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputFinal)"
         MobileFFmpeg.execute(final)
         
         // Merge audio file with video
@@ -505,10 +513,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ICGVideoTrimmerDelegate, TransformDataDelegate {
-    
-    
-    
-    
+
     // MARK: Rewrite func for CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arr.count
@@ -605,23 +610,20 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     //MARK: Rewirite function for userdefine Protocol
     
     
-    func transformVolume(volume: Float) {
-        self.volume = volume
-    }
-    
-    func transformRate(rate: Float) {
-        self.rate = rate
+    func transform(url: URL, volume: Float, rate: Float) {
+        self.arrURL[position] = url
+        self.volume = volume / volumeRate
+        self.rate = rate / steps
+        viewDidAppear(true)
     }
     
     func transformQuality(quality: String) {
         self.quality = quality
     }
     
-    func transformDeleteMusic(url: URL) {
+    func transformSplitMusic(url: URL) {
         self.arrURL[position] = url
-        print(self.arrURL[position])
-        
-        tableView.reloadData()
+        viewDidAppear(true)
     }
     
     func isSaveVideo(isSave: Bool) {
@@ -640,7 +642,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             
             let parameter = SaveParameter(volume: self.volume! * self.volumeRate, rate: self.rate! * self.steps, quality: self.quality)
             
-            let str = "-y -i \(self.path!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
+            let str = "-y -i \(self.urlVideo!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
             
             let serialQueue = DispatchQueue(label: "serialQueue")
             
@@ -683,7 +685,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         if arrURL.count != 0 {
             if indexPath.row < arrURL.count {
                 cell.textLabel?.text = arrURL[indexPath.row].absoluteString
-                print(arrURL[indexPath.row].absoluteString)
                 addAudioPlayer()
             }
         }

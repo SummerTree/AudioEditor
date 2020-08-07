@@ -17,7 +17,7 @@ class DeleteViewController: UIViewController {
     @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
     @IBOutlet weak var btnPlay: UIButton!
     
-    var path:String!
+    var url: URL!
     var player = AVAudioPlayer()
     var startTime: CGFloat?
     var endTime: CGFloat?
@@ -40,8 +40,9 @@ class DeleteViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        let asset = AVAsset(url: URL(fileURLWithPath: path))
-        addAudioPlayer(with: URL(fileURLWithPath: path))
+
+        let asset = AVAsset(url: url)
+        addAudioPlayer(with: url)
         initTrimmerView(asset: asset)
     }
     
@@ -111,7 +112,6 @@ class DeleteViewController: UIViewController {
         let playbackTime = CGFloat(player.currentTime)
         trimmerView.seek(toTime: playbackTime)
         
-        
         if Float(playbackTime) >= Float(end) {
             player.currentTime = Double(start)
             trimmerView.seek(toTime: start)
@@ -146,15 +146,18 @@ class DeleteViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func saveChange(_ sender: Any) {
-        delegate.transformDeleteMusic(url: URL(fileURLWithPath: path))
-        delegate.transformVolume(volume: player.volume / 0.1)
-        self.navigationController?.popViewController(animated: true)
+    @IBAction func saveChange(_ sender: Any) {   
+        self.dismiss(animated: true) {
+            self.delegate.transform(url: self.url, volume: self.player.volume, rate: self.player.rate)
+        }
         player.pause()
-        changeIconBtnPlay()
     }
     
     @IBAction func deleteSelectedAudioFile(_ sender: Any) {
+        
+        trimmerView.seek(toTime: startTime!)
+        
+        player.pause()
         
         let outputURL1 = fileManage.createUrlInApp(name: "File1.mp3")
         let outputURL2 = fileManage.createUrlInApp(name: "File2.mp3")
@@ -170,8 +173,8 @@ class DeleteViewController: UIViewController {
         // -i audio.mp3 -ss 00:01:54 -to 00:06:53 -c copy output.mp3
         // -i input.mp4 -ss 00:01:00 -codec copy -t 60 output.mp4
         // -i sample.avi -ss 00:03:05 -t 00:00:45.0 -q:a 0 -map a sample.mp3 - cut audio from video
-        let cmd = "-i \(path!) -ss 0 -t \(startTime!) -q:a 0 -map a \(outputURL1)"
-        let cmd1 = "-i \(path!) -ss \(endTime!) -t \(duration) -q:a 0 -map a \(outputURL2)"
+        let cmd = "-i \(url!) -ss 0 -t \(startTime!) -q:a 0 -map a \(outputURL1)"
+        let cmd1 = "-i \(url!) -ss \(endTime!) -t \(duration) -q:a 0 -map a \(outputURL2)"
         let cmd2 = "-i concat:\(outputURL1)|\(outputURL2) -c copy \(outputURL3)"
         
         let queue = DispatchQueue(label: "queue")
@@ -184,11 +187,11 @@ class DeleteViewController: UIViewController {
             MobileFFmpeg.execute(cmd)
             MobileFFmpeg.execute(cmd1)
             MobileFFmpeg.execute(cmd2)
-            self.path = outputURL3.path
-            self.addAudioPlayer(with: outputURL3)
+            self.url = outputURL3
+            self.addAudioPlayer(with: self.url)
             DispatchQueue.main.async {
                 ZKProgressHUD.dismiss()
-                self.initTrimmerView(asset: AVAsset(url: outputURL3))
+                self.initTrimmerView(asset: AVAsset(url: self.url))
                 ZKProgressHUD.showSuccess()
             }
         }

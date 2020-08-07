@@ -21,7 +21,7 @@ class VolumeViewController: UIViewController {
     
     var delegate: TransformDataDelegate!
     var player = AVAudioPlayer()
-    var path: String!
+    var url: URL!
     
     var volume: Float!
     var volumeRate: Float!
@@ -42,12 +42,11 @@ class VolumeViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        let pathURL = URL(fileURLWithPath: path)
-        
         super.viewDidAppear(animated)
-        addAudioPlayer(with: pathURL)
-        initTrimmerView(asset: AVAsset(url: pathURL))
+        
+
+        addAudioPlayer(with: url)
+        initTrimmerView(asset: AVAsset(url: url))
         player.pause()
         changeIconBtnPlay()
     }
@@ -147,8 +146,9 @@ class VolumeViewController: UIViewController {
     
     @IBAction func saveChange(_ sender: Any) {
         player.stop()
-        self.delegate.transformVolume(volume: self.volume)
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) {
+            self.delegate.transform(url: self.url, volume: self.player.volume, rate: self.player.rate)
+        }
     }
     
     @IBAction func changeVolume(_ sender: Any) {

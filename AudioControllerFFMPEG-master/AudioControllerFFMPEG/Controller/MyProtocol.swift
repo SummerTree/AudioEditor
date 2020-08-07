@@ -7,9 +7,8 @@
 //
 
 protocol TransformDataDelegate {
-    func transformVolume(volume: Float)
     
-    func transformRate(rate: Float)
+    func transform(url: URL, volume: Float, rate: Float)
     
     func transformQuality(quality: String)
     
@@ -17,5 +16,4 @@ protocol TransformDataDelegate {
     
     func isSaveVideo(isSave: Bool)
     
-    func transformDeleteMusic(url: URL)
 }

@@ -19,9 +19,9 @@ class SpeedViewController: UIViewController {
     @IBOutlet weak var lblEndTime: UILabel!
     @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
     
+    var url: URL!
     var player = AVAudioPlayer()
     var delegate: TransformDataDelegate!
-    var path: String!
     var volume: Float!
     var volumeRate: Float!
     var steps: Float!
@@ -40,9 +40,9 @@ class SpeedViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let pathURL = URL(fileURLWithPath: path)
-        addAudioPlayer(with: pathURL)
-        initTrimmerView(asset: AVAsset(url: pathURL))
+
+        addAudioPlayer(with: url)
+        initTrimmerView(asset: AVAsset(url: url))
         player.pause()
         changeIconBtnPlay()
     }
@@ -149,8 +149,9 @@ class SpeedViewController: UIViewController {
     
     @IBAction func saveChange(_ sender: Any) {
         player.stop()
-        self.delegate.transformRate(rate: self.rate)
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) {
+            self.delegate.transform(url: self.url, volume: self.player.volume, rate: self.player.rate)
+        }
     }
 }
 

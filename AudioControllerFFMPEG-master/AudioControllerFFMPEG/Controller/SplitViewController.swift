@@ -18,7 +18,9 @@ class SplitViewController: UIViewController {
     @IBOutlet weak var lblEndTime: UILabel!
     @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
     
-    var path:String!
+    var delegate: TransformDataDelegate!
+    
+    var url: URL!
     var player = AVAudioPlayer()
     var startTime: CGFloat?
     var endTime: CGFloat?
@@ -40,8 +42,9 @@ class SplitViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-        let asset = AVAsset(url: URL(fileURLWithPath: path))
-        addAudioPlayer(with: URL(fileURLWithPath: path))
+
+        let asset = AVAsset(url: url)
+        addAudioPlayer(with: url)
         initTrimmerView(asset: asset)
     }
     
@@ -129,13 +132,14 @@ class SplitViewController: UIViewController {
     // MARK: Handle IBAction
     
     @IBAction func backToRoot(_ sender: Any) {
-        navigationController?.popToRootViewController(animated: true)
-        player.currentTime = 0
+        
+        self.dismiss(animated: true) {
+            self.delegate.transform(url: self.url, volume: self.player.volume, rate: self.player.rate)
+        }
         player.pause()
-        changeIconBtnPlay()
+
     }
-    
-    
+       
     @IBAction func play(_ sender: Any) {
         player.currentTime = Double(startTime!)
         if player.isPlaying {
@@ -155,7 +159,7 @@ class SplitViewController: UIViewController {
         let output = fileManage.createUrlInApp(name: "\(name)\(type)")
         
         let duration = endTime! - startTime!
-        let cmd = "-i \(path!) -ss \(startTime!) -t \(duration) -q:a 0 -map a \(output)"
+        let cmd = "-i \(url.path) -ss \(startTime!) -t \(duration) -q:a 0 -map a \(output)"
         
         let queue = DispatchQueue(label: "queue")
         
@@ -165,11 +169,11 @@ class SplitViewController: UIViewController {
         
         queue.async {
             MobileFFmpeg.execute(cmd)
-            let x = self.fileManage.saveToDocumentDirectory(url: output)
-            self.addAudioPlayer(with: x)
+            self.url = output
+            self.addAudioPlayer(with: self.url)
             DispatchQueue.main.async {
                 ZKProgressHUD.dismiss()
-                self.initTrimmerView(asset: AVAsset(url: x))
+                self.initTrimmerView(asset: AVAsset(url: self.url))
                 ZKProgressHUD.showSuccess()
             }
         }
