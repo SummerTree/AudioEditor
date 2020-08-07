@@ -145,11 +145,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="BqZ-Yb-vXb" secondAttribute="bottom" id="DBD-42-lv5"/>
+                                            <constraint firstItem="BqZ-Yb-vXb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7pk-ys-uEH" secondAttribute="leading" constant="20" symbolic="YES" id="740-d4-cCH"/>
                                             <constraint firstAttribute="height" constant="40" id="E6m-g8-hXb"/>
-                                            <constraint firstItem="BqZ-Yb-vXb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7pk-ys-uEH" secondAttribute="leading" constant="20" symbolic="YES" id="Edv-CX-cL1"/>
-                                            <constraint firstAttribute="trailing" secondItem="BqZ-Yb-vXb" secondAttribute="trailing" constant="10" id="QtV-kX-MQ6"/>
-                                            <constraint firstItem="BqZ-Yb-vXb" firstAttribute="top" secondItem="7pk-ys-uEH" secondAttribute="top" id="yjk-oP-tRc"/>
+                                            <constraint firstItem="BqZ-Yb-vXb" firstAttribute="top" secondItem="7pk-ys-uEH" secondAttribute="top" id="Kd3-Wg-Kxm"/>
+                                            <constraint firstAttribute="trailing" secondItem="BqZ-Yb-vXb" secondAttribute="trailing" constant="10" id="exy-w1-Doc"/>
+                                            <constraint firstAttribute="bottom" secondItem="BqZ-Yb-vXb" secondAttribute="bottom" id="iJA-PO-wEV"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jq4-5I-49h" userLabel="View Player">
@@ -238,14 +238,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVs-Vf-cYT" userLabel="Play">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="212"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uI9-ZH-yfy">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="uI9-ZH-yfy">
                                                 <rect key="frame" x="30" y="10" width="315" height="192"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ldQ-Ck-Qkz" userLabel="Play And Save">
-                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="86"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="315" height="96"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iz-CH-EGT">
-                                                                <rect key="frame" x="114.5" y="0.0" width="86" height="86"/>
+                                                                <rect key="frame" x="109.5" y="0.0" width="96" height="96"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" image="icon_play"/>
                                                                 <connections>
@@ -253,7 +253,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JFF-k0-Fed">
-                                                                <rect key="frame" x="220.5" y="0.0" width="86" height="86"/>
+                                                                <rect key="frame" x="219" y="0.0" width="96" height="96"/>
                                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" image="icon_checkmark">
@@ -269,38 +269,52 @@
                                                             <constraint firstItem="JFF-k0-Fed" firstAttribute="width" secondItem="ldQ-Ck-Qkz" secondAttribute="height" id="4jG-i0-lNd"/>
                                                             <constraint firstItem="4iz-CH-EGT" firstAttribute="width" secondItem="ldQ-Ck-Qkz" secondAttribute="height" id="8mc-N4-3Bv"/>
                                                             <constraint firstItem="JFF-k0-Fed" firstAttribute="centerY" secondItem="ldQ-Ck-Qkz" secondAttribute="centerY" id="VC7-w3-ht2"/>
+                                                            <constraint firstAttribute="trailing" secondItem="JFF-k0-Fed" secondAttribute="trailing" id="bDw-Vh-x0Q"/>
                                                             <constraint firstItem="4iz-CH-EGT" firstAttribute="centerX" secondItem="ldQ-Ck-Qkz" secondAttribute="centerX" id="f4B-uZ-mqY"/>
                                                             <constraint firstItem="JFF-k0-Fed" firstAttribute="height" secondItem="ldQ-Ck-Qkz" secondAttribute="height" id="kBR-wi-A4W"/>
                                                             <constraint firstItem="4iz-CH-EGT" firstAttribute="centerY" secondItem="ldQ-Ck-Qkz" secondAttribute="centerY" id="sjB-jH-500"/>
                                                             <constraint firstItem="4iz-CH-EGT" firstAttribute="height" secondItem="ldQ-Ck-Qkz" secondAttribute="height" id="yLe-mK-Dao"/>
-                                                            <constraint firstItem="JFF-k0-Fed" firstAttribute="leading" secondItem="4iz-CH-EGT" secondAttribute="trailing" constant="20" id="zJE-GT-mjm"/>
                                                         </constraints>
                                                     </view>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="vHj-Ov-ShE" userLabel="Remove Or Delete">
-                                                        <rect key="frame" x="0.0" y="106" width="315" height="86"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XjX-d6-YAc">
+                                                        <rect key="frame" x="0.0" y="96" width="315" height="96"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5m2-BV-Gva">
-                                                                <rect key="frame" x="0.0" y="0.0" width="142.5" height="86"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUB-oO-YBf">
+                                                                <rect key="frame" x="0.0" y="23" width="64" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="AHs-gZ-lyZ"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                 <state key="normal" title="REMOVE">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="removeItem:" destination="uUF-I5-svO" eventType="touchUpInside" id="vEu-fu-ZO5"/>
+                                                                    <action selector="removeItem:" destination="uUF-I5-svO" eventType="touchUpInside" id="zgv-0U-LgC"/>
                                                                 </connections>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUB-oO-YBf">
-                                                                <rect key="frame" x="172.5" y="0.0" width="142.5" height="86"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5m2-BV-Gva">
+                                                                <rect key="frame" x="258" y="23" width="57" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="cx1-QX-Fs8"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                 <state key="normal" title="DELETE">
                                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="deleteSelectedAudioFile:" destination="uUF-I5-svO" eventType="touchUpInside" id="rv7-ng-JFk"/>
+                                                                    <action selector="deleteSelectedAudioFile:" destination="uUF-I5-svO" eventType="touchUpInside" id="mzn-wM-niW"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
-                                                    </stackView>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="dUB-oO-YBf" firstAttribute="centerY" secondItem="XjX-d6-YAc" secondAttribute="centerY" id="0ek-qz-rKf"/>
+                                                            <constraint firstItem="5m2-BV-Gva" firstAttribute="centerY" secondItem="XjX-d6-YAc" secondAttribute="centerY" id="Eke-0Q-ILG"/>
+                                                            <constraint firstItem="5m2-BV-Gva" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dUB-oO-YBf" secondAttribute="trailing" constant="8" symbolic="YES" id="dx7-q4-ZMs"/>
+                                                            <constraint firstItem="dUB-oO-YBf" firstAttribute="leading" secondItem="XjX-d6-YAc" secondAttribute="leading" id="kig-v8-wDF"/>
+                                                            <constraint firstAttribute="trailing" secondItem="5m2-BV-Gva" secondAttribute="trailing" id="wkb-Ft-ntl"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>

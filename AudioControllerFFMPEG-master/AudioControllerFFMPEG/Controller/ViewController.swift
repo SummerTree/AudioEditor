@@ -43,7 +43,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var audioRecorder: AVAudioRecorder!
     
     var urlVideo: URL!
-    var urlAudio: URL!
     var mediaPicker: MPMediaPickerController?
     var myMusicPlayer: MPMusicPlayerController?
     var audioPlayer: AVAudioPlayer?
@@ -236,7 +235,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         arr.append(ModelItem(title: "Delete", image: "icon_trash"))
         arr.append(ModelItem(title: "Split", image: "icon_split"))
         arr.append(ModelItem(title: "Duplicate", image: "icon_duplicate"))
-        arr.append(ModelItem(title: "Config", image: "icon_quality"))
     }
     
     private func initTrimmerView(asset: AVAsset) {
@@ -249,6 +247,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         self.trimmerView.thumbWidth = 10
         self.trimmerView.resetSubviews()
         setLabelTime()
+        
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        print("Tapped")
     }
     
     // MARK: Display media picker
@@ -327,7 +330,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.volumeRate = volumeRate
         view.steps = steps
         view.url = self.arrURL[position]
-        self.navigationController?.pushViewController(view, animated: true)
+        view.delegate = self
+        view.modalPresentationStyle = .overCurrentContext
+        self.present(view, animated: true)
     }
     
     func chooseQuality() {
@@ -356,8 +361,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         serialQueue.async {
             MobileFFmpeg.execute(cmd)
             MobileFFmpeg.execute(cmd2)
+            let audio = self.Audios[self.position]
             self.arrURL[self.position] = outputDuplicate
-
+            self.volume = audio.volume / self.volumeRate
+            self.rate = audio.rate / self.steps
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 ZKProgressHUD.dismiss()
@@ -582,8 +589,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             gotoSplitView()
         case 7:
             dupicateAudioFile()
-        case 8:
-            chooseQuality()
         default:
             print(indexPath.row)
         }
@@ -673,8 +678,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
 }
 
 
-//MARK: Rewrite func for TableView
-extension ViewController: UITableViewDelegate, UITableViewDataSource{
+
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    //MARK: Rewrite func for TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrURL.count
