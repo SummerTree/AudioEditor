@@ -10,10 +10,6 @@ import UIKit
 import AVFoundation
 import ICGVideoTrimmer
 
-protocol PassSpeedBackDelegate {
-    func passSpeedData(speed: Float)
-}
-
 class SpeedViewController: UIViewController {
     
     @IBOutlet weak var sliderSpeed: UISlider!
@@ -24,7 +20,7 @@ class SpeedViewController: UIViewController {
     @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
     
     var player = AVAudioPlayer()
-    var delegate: PassSpeedBackDelegate!
+    var delegate: TransformDataDelegate!
     var path: String!
     var volume: Float!
     var volumeRate: Float!
@@ -153,7 +149,7 @@ class SpeedViewController: UIViewController {
     
     @IBAction func saveChange(_ sender: Any) {
         player.stop()
-        self.delegate.passSpeedData(speed: self.rate)
+        self.delegate.transformRate(rate: self.rate)
         self.navigationController?.popViewController(animated: true)
     }
 }

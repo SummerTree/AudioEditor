@@ -77,6 +77,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         asset = AVAsset(url: URL(fileURLWithPath: path))
         addVieoPlayer(asset: asset, playerView: playerView)
+        
         initTrimmerView(asset: asset)
         
         position = -1
@@ -95,16 +96,22 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     private func getAudios() {
         let iAudio = Audios.count - 1
         let iURL = arrURL.count - 1
-        if iAudio < iURL {
+        if iAudio <= iURL {
             for i in 0...iURL {
-                if i > iAudio {
-                    do {
-                        let audio = try AVAudioPlayer(contentsOf: arrURL[i])
-                        audio.enableRate = true
-                        audio.numberOfLoops = -1
+                do {
+                    let audio = try AVAudioPlayer(contentsOf: arrURL[i])
+                    audio.enableRate = true
+                    audio.numberOfLoops = -1
+                    if i > iAudio {
                         Audios.append(audio)
-                    } catch {
+                    } else {
+                        Audios[i] = audio
+                    }
+                } catch {
+                    if i > iAudio {
                         Audios.append(AVAudioPlayer())
+                    } else {
+                        Audios[i] = AVAudioPlayer()
                     }
                 }
             }
@@ -183,8 +190,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
     }
     
-    
-    
     func setLabelTime() {
         lblStartTime.text = CMTimeMakeWithSeconds(Float64(startTime!), preferredTimescale: 600).positionalTime
         lblEndTime.text = CMTimeMakeWithSeconds(Float64(endTime!), preferredTimescale: 600).positionalTime
@@ -242,7 +247,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         self.trimmerView.thumbWidth = 10
         self.trimmerView.resetSubviews()
         setLabelTime()
-        
     }
     
     // MARK: Display media picker
@@ -308,6 +312,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.volumeRate = volumeRate
         view.steps = steps
         view.path = self.arrURL[position].path
+        view.delegate = self
         self.navigationController?.pushViewController(view, animated: true)
     }
     
@@ -348,7 +353,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             MobileFFmpeg.execute(cmd)
             MobileFFmpeg.execute(cmd2)
             self.arrURL[self.position] = outputDuplicate
-            print(self.arrURL[self.position])
+
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 ZKProgressHUD.dismiss()
@@ -395,51 +400,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         changeIconBtnPlay()
     }
     
-    
-    
     @IBAction func saveChange(_ sender: Any) {
-        
-//        let alert = UIAlertController(title: "Do you want to save all changes?", message: "", preferredStyle: .alert)
-//
-//        alert.addAction(UIAlertAction(title: "No", style: .default, handler: ({action in
-//        })))
-//
-//        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: ({action in
-//
-//            if self.hasChooseMusic {
-//                for audio in self.Audios {
-//                    audio.pause()
-//                }
-//            }
-//
-//            let hour = Date().toString(dateFormat: "HH:mm:ss")
-//            let date = Date().toString(dateFormat: "YYYY:MM:dd")
-//            let type = ".mp4"
-//
-//            let output = self.fileManage.createUrlInApp(name: "\(date)_\(hour)\(type)")
-//
-//            let parameter = SaveParameter(volume: self.volume! * self.volumeRate, rate: self.rate! * self.steps, quality: self.quality)
-//
-//            let str = "-y -i \(self.path!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
-//
-//            let serialQueue = DispatchQueue(label: "serialQueue")
-//
-//            DispatchQueue.main.async {
-//                ZKProgressHUD.show()
-//            }
-//
-//            serialQueue.async {
-//                MobileFFmpeg.execute(str)
-//                let x = (self.fileManage.saveToDocumentDirectory(url: output))
-//                self.fileManage.moveToLibrary(destinationURL: x)
-//                DispatchQueue.main.async {
-//                    ZKProgressHUD.dismiss()
-//                    ZKProgressHUD.showSuccess()
-//                }
-//
-//            }
-//        })))
-//        present(alert, animated: true, completion: nil)
         chooseQuality()
     }
     
@@ -547,7 +508,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PassVolumeBackDelegate, PassSpeedBackDelegate, ICGVideoTrimmerDelegate, PassQualityDelegate, PassAudioURLBackDelegate {
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ICGVideoTrimmerDelegate, TransformDataDelegate {
+    
+    
+    
     
     // MARK: Rewrite func for CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -644,19 +608,27 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     //MARK: Rewirite function for userdefine Protocol
     
-    func passSpeedData(speed: Float) {
-        self.rate = speed
-    }
     
-    func passVolumeBack(volume: Float) {
+    func transformVolume(volume: Float) {
         self.volume = volume
     }
     
-    func getQuality(quality: String) {
+    func transformRate(rate: Float) {
+        self.rate = rate
+    }
+    
+    func transformQuality(quality: String) {
         self.quality = quality
     }
     
-    func isSave(isSave: Bool) {
+    func transformDeleteMusic(url: URL) {
+        self.arrURL[position] = url
+        print(self.arrURL[position])
+        
+        tableView.reloadData()
+    }
+    
+    func isSaveVideo(isSave: Bool) {
         if isSave {
             if self.hasChooseMusic {
                 for audio in self.Audios {
@@ -693,7 +665,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
     }
     
-    func passAudioURLBack(path: String) {
+    func transformMusicPath(path: String) {
         if(arrURL.count < 4) {
             self.arrURL.append(URL(fileURLWithPath: path))
         } else {
@@ -715,6 +687,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         if arrURL.count != 0 {
             if indexPath.row < arrURL.count {
                 cell.textLabel?.text = arrURL[indexPath.row].absoluteString
+                print(arrURL[indexPath.row].absoluteString)
                 addAudioPlayer()
             }
         }

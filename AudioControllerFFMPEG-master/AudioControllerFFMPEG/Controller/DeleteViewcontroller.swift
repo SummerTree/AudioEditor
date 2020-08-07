@@ -28,6 +28,7 @@ class DeleteViewController: UIViewController {
     var volumeRate: Float!
     var steps: Float!
     var rate: Float!
+    var delegate: TransformDataDelegate!
     
     let fileManage = HandleOutputFile()
     
@@ -146,6 +147,7 @@ class DeleteViewController: UIViewController {
     }
     
     @IBAction func saveChange(_ sender: Any) {
+        delegate.transformDeleteMusic(url: URL(fileURLWithPath: path))
         self.navigationController?.popViewController(animated: true)
         player.currentTime = 0
         player.pause()
@@ -182,11 +184,11 @@ class DeleteViewController: UIViewController {
             MobileFFmpeg.execute(cmd)
             MobileFFmpeg.execute(cmd1)
             MobileFFmpeg.execute(cmd2)
-            let x = self.fileManage.saveToDocumentDirectory(url: outputURL3)
-            self.addAudioPlayer(with: x)
+            self.path = outputURL3.path
+            self.addAudioPlayer(with: outputURL3)
             DispatchQueue.main.async {
                 ZKProgressHUD.dismiss()
-                self.initTrimmerView(asset: AVAsset(url: x))
+                self.initTrimmerView(asset: AVAsset(url: outputURL3))
                 ZKProgressHUD.showSuccess()
             }
         }

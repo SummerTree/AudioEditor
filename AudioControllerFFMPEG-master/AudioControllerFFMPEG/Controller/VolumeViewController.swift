@@ -10,9 +10,6 @@ import UIKit
 import AVFoundation
 import ICGVideoTrimmer
 
-protocol PassVolumeBackDelegate {
-    func passVolumeBack(volume: Float)
-}
 
 class VolumeViewController: UIViewController {
     
@@ -22,7 +19,7 @@ class VolumeViewController: UIViewController {
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var lblEndTime: UILabel!
     
-    var delegate: PassVolumeBackDelegate!
+    var delegate: TransformDataDelegate!
     var player = AVAudioPlayer()
     var path: String!
     
@@ -150,7 +147,7 @@ class VolumeViewController: UIViewController {
     
     @IBAction func saveChange(_ sender: Any) {
         player.stop()
-        self.delegate.passVolumeBack(volume: self.volume)
+        self.delegate.transformVolume(volume: self.volume)
         self.navigationController?.popViewController(animated: true)
     }
     

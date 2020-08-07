@@ -17,6 +17,7 @@
 		8F48947B24C84A5300427B50 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947A24C84A5300427B50 /* Time.swift */; };
 		8F51D07424D568170008EC35 /* AB.mov in Resources */ = {isa = PBXBuildFile; fileRef = 8F51D07324D568170008EC35 /* AB.mov */; };
 		8FB9961B24C59B74009FE54D /* gene.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FB9961A24C59B74009FE54D /* gene.mp3 */; };
+		8FBB4C7624DD059000EB1692 /* MyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBB4C7524DD059000EB1692 /* MyProtocol.swift */; };
 		8FBD00E824C936F4005903AA /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBD00E724C936F4005903AA /* ConfigViewController.swift */; };
 		8FD6867824DAA99D00948620 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD6867724DAA99D00948620 /* Media.swift */; };
 		8FDCDC8F24BC561400BA003D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDCDC8E24BC561400BA003D /* AppDelegate.swift */; };
@@ -70,6 +71,7 @@
 		8F48947A24C84A5300427B50 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		8F51D07324D568170008EC35 /* AB.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = AB.mov; sourceTree = "<group>"; };
 		8FB9961A24C59B74009FE54D /* gene.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gene.mp3; sourceTree = "<group>"; };
+		8FBB4C7524DD059000EB1692 /* MyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProtocol.swift; sourceTree = "<group>"; };
 		8FBD00E724C936F4005903AA /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		8FD6867724DAA99D00948620 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		8FDCDC8B24BC561400BA003D /* AudioControllerFFMPEG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioControllerFFMPEG.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +254,7 @@
 				8F48947624C8237800427B50 /* HandleOuputFile.swift */,
 				8F48947A24C84A5300427B50 /* Time.swift */,
 				8FBD00E724C936F4005903AA /* ConfigViewController.swift */,
+				8FBB4C7524DD059000EB1692 /* MyProtocol.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				184964BE24D3FC900065C127 /* AppMusicViewController.swift in Sources */,
 				8F48947924C82EE900427B50 /* SplitViewController.swift in Sources */,
 				8FBD00E824C936F4005903AA /* ConfigViewController.swift in Sources */,
+				8FBB4C7624DD059000EB1692 /* MyProtocol.swift in Sources */,
 				8FFB832624BD50840045C6CF /* VolumeViewController.swift in Sources */,
 				8FDCDC8F24BC561400BA003D /* AppDelegate.swift in Sources */,
 				8FFB832224BD4FFF0045C6CF /* ModelItem.swift in Sources */,

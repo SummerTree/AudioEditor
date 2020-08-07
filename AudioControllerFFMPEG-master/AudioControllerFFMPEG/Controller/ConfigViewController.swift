@@ -8,19 +8,13 @@
 
 import UIKit
 
-protocol PassQualityDelegate {
-    func getQuality(quality: String)
-    
-    func isSave(isSave: Bool)
-}
-
 class ConfigViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let quality = [ "960:540", "1280:720", "1920:1080" ]
     let name = [ "Large", "HD", "Full HD" ]
     var myQuality: String!
-    var delegate: PassQualityDelegate!
+    var delegate: TransformDataDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +26,14 @@ class ConfigViewController: UIViewController {
     @IBAction func saveQuality(_ sender: Any) {
         self.dismiss(animated: true) {
             let x = (self.myQuality as String)
-            self.delegate.getQuality(quality: x)
-            self.delegate.isSave(isSave: true)
+            self.delegate.transformQuality(quality: x)
+            self.delegate.isSaveVideo(isSave: true)
         }
     }
     
     @IBAction func Cancel(_ sender: Any) {
         self.dismiss(animated: true) {
-            self.delegate.isSave(isSave: false)
+            self.delegate.isSaveVideo(isSave: false)
         }
     }
 }

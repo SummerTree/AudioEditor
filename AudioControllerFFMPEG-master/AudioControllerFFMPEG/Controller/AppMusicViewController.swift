@@ -9,11 +9,6 @@
 import UIKit
 import AVFoundation
 
-protocol PassAudioURLBackDelegate {
-    func passAudioURLBack(path: String)
-}
-
-
 class AppMusicViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var table: UITableView!
@@ -21,7 +16,7 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
     var audioPlayer: AVAudioPlayer?
     var sound:URL?
     var position = -1
-    var delegate: PassAudioURLBackDelegate!
+    var delegate: TransformDataDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +88,7 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func GetMusic(_ sender: Any) {
         if position != -1 {
-            self.delegate.passAudioURLBack(path: sound!.path)
+            self.delegate.transformMusicPath(path: sound!.path)
             self.navigationController?.popViewController(animated: true)
         }
     }
