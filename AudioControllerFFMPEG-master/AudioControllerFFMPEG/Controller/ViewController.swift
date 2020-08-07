@@ -94,26 +94,22 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     // MARK: Add AudioPlayer
     
     private func getAudios() {
-        let iAudio = Audios.count - 1
-        let iURL = arrURL.count - 1
-        if iAudio <= iURL {
-            for i in 0...iURL {
+        let numURL = arrURL.count
+        let numAudio = Audios.count
+        if numURL > 0 {
+            for i in 0..<numURL {
                 do {
                     let audio = try AVAudioPlayer(contentsOf: arrURL[i])
                     audio.enableRate = true
                     audio.numberOfLoops = -1
-                    if i > iAudio {
-                        Audios.append(audio)
-                    } else {
+                    if i <= (numAudio - 1) {
+                        audio.rate = Audios[i].rate
+                        audio.volume = Audios[i].volume
                         Audios[i] = audio
-                    }
-                } catch {
-                    if i > iAudio {
-                        Audios.append(AVAudioPlayer())
                     } else {
-                        Audios[i] = AVAudioPlayer()
+                        Audios.append(audio)
                     }
-                }
+                } catch {}
             }
         }
     }

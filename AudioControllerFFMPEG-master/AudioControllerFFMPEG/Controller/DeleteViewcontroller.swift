@@ -148,8 +148,8 @@ class DeleteViewController: UIViewController {
     
     @IBAction func saveChange(_ sender: Any) {
         delegate.transformDeleteMusic(url: URL(fileURLWithPath: path))
+        delegate.transformVolume(volume: player.volume / 0.1)
         self.navigationController?.popViewController(animated: true)
-        player.currentTime = 0
         player.pause()
         changeIconBtnPlay()
     }
