@@ -1,9 +1,9 @@
 //
 //  SongQuery.swift
-//  ZipiOs
+//  AudioControllerFFMPEG
 //
-//  Created by Nguyen Hoa on 11/16/18.
-//  Copyright © 2018 Nguyen Hoa. All rights reserved.
+//  Created by Apple on 8/10/20.
+//  Copyright © 2020 Viet Hoang. All rights reserved.
 //
 
 import UIKit
