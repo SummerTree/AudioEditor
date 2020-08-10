@@ -67,6 +67,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         urlVideo = URL(fileURLWithPath: fileManage.getFilePath(name: "AB", type: "mov"))
         
+        createAudioSession()
         initCollectionView()
     }
     
@@ -87,6 +88,18 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         position = -1
         
         hasChooseMusic = false
+    }
+    
+    
+    // create session
+    func createAudioSession(){
+        do {
+            /// this codes for making this app ready to takeover the device nlPlayer
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback,mode:.moviePlayback ,options: .mixWithOthers)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+             print("error: \(error.localizedDescription)")
+         }
     }
     
     // MARK: Add AudioPlayer
@@ -428,7 +441,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 } else {
                     print("Permission denied")
                 }
-            }        } catch {
+            }
+        } catch {
                 // failed to record!
                 print("Permission fail")
         }
@@ -469,25 +483,29 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func finishRecord(success: Bool){
         audioRecorder.stop()
         audioRecorder = nil
+        
         if success {
             arrURL.append(recordURL!)
             tableView.reloadData()
             collectionView.reloadData()
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: recordURL!)
-            } catch {
-                print("Cannot create AVAudioPlayer")
-            }
         } else{
             print("Record failed")
         }
     }
-    
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        if !flag {
-            finishRecord(success: false)
-        }
-    }
+       
+       func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+           if !flag {
+               finishRecord(success: false)
+           }
+       }
+       
+       func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+           print("Error while recording audio \(error!.localizedDescription)")
+       }
+       
+       func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+           print("Error while playing audio \(error!.localizedDescription)")
+       }
     
     // MARK: Merge audio with video
     func mergeAudioWithVideo() {
@@ -685,8 +703,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
     }
 }
-
-
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
