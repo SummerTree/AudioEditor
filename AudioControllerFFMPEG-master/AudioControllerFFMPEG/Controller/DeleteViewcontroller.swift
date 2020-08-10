@@ -10,6 +10,7 @@ import UIKit
 import ICGVideoTrimmer
 import ZKProgressHUD
 
+
 class DeleteViewController: UIViewController {
     
     @IBOutlet weak var lblEndTime: UILabel!
@@ -45,7 +46,6 @@ class DeleteViewController: UIViewController {
         addAudioPlayer(with: url)
         initTrimmerView(asset: asset)
     }
-    
     
     private func initTrimmerView(asset: AVAsset) {
         self.trimmerView.asset = asset
@@ -142,8 +142,10 @@ class DeleteViewController: UIViewController {
     
     
     @IBAction func removeItem(_ sender: Any) {
-        print("REMOVE PRESSED")
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) {
+            self.delegate.isRemove(isRemove: true)
+        }
+        player.pause()
     }
     
     @IBAction func saveChange(_ sender: Any) {   

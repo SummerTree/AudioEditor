@@ -54,7 +54,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var recordURL:URL?
     var position: Int!
     var hasChooseMusic = false
-    var isRemove: Bool = false
     var hasChangeMedia: Bool = false
     
     override func viewDidLoad() {
@@ -80,16 +79,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         initTrimmerView(asset: asset)
         
-        position = -1
-        
-        hasChooseMusic = false
-        
-        if arrURL.count > 0 || isRemove {
+        if arrURL.count > 0 {
             tableView.reloadData()
             collectionView.reloadData()
         }
+
+        position = -1
+        
+        hasChooseMusic = false
     }
-    
     
     // MARK: Add AudioPlayer
     
@@ -663,9 +661,20 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                     ZKProgressHUD.dismiss()
                     ZKProgressHUD.showSuccess()
                 }
-                
             }
         }
+    }
+    
+    func isRemove(isRemove: Bool) {
+        if arrURL.count > 0 {
+            if isRemove {
+                arrURL.remove(at: position)
+                Audios.remove(at: position)
+            }
+            tableView.reloadData()
+            collectionView.reloadData()
+        }
+        position = -1
     }
     
     func transformMusicPath(path: String) {
@@ -728,4 +737,3 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
