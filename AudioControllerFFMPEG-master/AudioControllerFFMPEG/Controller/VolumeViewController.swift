@@ -37,18 +37,22 @@ class VolumeViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         sliderVolume.value = volume
+        
+        
+        print("VIEW DID LOAD")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-
         addAudioPlayer(with: url)
+        print("Add audio player")
         initTrimmerView(asset: AVAsset(url: url))
-        player.pause()
-        changeIconBtnPlay()
+        print("Init trimmer view")
+//        player.pause()
+//        changeIconBtnPlay()
+        print("VIEW DID APPEAR")
     }
     
     
@@ -143,8 +147,13 @@ class VolumeViewController: UIViewController {
         changeIconBtnPlay()
     }
     
+    @IBAction func back(_ sender: Any) {
+        player.stop()
+        self.dismiss(animated: true)
+    }
     
-    @IBAction func saveChange(_ sender: Any) {
+    
+    @IBAction func save(_ sender: Any) {   
         player.stop()
         self.dismiss(animated: true) {
             self.delegate.transform(url: self.url, volume: self.player.volume, rate: self.player.rate)

@@ -147,7 +147,13 @@ class SpeedViewController: UIViewController {
         changeIconBtnPlay()
     }
     
-    @IBAction func saveChange(_ sender: Any) {
+    
+    @IBAction func back(_ sender: Any) {
+        player.stop()
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func save(_ sender: Any) {
         player.stop()
         self.dismiss(animated: true) {
             self.delegate.transform(url: self.url, volume: self.player.volume, rate: self.player.rate)

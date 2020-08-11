@@ -65,14 +65,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         tableView.delegate = self
         tableView.dataSource = self
         
-        urlVideo = URL(fileURLWithPath: fileManage.getFilePath(name: "AB", type: "mov"))
+        urlVideo = URL(fileURLWithPath: fileManage.getFilePath(name: "small", type: "mp4"))
         
         createAudioSession()
         initCollectionView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         super.viewDidAppear(animated)
         
         asset = AVAsset(url: urlVideo)
@@ -84,9 +83,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             tableView.reloadData()
             collectionView.reloadData()
         }
-
-        position = -1
         
+        position = -1
         hasChooseMusic = false
     }
     
@@ -98,8 +96,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback,mode:.moviePlayback ,options: .mixWithOthers)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-             print("error: \(error.localizedDescription)")
-         }
+            print("error: \(error.localizedDescription)")
+        }
     }
     
     // MARK: Add AudioPlayer
@@ -443,8 +441,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 }
             }
         } catch {
-                // failed to record!
-                print("Permission fail")
+            // failed to record!
+            print("Permission fail")
         }
     }
     
@@ -492,20 +490,20 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             print("Record failed")
         }
     }
-       
-       func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-           if !flag {
-               finishRecord(success: false)
-           }
-       }
-       
-       func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
-           print("Error while recording audio \(error!.localizedDescription)")
-       }
-       
-       func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
-           print("Error while playing audio \(error!.localizedDescription)")
-       }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecord(success: false)
+        }
+    }
+    
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        print("Error while recording audio \(error!.localizedDescription)")
+    }
+    
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        print("Error while playing audio \(error!.localizedDescription)")
+    }
     
     // MARK: Merge audio with video
     func mergeAudioWithVideo() {
@@ -530,13 +528,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         MobileFFmpeg.execute(str)
         
         print(fileManage.saveToDocumentDirectory(url: output))
-//        fileManage.moveToLibrary(destinationURL: output)
+        //        fileManage.moveToLibrary(destinationURL: output)
     }
     
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ICGVideoTrimmerDelegate, TransformDataDelegate {
-
+    
     // MARK: Rewrite func for CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arr.count
@@ -727,7 +725,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if arrURL.count > 0 {
-                    
+            
             // Pause all Audio and video
             for audio in Audios {
                 audio.pause()

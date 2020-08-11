@@ -131,14 +131,18 @@ class SplitViewController: UIViewController {
     
     // MARK: Handle IBAction
     
-    @IBAction func backToRoot(_ sender: Any) {
-        
+    @IBAction func save(_ sender: Any) {
+        player.stop()
         self.dismiss(animated: true) {
             self.delegate.transform(url: self.url, volume: self.player.volume, rate: self.player.rate)
         }
-        player.pause()
-
     }
+    
+    @IBAction func back(_ sender: Any) {
+        player.stop()
+        self.dismiss(animated: true)
+    }
+    
        
     @IBAction func play(_ sender: Any) {
         player.currentTime = Double(startTime!)

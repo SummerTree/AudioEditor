@@ -41,7 +41,7 @@ class DeleteViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
-
+        
         let asset = AVAsset(url: url)
         addAudioPlayer(with: url)
         initTrimmerView(asset: asset)
@@ -148,12 +148,18 @@ class DeleteViewController: UIViewController {
         player.pause()
     }
     
-    @IBAction func saveChange(_ sender: Any) {   
+    @IBAction func save(_ sender: Any) {
         self.dismiss(animated: true) {
             self.delegate.transform(url: self.url, volume: self.player.volume, rate: self.player.rate)
         }
         player.pause()
     }
+    
+    @IBAction func back(_ sender: Any) {
+        player.stop()
+        self.dismiss(animated: true)
+    }
+    
     
     @IBAction func deleteSelectedAudioFile(_ sender: Any) {
         
