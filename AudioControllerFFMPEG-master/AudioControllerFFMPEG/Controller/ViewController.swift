@@ -693,6 +693,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             collectionView.reloadData()
         }
         position = -1
+        hasChooseMusic = false
     }
     
     func transformMusicPath(path: String) {
