@@ -116,6 +116,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                         audio.volume = Audios[i].volume
                         Audios[i] = audio
                     } else {
+                        audio.rate = self.rate! * steps
+                        audio.volume = self.volume! * volumeRate
                         Audios.append(audio)
                     }
                 } catch {}
@@ -236,14 +238,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     //MARK: Init View, Player...
     func initCollectionView() {
         collectionView.register(UINib(nibName: "ButtonCell", bundle: nil), forCellWithReuseIdentifier: "ButtonCell")
-        arr.append(ModelItem(title: "Music", image: "Music"))
-        arr.append(ModelItem(title: "Itunes", image: "Itunes"))
-        arr.append(ModelItem(title: "Record", image: "Record"))
-        arr.append(ModelItem(title: "Volume", image: "icon_sound"))
-        arr.append(ModelItem(title: "Speed", image: "icon_speed"))
-        arr.append(ModelItem(title: "Delete", image: "icon_trash"))
-        arr.append(ModelItem(title: "Split", image: "icon_split"))
-        arr.append(ModelItem(title: "Duplicate", image: "icon_duplicate"))
+        arr.append(ModelItem(title: "MUSIC", image: "Music"))
+        arr.append(ModelItem(title: "ITUNES", image: "Itunes"))
+        arr.append(ModelItem(title: "RECORD", image: "Record"))
+        arr.append(ModelItem(title: "VOLUME", image: "icon_sound"))
+        arr.append(ModelItem(title: "SPEED", image: "icon_speed"))
+        arr.append(ModelItem(title: "DELETE", image: "icon_trash"))
+        arr.append(ModelItem(title: "SPLIT", image: "icon_split"))
+        arr.append(ModelItem(title: "DUPLICATE", image: "icon_duplicate"))
     }
     
     private func initTrimmerView(asset: AVAsset) {
@@ -417,11 +419,16 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             videoPlayer.play()
             startPlaybackTimeChecker()
         }
+        if Audios.count > 0 && arrURL.count > 0 {
+            for i in 0 ..< Audios.count {
+                print("\(i) : volume: \(Audios[i].volume), rate: \(Audios[i].rate)")
+            }
+        }
         changeIconBtnPlay()
     }
     
     @IBAction func saveChange(_ sender: Any) {
-        chooseQuality()
+        print(mergeAudioWithVideo())
     }
     
     //MARK: Record audio file
@@ -506,29 +513,30 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     }
     
     // MARK: Merge audio with video
-    func mergeAudioWithVideo() {
+    func mergeAudioWithVideo() -> URL {
         let output = fileManage.createUrlInApp(name: "output.mp4")
         let outputVideo = fileManage.createUrlInApp(name: "outputVideo.mp3")
-        let outputFinal = fileManage.createUrlInApp(name: "outputFinal.mp3")
-        
-        guard let x = Bundle.main.path(forResource: "small", ofType: "mp4") else {
-            return
-        }
+        let outputAudio = fileManage.createUrlInApp(name: "outputAudio.mp3")
+        let outputMerge = fileManage.createUrlInApp(name: "outputMerge.mp3")
+        let path = urlVideo.path
         
         // Get audio from mp4 file
-        let extract = "-i \(x) \(outputVideo)"
+        let extract = "-i \(path) \(outputVideo)"
         MobileFFmpeg.execute(extract)
         
         // Merge 2 audio file
-        let final = "-i \(outputVideo) -i \(self.urlVideo!)  -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputFinal)"
+        let audio0 = "-i \(arrURL[0]) -af \"[0:a]volume=\(Audios[0].volume),atempo=\(Audios[0].rate)\" \(outputAudio)"
+        MobileFFmpeg.execute(audio0)
+        
+        let final = "-i \(outputVideo) -i \(outputAudio) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputMerge)"
+        print(final)
         MobileFFmpeg.execute(final)
+//
+//        // Merge audio file with video
+//        let str = "-i \(path) -i \(outputFinal) -map 0:v -map 1:a -c copy -y \(output)"
+//        MobileFFmpeg.execute(str)
         
-        // Merge audio file with video
-        let str = "-i \(x) -i \(outputFinal) -map 0:v -map 1:a -c copy -y \(output)"
-        MobileFFmpeg.execute(str)
-        
-        print(fileManage.saveToDocumentDirectory(url: output))
-        //        fileManage.moveToLibrary(destinationURL: output)
+        return outputMerge
     }
     
 }

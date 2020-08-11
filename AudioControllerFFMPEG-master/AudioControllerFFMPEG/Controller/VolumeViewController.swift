@@ -38,21 +38,15 @@ class VolumeViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         sliderVolume.value = volume
-        
-        
-        print("VIEW DID LOAD")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         addAudioPlayer(with: url)
-        print("Add audio player")
         initTrimmerView(asset: AVAsset(url: url))
-        print("Init trimmer view")
-//        player.pause()
-//        changeIconBtnPlay()
-        print("VIEW DID APPEAR")
+        player.pause()
+        changeIconBtnPlay()
     }
     
     
