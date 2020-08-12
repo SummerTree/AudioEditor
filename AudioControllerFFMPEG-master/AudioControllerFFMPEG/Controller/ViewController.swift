@@ -448,7 +448,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         ZKProgressHUD.show()
         let queue = DispatchQueue(label: "saveQueue")
         queue.async {
-            print(self.mergeAudioWithVideo())
+            self.fileManage.moveToLibrary(destinationURL: self.mergeAudioWithVideo())
             DispatchQueue.main.async {
                 ZKProgressHUD.dismiss()
                 ZKProgressHUD.showSuccess()
