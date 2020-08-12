@@ -361,14 +361,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         self.present(view, animated: true)
     }
     
-    func chooseQuality() {
-        let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ConfigView") as! ConfigViewController
-        view.delegate = self
-        view.myQuality = quality
-        view.modalPresentationStyle = .overCurrentContext
-        self.present(view, animated: true)
-        
-    }
+//    func chooseQuality() {
+//        let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ConfigView") as! ConfigViewController
+//        view.delegate = self
+//        view.myQuality = quality
+//        view.modalPresentationStyle = .overCurrentContext
+//        self.present(view, animated: true)
+//        
+//    }
     
     
     func dupicateAudioFile() {
@@ -727,39 +727,39 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         viewDidAppear(true)
     }
     
-    func isSaveVideo(isSave: Bool) {
-        if isSave {
-            if self.hasChooseMusic {
-                for audio in self.Audios {
-                    audio.pause()
-                }
-            }
-            
-            let hour = Date().toString(dateFormat: "HH:mm:ss")
-            let date = Date().toString(dateFormat: "YYYY:MM:dd")
-            let type = ".mp4"
-            
-            let output = self.fileManage.createUrlInApp(name: "\(date)_\(hour)\(type)")
-            
-            let parameter = SaveParameter(volume: self.volume! * self.volumeRate, rate: self.rate! * self.steps, quality: self.quality)
-            
-            let str = "-y -i \(self.urlVideo!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
-            
-            let serialQueue = DispatchQueue(label: "serialQueue")
-            
-            ZKProgressHUD.show()
-            
-            serialQueue.async {
-                MobileFFmpeg.execute(str)
-                let x = (self.fileManage.saveToDocumentDirectory(url: output))
-                self.fileManage.moveToLibrary(destinationURL: x)
-                DispatchQueue.main.async {
-                    ZKProgressHUD.dismiss()
-                    ZKProgressHUD.showSuccess()
-                }
-            }
-        }
-    }
+//    func isSaveVideo(isSave: Bool) {
+//        if isSave {
+//            if self.hasChooseMusic {
+//                for audio in self.Audios {
+//                    audio.pause()
+//                }
+//            }
+//
+//            let hour = Date().toString(dateFormat: "HH:mm:ss")
+//            let date = Date().toString(dateFormat: "YYYY:MM:dd")
+//            let type = ".mp4"
+//
+//            let output = self.fileManage.createUrlInApp(name: "\(date)_\(hour)\(type)")
+//
+//            let parameter = SaveParameter(volume: self.volume! * self.volumeRate, rate: self.rate! * self.steps, quality: self.quality)
+//
+//            let str = "-y -i \(self.urlVideo!) -filter_complex \"[0:a]volume=\(parameter.volume),atempo=\(parameter.rate)[a];[0:v]setpts=PTS*1/\(parameter.rate),scale=\(parameter.quality)[v]\" -map \"[a]\" -map \"[v]\" -preset ultrafast \(output)"
+//
+//            let serialQueue = DispatchQueue(label: "serialQueue")
+//
+//            ZKProgressHUD.show()
+//
+//            serialQueue.async {
+//                MobileFFmpeg.execute(str)
+//                let x = (self.fileManage.saveToDocumentDirectory(url: output))
+//                self.fileManage.moveToLibrary(destinationURL: x)
+//                DispatchQueue.main.async {
+//                    ZKProgressHUD.dismiss()
+//                    ZKProgressHUD.showSuccess()
+//                }
+//            }
+//        }
+//    }
     
     func isRemove(isRemove: Bool) {
         if arrURL.count > 0 {
