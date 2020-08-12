@@ -713,7 +713,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         } else {
             self.arrURL[position] = url
             self.volume = volume / volumeRate
-            self.rate = rate / steps 
+            self.rate = rate / steps
         }
         viewDidAppear(true)
     }
