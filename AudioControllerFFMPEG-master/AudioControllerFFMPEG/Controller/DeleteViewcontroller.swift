@@ -52,7 +52,7 @@ class DeleteViewController: UIViewController {
         self.trimmerView.delegate = self
         self.trimmerView.themeColor = .white
         self.trimmerView.showsRulerView = false
-        self.trimmerView.thumbWidth = 10
+        self.trimmerView.thumbWidth = 12
         self.trimmerView.maxLength = CGFloat(player.duration)
         self.trimmerView.trackerColor = .white
         self.trimmerView.resetSubviews()

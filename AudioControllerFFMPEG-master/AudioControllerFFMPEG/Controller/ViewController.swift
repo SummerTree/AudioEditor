@@ -150,7 +150,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                                                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         
         let layer: AVPlayerLayer = AVPlayerLayer(player: videoPlayer)
-        layer.backgroundColor = UIColor.white.cgColor
+        layer.backgroundColor = UIColor.gray.cgColor
         layer.frame = CGRect(x: 0, y: 0, width: playerView.frame.width, height: playerView.frame.height)
         //        layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         playerView.layer.addSublayer(layer)
@@ -223,6 +223,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func initMedia() {
         if volume == nil {
             volume = 60.0
+            videoPlayer.volume = volume! * volumeRate
         }
         if rate == nil {
             rate = 4.0
@@ -236,7 +237,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 audio.volume = 60 * volumeRate
             }
         }
-        
         changeIconBtnPlay()
     }
     
@@ -267,7 +267,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         self.trimmerView.showsRulerView = false
         self.trimmerView.maxLength = CGFloat(CMTimeGetSeconds((videoPlayer.currentItem?.asset.duration)!))
         self.trimmerView.trackerColor = .white
-        self.trimmerView.thumbWidth = 10
+        self.trimmerView.thumbWidth = 12
         self.trimmerView.resetSubviews()
         setLabelTime()
         

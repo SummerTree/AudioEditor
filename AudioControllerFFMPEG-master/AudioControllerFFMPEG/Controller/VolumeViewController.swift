@@ -81,7 +81,7 @@ class VolumeViewController: UIViewController {
         self.trimmerView.showsRulerView = false
         self.trimmerView.maxLength = CGFloat(player.duration)
         self.trimmerView.trackerColor = .white
-        self.trimmerView.thumbWidth = 10
+        self.trimmerView.thumbWidth = 12
         self.trimmerView.resetSubviews()
         setLabelTime()
     }
