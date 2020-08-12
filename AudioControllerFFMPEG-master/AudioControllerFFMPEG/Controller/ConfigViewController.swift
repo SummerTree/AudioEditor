@@ -32,9 +32,7 @@ class ConfigViewController: UIViewController {
     }
     
     @IBAction func Cancel(_ sender: Any) {
-        self.dismiss(animated: true) {
-            self.delegate.isSaveVideo(isSave: false)
-        }
+        self.dismiss(animated: true)
     }
 }
 

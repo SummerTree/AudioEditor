@@ -32,6 +32,7 @@ class VolumeViewController: UIViewController {
     
     var playbackTimeCheckerTimer: Timer?
     var trimmerPositionChangedTimer: Timer?
+    var isVideo: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +65,10 @@ class VolumeViewController: UIViewController {
         } catch {
             print("Couldn't load file")
         }
-        player.numberOfLoops = -1
-        player.enableRate = true
+        if !isVideo {
+            player.numberOfLoops = -1
+            player.enableRate = true
+        }
         endTime = CGFloat(player.duration)
         startTime = 0
         initMedia()
@@ -90,7 +93,9 @@ class VolumeViewController: UIViewController {
         if rate == nil {
             rate = 4.0
         }
-        player.rate = rate! * steps
+        if !isVideo {
+            player.rate = rate! * steps
+        }
         player.volume = volumeRate * volume!
     }
     

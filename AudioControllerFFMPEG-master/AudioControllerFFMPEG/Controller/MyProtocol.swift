@@ -17,5 +17,4 @@ protocol TransformDataDelegate {
     func isSaveVideo(isSave: Bool)
     
     func isRemove(isRemove: Bool)
-    
 }

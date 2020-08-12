@@ -10,6 +10,7 @@ import Photos
 import AVKit
 
 class HandleOutputFile {
+    
     func createUrlInApp(name: String ) -> URL {
         let url = URL(fileURLWithPath: "\(NSTemporaryDirectory())\(name)")
         removeFileIfExists(fileURL: url)
@@ -62,6 +63,20 @@ class HandleOutputFile {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
+    	
+    // Remove all temp file
     
+    func clearTempDirectory() {
+        do {
+            let tmpDirectory = try FileManager.default.contentsOfDirectory(atPath: NSTemporaryDirectory())
+            try tmpDirectory.forEach({ file in
+                let path = String.init(format: "%@%@", NSTemporaryDirectory(), file)
+                try FileManager.default.removeItem(atPath: path)
+            })
+            print("Removed temp file")
+        } catch {
+            print(error)
+        }
+    }
 
 }

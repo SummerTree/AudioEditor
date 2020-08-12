@@ -30,7 +30,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var arr = [ModelItem]()
     var Audios = [AVAudioPlayer]()
     var volume: Float?
-    var volumeRate: Float = 0.1
+    var volumeRate: Float = 0.01
     var rate: Float?
     var steps: Float = 0.25
     var fileManage = HandleOutputFile()
@@ -55,6 +55,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var position: Int!
     var hasChooseMusic = false
     var hasChangeMedia: Bool = false
+    var isVideo: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +70,16 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         createAudioSession()
         initCollectionView()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+        tap.numberOfTapsRequired = 2
+        trimmerView.addGestureRecognizer(tap)
+    }
+    
+    @objc func doubleTapped() {
+        pauseMedia()
+        isVideo = true
+        gotoEditVolume()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,6 +97,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
         position = -1
         hasChooseMusic = false
+        isVideo = false
     }
     
     
@@ -140,7 +152,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         let layer: AVPlayerLayer = AVPlayerLayer(player: videoPlayer)
         layer.backgroundColor = UIColor.white.cgColor
         layer.frame = CGRect(x: 0, y: 0, width: playerView.frame.width, height: playerView.frame.height)
-        layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        //        layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         playerView.layer.addSublayer(layer)
         endTime = CGFloat(CMTimeGetSeconds((videoPlayer.currentItem?.asset.duration)!))
         startTime = 0
@@ -261,10 +273,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        print("Tapped")
-    }
-    
     // MARK: Display media picker
     
     func displayMediaPickerAndPlayItem(){
@@ -290,6 +298,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     // MARK: Navigate to another view
     
     func MusicInApp(){
+        
         if arrURL.count < 4 {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let MusicView = sb.instantiateViewController(withIdentifier: "AppMusic") as! AppMusicViewController
@@ -301,11 +310,17 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func gotoEditVolume() {
         let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "VolumeView") as! VolumeViewController
         view.delegate = self
-        view.volume = Audios[position].volume / volumeRate
-        view.rate = Audios[position].rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
-        view.url = arrURL[position]
+        view.isVideo = isVideo
+        if isVideo {
+            view.url = urlVideo
+            view.volume = videoPlayer.volume / volumeRate
+        } else {
+            view.url = arrURL[position]
+            view.volume = Audios[position].volume / volumeRate
+            view.rate = Audios[position].rate / steps
+        }
         view.modalPresentationStyle = .overCurrentContext
         self.present(view, animated: true)
     }
@@ -393,42 +408,53 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
     }
     
-    
-    
     //MARK: Handle IBAction
     @IBAction func playAudio(_ sender: Any) {
-        
+        print(arrURL.count)
         if videoPlayer.isPlaying {
-            if hasChooseMusic {
-                Audios[position].pause()
-            } else {
-                for audio in Audios {
-                    audio.pause()
-                }
-            }
-            videoPlayer.pause()
+            pauseMedia()
             stopPlaybackTimeChecker()
         } else {
-            if hasChooseMusic {
-                Audios[position].play()
-            } else {
-                for audio in Audios {
-                    audio.play()
-                }
-            }
-            videoPlayer.play()
+            playMedia()
             startPlaybackTimeChecker()
-        }
-        if Audios.count > 0 && arrURL.count > 0 {
-            for i in 0 ..< Audios.count {
-                print("\(i) : volume: \(Audios[i].volume), rate: \(Audios[i].rate)")
-            }
         }
         changeIconBtnPlay()
     }
     
+    func pauseMedia() {
+        if hasChooseMusic {
+            Audios[position].pause()
+        } else {
+            for audio in Audios {
+                audio.pause()
+            }
+        }
+        videoPlayer.pause()
+    }
+    
+    func playMedia() {
+        if hasChooseMusic {
+            Audios[position].play()
+        } else {
+            for audio in Audios {
+                audio.play()
+            }
+        }
+        videoPlayer.play()
+    }
+    
     @IBAction func saveChange(_ sender: Any) {
-        print(mergeAudioWithVideo())
+        pauseMedia()
+        ZKProgressHUD.show()
+        let queue = DispatchQueue(label: "saveQueue")
+        queue.async {
+            print(self.mergeAudioWithVideo())
+            DispatchQueue.main.async {
+                ZKProgressHUD.dismiss()
+                ZKProgressHUD.showSuccess()
+            }
+        }
+        
     }
     
     //MARK: Record audio file
@@ -516,32 +542,77 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func mergeAudioWithVideo() -> URL {
         let output = fileManage.createUrlInApp(name: "output.mp4")
         let outputVideo = fileManage.createUrlInApp(name: "outputVideo.mp3")
-        let outputAudio = fileManage.createUrlInApp(name: "outputAudio.mp3")
         let outputMerge = fileManage.createUrlInApp(name: "outputMerge.mp3")
         let path = urlVideo.path
         
         // Get audio from mp4 file
-        let extract = "-i \(path) \(outputVideo)"
+        let extract = "-i \(path) -af \"volume=\(videoPlayer.volume)\" \(outputVideo)"
         MobileFFmpeg.execute(extract)
         
-        // Merge 2 audio file
-        let audio0 = "-i \(arrURL[0]) -af \"[0:a]volume=\(Audios[0].volume),atempo=\(Audios[0].rate)\" \(outputAudio)"
-        MobileFFmpeg.execute(audio0)
+        var isEmpty: Bool
+        var outputAudio: URL
         
-        let final = "-i \(outputVideo) -i \(outputAudio) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputMerge)"
-        print(final)
-        MobileFFmpeg.execute(final)
-//
-//        // Merge audio file with video
-//        let str = "-i \(path) -i \(outputFinal) -map 0:v -map 1:a -c copy -y \(output)"
-//        MobileFFmpeg.execute(str)
+        (outputAudio, isEmpty) = mergeAllOfAudioURL()
         
-        return outputMerge
+        // Merge audio file
+        if isEmpty {
+            fileManage.clearTempDirectory()
+            return urlVideo
+        } else {
+            let final = "-i \(outputVideo) -i \(outputAudio) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputMerge)"
+            MobileFFmpeg.execute(final)
+            
+            // Merge audio file with video
+            let str = "-i \(path) -i \(outputMerge) -map 0:v -map 1:a -c copy -y \(output)"
+            MobileFFmpeg.execute(str)
+            
+            // Move to directory
+            let urlDir = fileManage.saveToDocumentDirectory(url: output)
+            fileManage.clearTempDirectory()
+            return urlDir
+        }
+        
+    }
+    
+    func mergeAllOfAudioURL() -> (URL, Bool) {
+        var url = [URL]()
+        let urlNum = arrURL.count
+        var outputAudio = fileManage.createUrlInApp(name: "OutputAudio.mp3")
+        if arrURL.count > 0 {
+            for i in 0 ..< urlNum {
+                let output = fileManage.createUrlInApp(name: "\(i).mp3")
+                let audio = "-i \(arrURL[i]) -af \"volume=\(Audios[i].volume), atempo=\(Audios[i].rate)\" \(output)"
+                MobileFFmpeg.execute(audio)
+                url.append(output)
+            }
+        }
+        
+        let urlConvert = url.count
+        if urlConvert > 1 {
+            var str = ""
+            switch urlConvert {
+            case 2:
+                str = "-i \(url[0]) -i \(url[1]) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputAudio)"
+            case 3:
+                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputAudio)"
+            case 4:
+                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -i \(url[3]) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputAudio)"
+            default:
+                print("Default")
+            }
+            MobileFFmpeg.execute(str)
+            return (outputAudio, false)
+        } else if urlConvert == 1 {
+            outputAudio = url[0]
+            return (outputAudio, false)
+        } else {
+            return (outputAudio, true)
+        }
     }
     
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ICGVideoTrimmerDelegate, TransformDataDelegate {
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ICGVideoTrimmerDelegate, TransformDataDelegate {    
     
     // MARK: Rewrite func for CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -581,7 +652,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         hasChangeMedia = true
         
         if hasChooseMusic {
@@ -638,9 +708,13 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     
     func transform(url: URL, volume: Float, rate: Float) {
-        self.arrURL[position] = url
-        self.volume = volume / volumeRate
-        self.rate = rate / steps
+        if isVideo {
+            videoPlayer.volume = volume
+        } else {
+            self.arrURL[position] = url
+            self.volume = volume / volumeRate
+            self.rate = rate / steps 
+        }
         viewDidAppear(true)
     }
     
@@ -673,9 +747,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             
             let serialQueue = DispatchQueue(label: "serialQueue")
             
-            DispatchQueue.main.async {
-                ZKProgressHUD.show()
-            }
+            ZKProgressHUD.show()
             
             serialQueue.async {
                 MobileFFmpeg.execute(str)
