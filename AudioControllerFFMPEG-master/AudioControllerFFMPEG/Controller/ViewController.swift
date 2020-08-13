@@ -481,8 +481,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         
     }
     
-    //MARK: Record audio file
+    @IBAction func back(_ sender: Any) {
+    }
     
+    
+    //MARK: Record audio file
     // Get permission
     func recordPermission(){
         recordingSession = AVAudioSession.sharedInstance()
