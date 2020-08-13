@@ -144,7 +144,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                                                name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         
         let layer: AVPlayerLayer = AVPlayerLayer(player: videoPlayer)
-        layer.backgroundColor = UIColor.gray.cgColor
+        layer.backgroundColor = UIColor.black.cgColor
         layer.frame = CGRect(x: 0, y: 0, width: playerView.frame.width, height: playerView.frame.height)
         //        layer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         playerView.layer.addSublayer(layer)
@@ -362,11 +362,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     //MARK: Itunes
         
         func gotoItunesView(){
-    //        if arrURL.count < 4 {
-    //            let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItunesView") as! ItunesViewController
-    //            view.modalPresentationStyle = .overCurrentContext
-    //            self.present(view, animated: true)
-    //        }
+            
             if arrURL.count < 4 {
                 let picker = MPMediaPickerController(mediaTypes: .anyAudio)
                 picker.delegate = self
@@ -376,23 +372,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
         
         func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-            
-    //        for thisItem in mediaItemCollection.items {
-    //            let itemUrl = thisItem.value(forProperty: MPMediaItemPropertyAssetURL) as? NSURL
-    //            self.dismiss(animated: true, completion: nil)
-    //
-    //            // Play the item using MPMusicPlayer
-    //            let appMusicPlayer = MPMusicPlayerController.applicationMusicPlayer
-    //            appMusicPlayer.play()
-    //            print(itemUrl as Any)
-    //
-    //            // Play the item using AVPlayer
-    //            let playerItem = AVPlayerItem(url: itemUrl! as URL)
-    //            let player = AVPlayer(playerItem: playerItem)
-    //            player.play()
-    //            print("Played")
-    //
-    //        }
             
             guard let mediaItem = mediaItemCollection.items.first else {
                 print("No song selected")
@@ -754,7 +733,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     //MARK: Rewirite function for userdefine Protocol
-    
     
     func transform(url: URL, volume: Float, rate: Float) {
         if isVideo {
