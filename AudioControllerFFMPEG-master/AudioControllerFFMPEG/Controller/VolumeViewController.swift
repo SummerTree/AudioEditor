@@ -38,6 +38,7 @@ class VolumeViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        print(volume)
         sliderVolume.value = volume
     }
     
@@ -87,12 +88,7 @@ class VolumeViewController: UIViewController {
     }
     
     func initMedia() {
-        if volume == nil {
-            volume = 60.0
-        }
-        if rate == nil {
-            rate = 4.0
-        }
+        
         if !isVideo {
             player.rate = rate! * steps
         }

@@ -60,13 +60,18 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        urlVideo = URL(fileURLWithPath: fileManage.getFilePath(name: "small", type: "mp4"))
+        
+        asset = AVAsset(url: urlVideo)
+        addVieoPlayer(asset: asset, playerView: playerView)
+        
+        initTrimmerView(asset: asset)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
         tableView.delegate = self
         tableView.dataSource = self
-        
-        urlVideo = URL(fileURLWithPath: fileManage.getFilePath(name: "small", type: "mp4"))
         
         createAudioSession()
         initCollectionView()
@@ -85,11 +90,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        asset = AVAsset(url: urlVideo)
-        addVieoPlayer(asset: asset, playerView: playerView)
-        
-        initTrimmerView(asset: asset)
-        
         if arrURL.count > 0 {
             tableView.reloadData()
             collectionView.reloadData()
@@ -99,7 +99,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         hasChooseMusic = false
         isVideo = false
     }
-    
     
     // create session
     func createAudioSession(){
@@ -137,11 +136,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
     }
     
-    private func addAudioPlayer() {
-        getAudios()
-        initMedia() 
-    }
-    
     private func addVieoPlayer(asset: AVAsset, playerView: UIView) {
         let playerItem = AVPlayerItem(asset: asset)
         videoPlayer = AVPlayer(playerItem: playerItem)
@@ -156,7 +150,12 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         playerView.layer.addSublayer(layer)
         endTime = CGFloat(CMTimeGetSeconds((videoPlayer.currentItem?.asset.duration)!))
         startTime = 0
-        initMedia()
+        videoPlayer.volume = 0.6
+    }
+    
+    private func addAudioPlayer() {
+        getAudios()
+        initMedia() 
     }
     
     @objc func itemDidFinishPlaying(_ notification: Notification) {
@@ -223,7 +222,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func initMedia() {
         if volume == nil {
             volume = 60.0
-            videoPlayer.volume = volume! * volumeRate
         }
         if rate == nil {
             rate = 4.0
@@ -270,7 +268,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         self.trimmerView.thumbWidth = 12
         self.trimmerView.resetSubviews()
         setLabelTime()
-        
     }
     
     // MARK: Display media picker
@@ -700,6 +697,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func transform(url: URL, volume: Float, rate: Float) {
         if isVideo {
             videoPlayer.volume = volume
+            print(videoPlayer.volume)
         } else {
             self.arrURL[position] = url
             self.volume = volume / volumeRate
