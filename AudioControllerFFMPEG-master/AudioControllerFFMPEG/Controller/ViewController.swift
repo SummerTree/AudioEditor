@@ -785,7 +785,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         if arrURL.count != 0 {
             if indexPath.row < arrURL.count {
-                cell.textLabel?.text = arrURL[indexPath.row].absoluteString
+                cell.textLabel?.text = arrURL[indexPath.row].lastPathComponent
                 addAudioPlayer()
             }
         }

@@ -69,6 +69,7 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
         
         if indexPath.row == position {
             position = -1
+            audioPlayer?.stop()
         } else {
             position = indexPath.row
         }
