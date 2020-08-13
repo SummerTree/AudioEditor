@@ -290,10 +290,10 @@
 			children = (
 				8FDCDC9724BC561600BA003D /* Assets.xcassets */,
 				8FB8D5E024E24B0900FC8A2C /* m4a.m4a */,
-				8FE5CC6224BD960300841402 /* small.mp4 */,
 				8FE5CC6124BD960200841402 /* example.mp3 */,
-				8F51D07324D568170008EC35 /* AB.mov */,
 				8FB9961A24C59B74009FE54D /* gene.mp3 */,
+				8FE5CC6224BD960300841402 /* small.mp4 */,
+				8F51D07324D568170008EC35 /* AB.mov */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
