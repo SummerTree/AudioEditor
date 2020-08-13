@@ -10,11 +10,7 @@ protocol TransformDataDelegate {
     
     func transform(url: URL, volume: Float, rate: Float)
     
-//    func transformQuality(quality: String)
-    
     func transformMusicPath(path: String)
-    
-//    func isSaveVideo(isSave: Bool)
     
     func isRemove(isRemove: Bool)
 }
