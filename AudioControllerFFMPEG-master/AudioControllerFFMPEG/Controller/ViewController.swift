@@ -217,7 +217,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         lblEndTime.text = CMTimeMakeWithSeconds(Float64(endTime!), preferredTimescale: 600).positionalTime
     }
     
-    
     func initMedia() {
         if volume == nil {
             volume = 60.0

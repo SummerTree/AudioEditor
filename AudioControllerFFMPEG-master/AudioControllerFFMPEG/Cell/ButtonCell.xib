@@ -28,7 +28,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bza-XS-kBk">
                                 <rect key="frame" x="0.0" y="27" width="235" height="143"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="9"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
