@@ -12,7 +12,9 @@
 		184964B524D3FC1B0065C127 /* BuaYeu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184964B124D3FC1B0065C127 /* BuaYeu.mp3 */; };
 		184964B624D3FC1B0065C127 /* MotCuLua.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184964B224D3FC1B0065C127 /* MotCuLua.mp3 */; };
 		184964B724D3FC1B0065C127 /* BanhTroiNuoc.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 184964B324D3FC1B0065C127 /* BanhTroiNuoc.mp3 */; };
-		184964BE24D3FC900065C127 /* AppMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184964BB24D3FC900065C127 /* AppMusicViewController.swift */; };
+		18566CE924E52AE4000A0655 /* MusicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18566CE724E52AE4000A0655 /* MusicCell.swift */; };
+		18566CEA24E52AE4000A0655 /* MusicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18566CE824E52AE4000A0655 /* MusicCell.xib */; };
+		18566CEC24E52B09000A0655 /* AppMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18566CEB24E52B09000A0655 /* AppMusicViewController.swift */; };
 		8F48947724C8237800427B50 /* HandleOuputFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947624C8237800427B50 /* HandleOuputFile.swift */; };
 		8F48947924C82EE900427B50 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947824C82EE900427B50 /* SplitViewController.swift */; };
 		8F48947B24C84A5300427B50 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947A24C84A5300427B50 /* Time.swift */; };
@@ -65,7 +67,9 @@
 		184964B124D3FC1B0065C127 /* BuaYeu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BuaYeu.mp3; sourceTree = "<group>"; };
 		184964B224D3FC1B0065C127 /* MotCuLua.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MotCuLua.mp3; sourceTree = "<group>"; };
 		184964B324D3FC1B0065C127 /* BanhTroiNuoc.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BanhTroiNuoc.mp3; sourceTree = "<group>"; };
-		184964BB24D3FC900065C127 /* AppMusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMusicViewController.swift; sourceTree = "<group>"; };
+		18566CE724E52AE4000A0655 /* MusicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicCell.swift; sourceTree = "<group>"; };
+		18566CE824E52AE4000A0655 /* MusicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicCell.xib; sourceTree = "<group>"; };
+		18566CEB24E52B09000A0655 /* AppMusicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMusicViewController.swift; sourceTree = "<group>"; };
 		5B5705B5AD0C11982F3C5E8B /* Pods-AudioControllerFFMPEG.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AudioControllerFFMPEG.release.xcconfig"; path = "Target Support Files/Pods-AudioControllerFFMPEG/Pods-AudioControllerFFMPEG.release.xcconfig"; sourceTree = "<group>"; };
 		73FFFEBE1EC4D4E992694C23 /* Pods_AudioControllerFFMPEG.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AudioControllerFFMPEG.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F48947624C8237800427B50 /* HandleOuputFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandleOuputFile.swift; sourceTree = "<group>"; };
@@ -248,7 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				8FDCDC9224BC561400BA003D /* ViewController.swift */,
-				184964BB24D3FC900065C127 /* AppMusicViewController.swift */,
+				18566CEB24E52B09000A0655 /* AppMusicViewController.swift */,
 				8FFB832524BD50840045C6CF /* VolumeViewController.swift */,
 				8FFB832724BD50900045C6CF /* SpeedViewController.swift */,
 				8FFB832924BD50A10045C6CF /* DeleteViewcontroller.swift */,
@@ -264,6 +268,8 @@
 		8FFB831624BD46FC0045C6CF /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				18566CE724E52AE4000A0655 /* MusicCell.swift */,
+				18566CE824E52AE4000A0655 /* MusicCell.xib */,
 				8FFB831D24BD4F320045C6CF /* ButtonCell.swift */,
 				8FFB831E24BD4F320045C6CF /* ButtonCell.xib */,
 			);
@@ -414,6 +420,7 @@
 				184964B424D3FC1B0065C127 /* RoiRemix.mp3 in Resources */,
 				8FE5CC6424BD960300841402 /* small.mp4 in Resources */,
 				8FB9961B24C59B74009FE54D /* gene.mp3 in Resources */,
+				18566CEA24E52AE4000A0655 /* MusicCell.xib in Resources */,
 				184964B724D3FC1B0065C127 /* BanhTroiNuoc.mp3 in Resources */,
 				184964B624D3FC1B0065C127 /* MotCuLua.mp3 in Resources */,
 				184964B524D3FC1B0065C127 /* BuaYeu.mp3 in Resources */,
@@ -509,7 +516,7 @@
 				8FFB832824BD50900045C6CF /* SpeedViewController.swift in Sources */,
 				8FD6867824DAA99D00948620 /* Media.swift in Sources */,
 				8FDCDC9324BC561400BA003D /* ViewController.swift in Sources */,
-				184964BE24D3FC900065C127 /* AppMusicViewController.swift in Sources */,
+				18566CE924E52AE4000A0655 /* MusicCell.swift in Sources */,
 				8F48947924C82EE900427B50 /* SplitViewController.swift in Sources */,
 				8FBB4C7624DD059000EB1692 /* MyProtocol.swift in Sources */,
 				8FFB832624BD50840045C6CF /* VolumeViewController.swift in Sources */,
@@ -518,6 +525,7 @@
 				8F48947724C8237800427B50 /* HandleOuputFile.swift in Sources */,
 				181544CD24E1331400F13077 /* SongQuery.swift in Sources */,
 				8FFB831F24BD4F320045C6CF /* ButtonCell.swift in Sources */,
+				18566CEC24E52B09000A0655 /* AppMusicViewController.swift in Sources */,
 				8FFB832A24BD50A10045C6CF /* DeleteViewcontroller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -700,7 +708,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5538N57KLD;
+				DEVELOPMENT_TEAM = 663NP8547U;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = AudioControllerFFMPEG/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -724,7 +732,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5538N57KLD;
+				DEVELOPMENT_TEAM = 663NP8547U;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = AudioControllerFFMPEG/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

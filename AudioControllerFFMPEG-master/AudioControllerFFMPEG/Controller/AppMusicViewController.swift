@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class AppMusicViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AppMusicViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MusicCellDelegate {
     
     @IBOutlet weak var table: UITableView!
     var songs = [Song]()
@@ -24,6 +24,7 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
         createAudioSession()
         table.delegate = self
         table.dataSource = self
+        table.register(MusicCell.nib(), forCellReuseIdentifier: MusicCell.identifier)
     }
     
     func createAudioSession(){
@@ -36,32 +37,42 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
          }
     }
     
+    func clickedBtnUse(index: Int) {
+        if index != -1 {
+            self.delegate.transformMusicPath(path: sound!.path)
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: MusicCell.identifier, for: indexPath) as! MusicCell
         let song = songs[indexPath.row]
+        
+        cell.configure(with: song.trackName, image: song.image, index: indexPath.row, isHiddenBtn: indexPath.row != position)
+        cell.delegate = self
         //configure
         if indexPath.row == position {
             cell.textLabel?.textColor = UIColor.red
         } else{
             cell.textLabel?.textColor = UIColor.black
         }
-        cell.textLabel?.text = song.trackName
-        cell.detailTextLabel?.text = song.albumName
-        cell.imageView?.image = UIImage(named: song.image)
-        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //present player
-        tableView.cellForRow(at: indexPath)?.textLabel?.textColor = UIColor.red
-        position = indexPath.row
         //songs
         playBackgroundMusic(songName: songs[indexPath.row].trackName)
+        
+        if indexPath.row == position {
+            position = -1
+        } else {
+            position = indexPath.row
+        }
+        table.reloadData()
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -86,29 +97,11 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
         return aSound as URL
     }
     
-    @IBAction func GetMusic(_ sender: Any) {
-        if position != -1 {
-            self.delegate.transformMusicPath(path: sound!.path)
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
     func configureSong(){
         songs.append(Song(name: "BanhTroiNuoc", albumName: "Music", trackName: "BanhTroiNuoc", image: "SongList", artist: "HoangThuyLinh"))
         songs.append(Song(name: "BuaYeu", albumName: "Music", trackName: "BuaYeu", image: "SongList", artist: "BichPhuong"))
         songs.append(Song(name: "MotCuLua", albumName: "Music", trackName: "MotCuLua", image: "SongList", artist: "BichPhuong"))
         songs.append(Song(name: "Roi", albumName: "Music", trackName: "RoiRemix", image: "SongList", artist: "HoangThuyLinh"))
-        songs.append(Song(name: "BanhTroiNuoc", albumName: "Music", trackName: "BanhTroiNuoc", image: "SongList", artist: "HoangThuyLinh"))
-        songs.append(Song(name: "BuaYeu", albumName: "Music", trackName: "BuaYeu", image: "SongList", artist: "BichPhuong"))
-        songs.append(Song(name: "MotCuLua", albumName: "Music", trackName: "MotCuLua", image: "SongList", artist: "BichPhuong"))
-        songs.append(Song(name: "Roi", albumName: "Music", trackName: "RoiRemix", image: "SongList", artist: "HoangThuyLinh"))
-        songs.append(Song(name: "BanhTroiNuoc", albumName: "Music", trackName: "BanhTroiNuoc", image: "SongList", artist: "HoangThuyLinh"))
-        songs.append(Song(name: "BuaYeu", albumName: "Music", trackName: "BuaYeu", image: "SongList", artist: "BichPhuong"))
-        songs.append(Song(name: "MotCuLua", albumName: "Music", trackName: "MotCuLua", image: "SongList", artist: "BichPhuong"))
-        songs.append(Song(name: "Roi", albumName: "Music", trackName: "RoiRemix", image: "SongList", artist: "HoangThuyLinh"))
-        songs.append(Song(name: "BanhTroiNuoc", albumName: "Music", trackName: "BanhTroiNuoc", image: "SongList", artist: "HoangThuyLinh"))
-        songs.append(Song(name: "BuaYeu", albumName: "Music", trackName: "BuaYeu", image: "SongList", artist: "BichPhuong"))
-        songs.append(Song(name: "MotCuLua", albumName: "Music", trackName: "MotCuLua", image: "SongList", artist: "BichPhuong"))
-        songs.append(Song(name: "Roi", albumName: "Music", trackName: "RoiRemix", image: "SongList", artist: "HoangThuyLinh"))
+        
     }
 }

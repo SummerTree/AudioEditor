@@ -151,6 +151,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         endTime = CGFloat(CMTimeGetSeconds((videoPlayer.currentItem?.asset.duration)!))
         startTime = 0
         videoPlayer.volume = 0.6
+        initMedia()
     }
     
     private func addAudioPlayer() {
@@ -357,6 +358,67 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         view.modalPresentationStyle = .overCurrentContext
         self.present(view, animated: true)
     }
+    
+    //MARK: Itunes
+        
+        func gotoItunesView(){
+    //        if arrURL.count < 4 {
+    //            let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ItunesView") as! ItunesViewController
+    //            view.modalPresentationStyle = .overCurrentContext
+    //            self.present(view, animated: true)
+    //        }
+            if arrURL.count < 4 {
+                let picker = MPMediaPickerController(mediaTypes: .anyAudio)
+                picker.delegate = self
+                picker.allowsPickingMultipleItems = false
+                present(picker, animated: true, completion: nil)
+            }
+        }
+        
+        func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+            
+    //        for thisItem in mediaItemCollection.items {
+    //            let itemUrl = thisItem.value(forProperty: MPMediaItemPropertyAssetURL) as? NSURL
+    //            self.dismiss(animated: true, completion: nil)
+    //
+    //            // Play the item using MPMusicPlayer
+    //            let appMusicPlayer = MPMusicPlayerController.applicationMusicPlayer
+    //            appMusicPlayer.play()
+    //            print(itemUrl as Any)
+    //
+    //            // Play the item using AVPlayer
+    //            let playerItem = AVPlayerItem(url: itemUrl! as URL)
+    //            let player = AVPlayer(playerItem: playerItem)
+    //            player.play()
+    //            print("Played")
+    //
+    //        }
+            
+            guard let mediaItem = mediaItemCollection.items.first else {
+                print("No song selected")
+                return
+            }
+            if mediaItem.hasProtectedAsset {
+                print("Must be played only via MPMusicPlayer")
+            } else {
+                print("Can be played both via AVPlayer & MPMusicPlayer")
+            }
+            let audioUrl = mediaItem.assetURL
+            print("Audio URL:::")
+            print(audioUrl ?? "No file detected")
+            arrURL.append(audioUrl!)
+            tableView.reloadData()
+            mediaPicker.dismiss(animated: true, completion: nil)
+            
+            
+    //        mediaPicker.dismiss(animated: true, completion: nil)
+            
+    //        let musicPlayer = MPMusicPlayerController.systemMusicPlayer
+    //        musicPlayer.setQueue(with: mediaItemCollection)
+    //        mediaPicker.dismiss(animated: true)
+    //        // Begin playback.
+    //        musicPlayer.play()
+        }
     
     func dupicateAudioFile() {
         
@@ -654,7 +716,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         case 0:
             MusicInApp()
         case 1:
-            ItunesMusic()
+            gotoItunesView()
         case 2:
             RecordAudio()
             collectionView.reloadItems(at: [indexPath])
