@@ -65,8 +65,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         asset = AVAsset(url: urlVideo)
         addVieoPlayer(asset: asset, playerView: playerView)
         
-        initTrimmerView(asset: asset)
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -94,7 +92,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             tableView.reloadData()
             collectionView.reloadData()
         }
-        
+        initTrimmerView(asset: asset)
         position = -1
         hasChooseMusic = false
         isVideo = false
@@ -361,43 +359,43 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     //MARK: Itunes
         
-        func gotoItunesView(){
-            
-            if arrURL.count < 4 {
-                let picker = MPMediaPickerController(mediaTypes: .anyAudio)
-                picker.delegate = self
-                picker.allowsPickingMultipleItems = false
-                present(picker, animated: true, completion: nil)
-            }
-        }
+    func gotoItunesView(){
         
-        func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-            
-            guard let mediaItem = mediaItemCollection.items.first else {
-                print("No song selected")
-                return
-            }
-            if mediaItem.hasProtectedAsset {
-                print("Must be played only via MPMusicPlayer")
-            } else {
-                print("Can be played both via AVPlayer & MPMusicPlayer")
-            }
-            let audioUrl = mediaItem.assetURL
-            print("Audio URL:::")
-            print(audioUrl ?? "No file detected")
-            arrURL.append(audioUrl!)
-            tableView.reloadData()
-            mediaPicker.dismiss(animated: true, completion: nil)
-            
-            
-    //        mediaPicker.dismiss(animated: true, completion: nil)
-            
-    //        let musicPlayer = MPMusicPlayerController.systemMusicPlayer
-    //        musicPlayer.setQueue(with: mediaItemCollection)
-    //        mediaPicker.dismiss(animated: true)
-    //        // Begin playback.
-    //        musicPlayer.play()
+        if arrURL.count < 4 {
+            let picker = MPMediaPickerController(mediaTypes: .anyAudio)
+            picker.delegate = self
+            picker.allowsPickingMultipleItems = false
+            present(picker, animated: true, completion: nil)
         }
+    }
+        
+    func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        
+        guard let mediaItem = mediaItemCollection.items.first else {
+            print("No song selected")
+            return
+        }
+        if mediaItem.hasProtectedAsset {
+            print("Must be played only via MPMusicPlayer")
+        } else {
+            print("Can be played both via AVPlayer & MPMusicPlayer")
+        }
+        let audioUrl = mediaItem.assetURL
+        print("Audio URL:::")
+        print(audioUrl ?? "No file detected")
+        arrURL.append(audioUrl!)
+        tableView.reloadData()
+        mediaPicker.dismiss(animated: true, completion: nil)
+        
+        
+//        mediaPicker.dismiss(animated: true, completion: nil)
+        
+//        let musicPlayer = MPMusicPlayerController.systemMusicPlayer
+//        musicPlayer.setQueue(with: mediaItemCollection)
+//        mediaPicker.dismiss(animated: true)
+//        // Begin playback.
+//        musicPlayer.play()
+    }
     
     func dupicateAudioFile() {
         
@@ -426,7 +424,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             }
         }
     }
-    
     
     func changeIconBtnPlay() {
         if videoPlayer.isPlaying {
@@ -476,7 +473,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         ZKProgressHUD.show()
         let queue = DispatchQueue(label: "saveQueue")
         queue.async {
-            self.fileManage.moveToLibrary(destinationURL: self.mergeAudioWithVideo())
+            print(self.mergeAudioWithVideo())
             DispatchQueue.main.async {
                 ZKProgressHUD.dismiss()
                 ZKProgressHUD.showSuccess()
@@ -583,6 +580,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         (outputAudio, isEmpty) = mergeAllOfAudioURL()
         
         // Merge audio file
+        
         if isEmpty {
             fileManage.clearTempDirectory()
             return urlVideo
@@ -599,7 +597,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             fileManage.clearTempDirectory()
             return urlDir
         }
-        
     }
     
     func mergeAllOfAudioURL() -> (URL, Bool) {
