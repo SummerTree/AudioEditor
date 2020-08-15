@@ -587,12 +587,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             fileManage.clearTempDirectory()
             return urlVideo
         } else {
-            let final = "-i \(outputVideo) -i \(outputAudio) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputMerge)"
+            let final = "-i \(outputVideo) -i \(outputAudio) -filter_complex \"[0]adelay=0|0[b];[1]adelay=10000|10000[c];[b][c]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputMerge)"
+
             MobileFFmpeg.execute(final)
             
             // Merge audio file with video
-            let str = "-i \(path) -i \(outputMerge) -map 0:v -map 1:a -c copy -y \(output)"
-            MobileFFmpeg.execute(str)
+            
+            let str2 = "-i \(path) -i \(outputMerge) -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 \(output)"
+            MobileFFmpeg.execute(str2)
             
             // Move to directory
             let urlDir = fileManage.saveToDocumentDirectory(url: output)
