@@ -12,6 +12,7 @@ import ICGVideoTrimmer
 
 class SpeedViewController: UIViewController {
     
+    @IBOutlet weak var screen: UIView!
     @IBOutlet weak var sliderSpeed: UISlider!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var playerView: UIView!
@@ -36,6 +37,18 @@ class SpeedViewController: UIViewController {
         super.viewDidLoad()
         
         sliderSpeed.value = rate
+        addScreenTap(screen: self.screen)
+    }
+    
+    func addScreenTap(screen: UIView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        tap.numberOfTapsRequired = 1
+        screen.addGestureRecognizer(tap)
+    }
+    
+    @objc func screenTapped() {
+        player.pause()
+        self.dismiss(animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -442,6 +442,7 @@
                         <outlet property="btnPlay" destination="4iz-CH-EGT" id="dZR-Rw-uO9"/>
                         <outlet property="lblEndTime" destination="Rbe-Ll-r0B" id="Jke-0Z-2XH"/>
                         <outlet property="lblStartTime" destination="bhc-jI-OuK" id="bg6-Du-kbs"/>
+                        <outlet property="screen" destination="mTO-IZ-J5W" id="LMl-yP-w64"/>
                         <outlet property="trimmerView" destination="cdf-yw-2q2" id="aPl-MT-LOv"/>
                     </connections>
                 </viewController>
@@ -457,13 +458,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sy-Oi-lnK" userLabel="Play Audio">
-                                <rect key="frame" x="0.0" y="44" width="414" height="414"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="1sy-Oi-lnK" secondAttribute="height" id="GXG-EL-PDl"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O94-HY-YkM" userLabel="Edit Volume">
                                 <rect key="frame" x="0.0" y="458" width="414" height="404"/>
                                 <subviews>
@@ -622,6 +616,13 @@
                                     <constraint firstAttribute="bottom" secondItem="lN8-YH-01X" secondAttribute="bottom" id="yTl-FM-8p0"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sy-Oi-lnK" userLabel="Play Audio">
+                                <rect key="frame" x="0.0" y="44" width="414" height="414"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="1sy-Oi-lnK" secondAttribute="height" id="GXG-EL-PDl"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -639,6 +640,7 @@
                         <outlet property="btnPlay" destination="3PK-aC-1oY" id="exU-e6-Kci"/>
                         <outlet property="lblEndTime" destination="nc2-oP-Qdn" id="Vpx-q6-FQt"/>
                         <outlet property="lblStartTime" destination="zNG-dY-wlA" id="HnJ-BZ-N57"/>
+                        <outlet property="screen" destination="1sy-Oi-lnK" id="yWq-sK-2hk"/>
                         <outlet property="sliderVolume" destination="qli-tn-9fC" id="red-B6-5uS"/>
                         <outlet property="trimmerView" destination="fdr-80-FUq" id="lJb-yO-CEN"/>
                     </connections>
@@ -861,6 +863,7 @@
                         <outlet property="lblEndTime" destination="2bF-nG-xUL" id="bcn-bQ-UOa"/>
                         <outlet property="lblStartTime" destination="Ncu-7h-PBa" id="vrT-R9-Tl6"/>
                         <outlet property="playerView" destination="yj4-4m-2S4" id="aMF-ik-DbS"/>
+                        <outlet property="screen" destination="yj4-4m-2S4" id="kKj-ck-xVR"/>
                         <outlet property="sliderSpeed" destination="99v-IK-DMs" id="SjO-RG-CTH"/>
                         <outlet property="trimmerView" destination="gqr-9g-aw0" id="UWx-TC-UDV"/>
                     </connections>
@@ -1068,7 +1071,7 @@
                         <outlet property="btnPlay" destination="SEu-ss-JdG" id="BF2-gd-b3w"/>
                         <outlet property="lblEndTime" destination="JNc-2S-MI1" id="Esu-BZ-oAC"/>
                         <outlet property="lblStartTime" destination="ysg-kV-P6W" id="E54-ps-dpt"/>
-                        <outlet property="playerView" destination="u3G-OS-07K" id="143-vK-rU3"/>
+                        <outlet property="screen" destination="u3G-OS-07K" id="P7X-Bl-pW0"/>
                         <outlet property="trimmerView" destination="bfm-2W-yhK" id="gUX-Zc-HFV"/>
                     </connections>
                 </viewController>

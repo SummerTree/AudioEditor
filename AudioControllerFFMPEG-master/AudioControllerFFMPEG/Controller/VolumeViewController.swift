@@ -14,6 +14,7 @@ import ICGVideoTrimmer
 class VolumeViewController: UIViewController {
     
     @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
+    @IBOutlet weak var screen: UIView!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var sliderVolume: UISlider!
     @IBOutlet weak var lblStartTime: UILabel!
@@ -38,8 +39,20 @@ class VolumeViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        print(volume)
         sliderVolume.value = volume
+        
+        addScreenTap(screen: self.screen)
+    }
+    
+    func addScreenTap(screen: UIView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        tap.numberOfTapsRequired = 1
+        screen.addGestureRecognizer(tap)
+    }
+    
+    @objc func screenTapped() {
+        player.pause()
+        self.dismiss(animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -141,6 +154,13 @@ class VolumeViewController: UIViewController {
         }
         changeIconBtnPlay()
     }
+    
+    
+    @IBAction func screenPressed(_ sender: Any) {
+        player.stop()
+        self.dismiss(animated: true)
+    }
+    
     
     @IBAction func back(_ sender: Any) {
         player.stop()

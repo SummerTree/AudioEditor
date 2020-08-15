@@ -12,7 +12,7 @@ import ICGVideoTrimmer
 import ZKProgressHUD
 
 class SplitViewController: UIViewController {
-    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var screen: UIView!
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var lblEndTime: UILabel!
@@ -37,6 +37,18 @@ class SplitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addScreenTap(screen: self.screen)
+    }
+    
+    func addScreenTap(screen: UIView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        tap.numberOfTapsRequired = 1
+        screen.addGestureRecognizer(tap)
+    }
+    
+    @objc func screenTapped() {
+        player.pause()
+        self.dismiss(animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {

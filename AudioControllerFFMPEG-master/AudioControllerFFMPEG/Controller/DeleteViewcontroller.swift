@@ -13,6 +13,7 @@ import ZKProgressHUD
 
 class DeleteViewController: UIViewController {
     
+    @IBOutlet weak var screen: UIView!
     @IBOutlet weak var lblEndTime: UILabel!
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
@@ -35,7 +36,18 @@ class DeleteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addScreenTap(screen: self.screen)
+    }
+    
+    func addScreenTap(screen: UIView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        tap.numberOfTapsRequired = 1
+        screen.addGestureRecognizer(tap)
+    }
+    
+    @objc func screenTapped() {
+        player.pause()
+        self.dismiss(animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {

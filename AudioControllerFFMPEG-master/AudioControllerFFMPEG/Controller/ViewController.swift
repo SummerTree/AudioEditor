@@ -15,7 +15,6 @@ import MediaPlayer
 
 class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerControllerDelegate {
     
-    
     @IBOutlet weak var playerView: UIView!
     @IBOutlet weak var lblEndTime: UILabel!
     @IBOutlet weak var lblStartTime: UILabel!
