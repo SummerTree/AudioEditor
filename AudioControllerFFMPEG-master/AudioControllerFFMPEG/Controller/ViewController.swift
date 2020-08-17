@@ -208,6 +208,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 }
             }
             trimmerView.seek(toTime: start)
+            changeIconBtnPlay()
         }
     }
     
@@ -254,6 +255,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         arr.append(ModelItem(title: "SPLIT", image: "icon_split"))
         arr.append(ModelItem(title: "DUPLICATE", image: "icon_duplicate"))
     }
+    
+    //MARK: Init TrimmerView
     
     private func initTrimmerView(asset: AVAsset) {
         self.trimmerView.asset = asset
@@ -411,8 +414,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         serialQueue.async {
             MobileFFmpeg.execute(cmd)
             MobileFFmpeg.execute(cmd2)
+            let dupURL = self.fileManage.saveToDocumentDirectory(url: outputDuplicate)
             let audio = self.Audios[self.position]
-            self.arrURL[self.position] = outputDuplicate
+            self.arrURL[self.position] = dupURL
             self.volume = audio.volume / self.volumeRate
             self.rate = audio.rate / self.steps
             DispatchQueue.main.async {
@@ -433,7 +437,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     //MARK: Handle IBAction
     @IBAction func playAudio(_ sender: Any) {
-        print(arrURL.count)
         if videoPlayer.isPlaying {
             pauseMedia()
             stopPlaybackTimeChecker()
@@ -717,19 +720,18 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     // MARK: Rewrite func for TrimmerView
     
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
-        
         for audio in Audios {
             audio.pause()
             audio.currentTime = Double(startTime)
         }
-        
         videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 600))
+        trimmerView.seek(toTime: startTime)
         videoPlayer.pause()
-        
         changeIconBtnPlay()
         self.startTime = startTime
         self.endTime = endTime
         setLabelTime()
+        
     }
     
     //MARK: Rewirite function for userdefine Protocol
@@ -737,7 +739,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func transform(url: URL, volume: Float, rate: Float) {
         if isVideo {
             videoPlayer.volume = volume
-            print(videoPlayer.volume)
         } else {
             self.arrURL[position] = url
             self.volume = volume / volumeRate

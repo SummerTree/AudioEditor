@@ -15,3 +15,7 @@ extension AVPlayer {
     }
 }
 
+struct ArrAudio {
+    var player: AVAudioPlayer
+    var delayTime: CMTime
+}

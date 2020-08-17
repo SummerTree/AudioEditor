@@ -38,7 +38,6 @@ class VolumeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
         sliderVolume.value = volume
         
         addScreenTap(screen: self.screen)
