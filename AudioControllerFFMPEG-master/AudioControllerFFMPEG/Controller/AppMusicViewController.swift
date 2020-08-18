@@ -17,6 +17,7 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
     var sound:URL?
     var position = -1
     var delegate: TransformDataDelegate!
+    var delayTime: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
     func clickedBtnUse(index: Int) {
         if index != -1 {
             self.delegate.transformMusicPath(path: sound!.path)
+            self.delegate.delayTime(delayTime: self.delayTime!)
             self.navigationController?.popViewController(animated: true)
         }
     }

@@ -27,7 +27,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var playbackTimeCheckerTimer: Timer?
     var trimmerPositionChangedTimer: Timer?
     var arr = [ModelItem]()
-    var Audios = [AVAudioPlayer]()
+    var Audios = [ArrAudio]()
     var volume: Float?
     var volumeRate: Float = 0.01
     var rate: Float?
@@ -55,9 +55,12 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     var hasChooseMusic = false
     var hasChangeMedia: Bool = false
     var isVideo: Bool!
+    var delayTime: CGFloat!
+    var isReload: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isReload = false
         
         urlVideo = URL(fileURLWithPath: fileManage.getFilePath(name: "small", type: "mp4"))
         
@@ -119,16 +122,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                     let audio = try AVAudioPlayer(contentsOf: arrURL[i])
                     audio.enableRate = true
                     audio.numberOfLoops = -1
-                    if i <= (numAudio - 1) {
-                        audio.rate = Audios[i].rate
-                        audio.volume = Audios[i].volume
-                        Audios[i] = audio
-                    } else {
+                    if i > (numAudio - 1) {
                         audio.rate = self.rate! * steps
                         audio.volume = self.volume! * volumeRate
-                        Audios.append(audio)
+                        Audios.append(ArrAudio(player: audio, delayTime: delayTime))
                     }
-                } catch {}
+                } catch {
+                    
+                }
             }
         }
     }
@@ -147,6 +148,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         playerView.layer.addSublayer(layer)
         endTime = CGFloat(CMTimeGetSeconds((videoPlayer.currentItem?.asset.duration)!))
         startTime = 0
+        delayTime = startTime
         videoPlayer.volume = 0.6
         initMedia()
     }
@@ -156,17 +158,33 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         initMedia() 
     }
     
+    // Nếu điểm bắt đầu của trimmer view chưa tới thời gian delay mà music được thêm vào
+    // -> trình phát nhạc quản lí music của nó vẫn như cũ
+    
+    func isOverTimeDelay(startTime: CGFloat, delayTime: CGFloat) -> Bool {
+        return startTime > delayTime
+    }
+    
+    func setTimeMusic(audio: ArrAudio, startTime: CGFloat, play: Bool) {
+        var time: CGFloat = 0
+        if isOverTimeDelay(startTime: startTime, delayTime: audio.delayTime) {
+            time = startTime - audio.delayTime
+        }
+        audio.player.currentTime = Double(time)
+        if !play {
+            audio.player.pause()
+        }
+    }
+    
     @objc func itemDidFinishPlaying(_ notification: Notification) {
         if let start = self.startTime {
             videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(start), preferredTimescale: 600))
             videoPlayer.pause()
             if hasChooseMusic {
-                Audios[position].currentTime = Double(start)
-                Audios[position].pause()
+                setTimeMusic(audio: Audios[position], startTime: start, play: false)
             } else {
                 for audio in Audios {
-                    audio.currentTime = Double(start)
-                    audio.pause()
+                    setTimeMusic(audio: audio, startTime: start, play: false)
                 }
             }
         }
@@ -195,20 +213,44 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         let playBackTime = CGFloat(CMTimeGetSeconds(videoPlayer.currentTime()))
         trimmerView.seek(toTime: playBackTime)
         
+        
         if playBackTime >= endTime {
             videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(start), preferredTimescale: 600), toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
             videoPlayer.pause()
+                      
             if hasChooseMusic {
-                Audios[position].currentTime = Double(start)
-                Audios[position].pause()
+                setTimeMusic(audio: Audios[position], startTime: start, play: false)
             } else {
                 for audio in Audios {
-                    audio.currentTime = Double(start)
-                    audio.pause()
+                    setTimeMusic(audio: audio, startTime: start, play: false)
                 }
             }
+            
             trimmerView.seek(toTime: start)
             changeIconBtnPlay()
+        } else {
+//            delayTime = playBackTime
+            if hasChooseMusic {
+                if !Audios[position].player.isPlaying {
+                    setTimeMusic(audio: Audios[position], startTime: playBackTime, play: true)
+                    if isOverTimeDelay(startTime: playBackTime, delayTime: Audios[position].delayTime){
+                        if videoPlayer.isPlaying {
+                            Audios[position].player.play()
+                        }
+                    }
+                }
+            } else {
+                for audio in Audios {
+                    if !audio.player.isPlaying {
+                        setTimeMusic(audio: audio, startTime: playBackTime, play: true)
+                        if isOverTimeDelay(startTime: playBackTime, delayTime: audio.delayTime){
+                            if videoPlayer.isPlaying {
+                                audio.player.play()
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -229,8 +271,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             setMedia()
         } else {
             for audio in Audios {
-                audio.rate = 4 * steps
-                audio.volume = 60 * volumeRate
+                audio.player.rate = 4 * steps
+                audio.player.volume = 60 * volumeRate
             }
         }
         changeIconBtnPlay()
@@ -238,8 +280,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     func setMedia() {
         if position >= 0 {
-            Audios[position].volume = volume! * volumeRate
-            Audios[position].rate = rate! * steps
+            Audios[position].player.volume = volume! * volumeRate
+            Audios[position].player.rate = rate! * steps
         }
     }
     
@@ -295,11 +337,12 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     // MARK: Navigate to another view
     
     func MusicInApp(){
-        
+        self.delayTime = CGFloat(videoPlayer.currentTime().seconds)
         if arrURL.count < 4 {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let MusicView = sb.instantiateViewController(withIdentifier: "AppMusic") as! AppMusicViewController
             MusicView.delegate = self
+            MusicView.delayTime = self.delayTime
             navigationController?.pushViewController(MusicView, animated: true)
         }
     }
@@ -315,8 +358,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             view.volume = videoPlayer.volume / volumeRate
         } else {
             view.url = arrURL[position]
-            view.volume = Audios[position].volume / volumeRate
-            view.rate = Audios[position].rate / steps
+            view.volume = Audios[position].player.volume / volumeRate
+            view.rate = Audios[position].player.rate / steps
         }
         view.modalPresentationStyle = .overCurrentContext
         self.present(view, animated: true)
@@ -325,8 +368,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func gotoEditRate() {
         let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeedView") as! SpeedViewController
         view.delegate = self
-        view.volume = Audios[position].volume / volumeRate
-        view.rate = Audios[position].rate / steps
+        view.volume = Audios[position].player.volume / volumeRate
+        view.rate = Audios[position].player.rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
         view.url = arrURL[position]
@@ -336,8 +379,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     func gotoDeleteAudioFile() {
         let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DeleteView") as! DeleteViewController
-        view.volume = Audios[position].volume / volumeRate
-        view.rate = Audios[position].rate / steps
+        view.volume = Audios[position].player.volume / volumeRate
+        view.rate = Audios[position].player.rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
         view.url = self.arrURL[position]
@@ -348,8 +391,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     func gotoSplitView() {
         let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SplitView") as! SplitViewController
-        view.volume = Audios[position].volume / volumeRate
-        view.rate = Audios[position].rate / steps
+        view.volume = Audios[position].player.volume / volumeRate
+        view.rate = Audios[position].player.rate / steps
         view.volumeRate = volumeRate
         view.steps = steps
         view.url = self.arrURL[position]
@@ -387,17 +430,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         arrURL.append(audioUrl!)
         tableView.reloadData()
         mediaPicker.dismiss(animated: true, completion: nil)
-        
-        
-//        mediaPicker.dismiss(animated: true, completion: nil)
-        
-//        let musicPlayer = MPMusicPlayerController.systemMusicPlayer
-//        musicPlayer.setQueue(with: mediaItemCollection)
-//        mediaPicker.dismiss(animated: true)
-//        // Begin playback.
-//        musicPlayer.play()
     }
     
+    // MARK: Duplicate
     func dupicateAudioFile() {
         
         let outputTemp = fileManage.createUrlInApp(name: "temp.mp3")
@@ -417,8 +452,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             let dupURL = self.fileManage.saveToDocumentDirectory(url: outputDuplicate)
             let audio = self.Audios[self.position]
             self.arrURL[self.position] = dupURL
-            self.volume = audio.volume / self.volumeRate
-            self.rate = audio.rate / self.steps
+            self.volume = audio.player.volume / self.volumeRate
+            self.rate = audio.player.rate / self.steps
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 ZKProgressHUD.dismiss()
@@ -437,6 +472,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     //MARK: Handle IBAction
     @IBAction func playAudio(_ sender: Any) {
+        
         if videoPlayer.isPlaying {
             pauseMedia()
             stopPlaybackTimeChecker()
@@ -449,10 +485,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     func pauseMedia() {
         if hasChooseMusic {
-            Audios[position].pause()
+            if Audios[position].player.isPlaying && videoPlayer.isPlaying {
+                Audios[position].player.pause()
+            }
         } else {
             for audio in Audios {
-                audio.pause()
+                if audio.player.isPlaying && videoPlayer.isPlaying {
+                    audio.player.pause()
+                }
             }
         }
         videoPlayer.pause()
@@ -460,10 +500,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
     func playMedia() {
         if hasChooseMusic {
-            Audios[position].play()
+            if (!videoPlayer.isPlaying) && (videoPlayer.currentTime().seconds >= Double(Audios[position].delayTime)) {
+                Audios[position].player.play()
+            }
         } else {
             for audio in Audios {
-                audio.play()
+                if (!videoPlayer.isPlaying) && (videoPlayer.currentTime().seconds >= Double(audio.delayTime)) {
+                    audio.player.play()
+                }
             }
         }
         videoPlayer.play()
@@ -589,15 +633,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             fileManage.clearTempDirectory()
             return urlVideo
         } else {
-            let final = "-i \(outputVideo) -i \(outputAudio) -filter_complex \"[0]adelay=0|0[b];[1]adelay=10000|10000[c];[b][c]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputMerge)"
+            let final = "-i \(outputVideo) -i \(outputAudio) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputMerge)"
 
             MobileFFmpeg.execute(final)
-            
+
             // Merge audio file with video
-            
+
             let str2 = "-i \(path) -i \(outputMerge) -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 \(output)"
             MobileFFmpeg.execute(str2)
-            
+
             // Move to directory
             let urlDir = fileManage.saveToDocumentDirectory(url: output)
             fileManage.clearTempDirectory()
@@ -608,42 +652,52 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func mergeAllOfAudioURL() -> (URL, Bool) {
         var url = [URL]()
         let urlNum = arrURL.count
-        var outputAudio = fileManage.createUrlInApp(name: "OutputAudio.mp3")
+        let outputAudio = fileManage.createUrlInApp(name: "OutputAudio.mp3")
         if arrURL.count > 0 {
             for i in 0 ..< urlNum {
                 let output = fileManage.createUrlInApp(name: "\(i).mp3")
-                let audio = "-i \(arrURL[i]) -af \"volume=\(Audios[i].volume), atempo=\(Audios[i].rate)\" \(output)"
+                let audio = "-i \(arrURL[i]) -af \"volume=\(Audios[i].player.volume), atempo=\(Audios[i].player.rate)\" \(output)"
                 MobileFFmpeg.execute(audio)
                 url.append(output)
             }
         }
         
         let urlConvert = url.count
-        if urlConvert > 1 {
+        if urlConvert > 0 {
             var str = ""
             switch urlConvert {
+            case 1:
+                let delay0 = Audios[0].delayTime * 1000
+                str = "-i \(url[0]) -af adelay=\(delay0) -c:a libmp3lame \(outputAudio)"
             case 2:
-                str = "-i \(url[0]) -i \(url[1]) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputAudio)"
+                let delay0 = Audios[0].delayTime * 1000
+                let delay1 = Audios[1].delayTime * 1000
+                str = "-i \(url[0]) -i \(url[1]) -filter_complex \"[0]adelay=\(delay0)|\(delay0)[b];[1]adelay=\(delay1)|\(delay1)[c];[b][c]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputAudio)"
             case 3:
-                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputAudio)"
+                let delay0 = Audios[0].delayTime * 1000
+                let delay1 = Audios[1].delayTime * 1000
+                let delay2 = Audios[2].delayTime * 1000
+                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -filter_complex \"[0]adelay=\(delay0)|\(delay0)[b];[1]adelay=\(delay1)|\(delay1)[c];[2]adelay=\(delay2)|\(delay2)[d];[b][c][d]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputAudio)"
             case 4:
-                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -i \(url[3]) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputAudio)"
+                let delay0 = Audios[0].delayTime * 1000
+                let delay1 = Audios[1].delayTime * 1000
+                let delay2 = Audios[2].delayTime * 1000
+                let delay3 = Audios[3].delayTime * 1000
+                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -i \(url[3]) -filter_complex \"[0]adelay=\(delay0)|\(delay0)[b];[1]adelay=\(delay1)|\(delay1)[c];[2]adelay=\(delay2)|\(delay2)[d];[3]adelay=\(delay3)|\(delay3)[e];[b][c][d][e]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputAudio)"
             default:
                 print("Default")
             }
             MobileFFmpeg.execute(str)
             return (outputAudio, false)
-        } else if urlConvert == 1 {
-            outputAudio = url[0]
-            return (outputAudio, false)
-        } else {
+        }
+        else {
             return (outputAudio, true)
         }
     }
     
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ICGVideoTrimmerDelegate, TransformDataDelegate {    
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ICGVideoTrimmerDelegate, TransformDataDelegate {
     
     // MARK: Rewrite func for CollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -685,12 +739,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         hasChangeMedia = true
         
-        if hasChooseMusic {
-            for audio in Audios {
-                audio.currentTime = 0
-                audio.pause()
-            }
+        for audio in Audios {
+            audio.player.currentTime = 0
+            audio.player.pause()
         }
+        
         videoPlayer.seek(to: CMTime.zero)
         videoPlayer.pause()
         
@@ -720,18 +773,27 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     // MARK: Rewrite func for TrimmerView
     
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
+        
         for audio in Audios {
-            audio.pause()
-            audio.currentTime = Double(startTime)
+            // Nếu trimmer chưa kéo tới thời gian add audio vào thì sẽ không thay đổi thời gian bắt đầu của audio ấy
+            if startTime <= audio.delayTime {
+                audio.player.currentTime = Double(audio.delayTime)
+            } else {
+                audio.player.currentTime = Double(startTime)
+            }
+            audio.player.pause()
         }
-        videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 600))
-        trimmerView.seek(toTime: startTime)
+        
+        videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 600), toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         videoPlayer.pause()
         changeIconBtnPlay()
+        
+        trimmerView.seek(toTime: startTime)
+//        delayTime = startTime
+        
         self.startTime = startTime
         self.endTime = endTime
         setLabelTime()
-        
     }
     
     //MARK: Rewirite function for userdefine Protocol
@@ -744,6 +806,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             self.volume = volume / volumeRate
             self.rate = rate / steps
         }
+        isReload = true
         viewDidAppear(true)
     }
     
@@ -753,6 +816,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func transformSplitMusic(url: URL) {
         self.arrURL[position] = url
+        isReload = true
         viewDidAppear(true)
     }
     
@@ -775,6 +839,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         } else {
             print("Number of audio file more than 4")
         }
+    }
+    
+    func delayTime(delayTime: CGFloat) {
+        self.delayTime = delayTime
     }
 }
 
@@ -803,7 +871,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
             // Pause all Audio and video
             for audio in Audios {
-                audio.pause()
+                audio.player.pause()
             }
             videoPlayer.pause()
             
