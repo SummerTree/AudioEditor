@@ -13,21 +13,21 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MusicCell" id="KGk-i7-Jjw" customClass="MusicCell" customModule="AudioControllerFFMPEG" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aXs-gi-fEb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lgy-JN-dSd">
-                                <rect key="frame" x="10" y="10" width="20" height="20"/>
+                                <rect key="frame" x="10" y="10" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lgy-JN-dSd" secondAttribute="height" id="zyk-LW-Sq1"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1br-pH-i52">
-                                <rect key="frame" x="270" y="5" width="40" height="30"/>
+                                <rect key="frame" x="270" y="5" width="40" height="34"/>
                                 <color key="backgroundColor" red="1" green="0.02071482182" blue="0.28028530610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="geG-Ld-aQu"/>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6J7-jM-DzA">
-                                <rect key="frame" x="40" y="10" width="220" height="20"/>
+                                <rect key="frame" x="44" y="10" width="216" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,7 +55,6 @@
                             <constraint firstAttribute="bottom" secondItem="lgy-JN-dSd" secondAttribute="bottom" constant="10" id="ItZ-il-8ZG"/>
                             <constraint firstAttribute="bottom" secondItem="1br-pH-i52" secondAttribute="bottom" constant="5" id="PiA-df-Bhi"/>
                             <constraint firstItem="6J7-jM-DzA" firstAttribute="leading" secondItem="lgy-JN-dSd" secondAttribute="trailing" constant="10" id="Puq-kb-wiK"/>
-                            <constraint firstAttribute="height" constant="40" id="RA3-WB-jdS"/>
                             <constraint firstAttribute="trailing" secondItem="1br-pH-i52" secondAttribute="trailing" constant="10" id="WZZ-GJ-hVe"/>
                             <constraint firstItem="1br-pH-i52" firstAttribute="leading" secondItem="6J7-jM-DzA" secondAttribute="trailing" constant="10" id="boT-kf-ngg"/>
                             <constraint firstAttribute="bottom" secondItem="6J7-jM-DzA" secondAttribute="bottom" constant="10" id="uX5-eO-G1J"/>

@@ -17,4 +17,6 @@ protocol TransformDataDelegate {
     func isRemove(isRemove: Bool)
     
     func delayTime(delayTime: CGFloat)
+    
+    func isGetMusic(state: Bool)
 }

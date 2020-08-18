@@ -1104,28 +1104,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gdM-zm-shd">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ni-s7-QsR">
+                                <rect key="frame" x="0.0" y="44" width="414" height="409"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.50261333626760563" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gdM-zm-shd">
+                                <rect key="frame" x="0.0" y="461" width="414" height="409"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="nS8-HO-3nF" firstAttribute="trailing" secondItem="gdM-zm-shd" secondAttribute="trailing" id="PhD-lt-Rqv"/>
-                            <constraint firstItem="nS8-HO-3nF" firstAttribute="bottom" secondItem="gdM-zm-shd" secondAttribute="bottom" id="SQz-LS-fdD"/>
-                            <constraint firstItem="gdM-zm-shd" firstAttribute="top" secondItem="nS8-HO-3nF" secondAttribute="top" id="WrA-Z2-DDx"/>
-                            <constraint firstItem="gdM-zm-shd" firstAttribute="leading" secondItem="nS8-HO-3nF" secondAttribute="leading" id="pue-vT-3Ap"/>
+                            <constraint firstItem="gdM-zm-shd" firstAttribute="top" secondItem="9ni-s7-QsR" secondAttribute="bottom" id="6pR-Oa-HnN"/>
+                            <constraint firstItem="gdM-zm-shd" firstAttribute="bottom" secondItem="nS8-HO-3nF" secondAttribute="bottom" id="MeU-xv-pI1"/>
+                            <constraint firstItem="gdM-zm-shd" firstAttribute="leading" secondItem="nS8-HO-3nF" secondAttribute="leading" id="Ok9-pv-6AB"/>
+                            <constraint firstItem="nS8-HO-3nF" firstAttribute="trailing" secondItem="9ni-s7-QsR" secondAttribute="trailing" id="SWt-0l-Gez"/>
+                            <constraint firstItem="gdM-zm-shd" firstAttribute="trailing" secondItem="nS8-HO-3nF" secondAttribute="trailing" id="hUf-U2-rAo"/>
+                            <constraint firstItem="9ni-s7-QsR" firstAttribute="top" secondItem="nS8-HO-3nF" secondAttribute="top" id="lWh-py-59R"/>
+                            <constraint firstItem="9ni-s7-QsR" firstAttribute="leading" secondItem="nS8-HO-3nF" secondAttribute="leading" id="wk3-ax-pxa"/>
+                            <constraint firstItem="gdM-zm-shd" firstAttribute="height" secondItem="nS8-HO-3nF" secondAttribute="height" multiplier="1/2" id="yJH-aX-c0B"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nS8-HO-3nF"/>
                     </view>
                     <navigationItem key="navigationItem" id="N0G-16-eHz"/>
                     <connections>
+                        <outlet property="screen" destination="9ni-s7-QsR" id="pyG-qn-Ze4"/>
                         <outlet property="table" destination="gdM-zm-shd" id="dwj-eC-G0w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ff-2t-gOk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2213" y="33"/>
+            <point key="canvasLocation" x="2211.594202898551" y="32.8125"/>
         </scene>
     </scenes>
     <resources>

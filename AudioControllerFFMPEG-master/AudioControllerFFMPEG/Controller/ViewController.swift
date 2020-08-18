@@ -338,11 +338,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func MusicInApp(){
         self.delayTime = CGFloat(videoPlayer.currentTime().seconds)
         if arrURL.count < 4 {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let MusicView = sb.instantiateViewController(withIdentifier: "AppMusic") as! AppMusicViewController
+            let MusicView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AppMusic") as! AppMusicViewController
             MusicView.delegate = self
             MusicView.delayTime = self.delayTime
-            navigationController?.pushViewController(MusicView, animated: true)
+            MusicView.modalPresentationStyle = .overCurrentContext
+            self.present(MusicView, animated: true)
         }
     }
     
@@ -829,6 +829,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         position = -1
         hasChooseMusic = false
+    }
+    
+    func isGetMusic(state: Bool) {
+        if state {
+            tableView.reloadData()
+        }
     }
     
     func transformMusicPath(path: String) {

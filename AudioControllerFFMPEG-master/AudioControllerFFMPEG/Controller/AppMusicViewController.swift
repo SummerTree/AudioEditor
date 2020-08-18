@@ -11,6 +11,7 @@ import AVFoundation
 
 class AppMusicViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MusicCellDelegate {
     
+    @IBOutlet weak var screen: UIView!
     @IBOutlet weak var table: UITableView!
     var songs = [Song]()
     var audioPlayer: AVAudioPlayer?
@@ -26,6 +27,18 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
         table.delegate = self
         table.dataSource = self
         table.register(MusicCell.nib(), forCellReuseIdentifier: MusicCell.identifier)
+        addScreenTap(screen: self.screen)
+    }
+    
+    func addScreenTap(screen: UIView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
+        tap.numberOfTapsRequired = 1
+        screen.addGestureRecognizer(tap)
+    }
+    
+    @objc func screenTapped(){
+        audioPlayer?.stop()
+        self.dismiss(animated: true)
     }
     
     func createAudioSession(){
@@ -42,7 +55,8 @@ class AppMusicViewController: UIViewController, UITableViewDelegate, UITableView
         if index != -1 {
             self.delegate.transformMusicPath(path: sound!.path)
             self.delegate.delayTime(delayTime: self.delayTime!)
-            self.navigationController?.popViewController(animated: true)
+            self.delegate.isGetMusic(state: true)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
