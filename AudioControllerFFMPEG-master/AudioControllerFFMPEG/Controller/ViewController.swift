@@ -121,7 +121,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 do {
                     let audio = try AVAudioPlayer(contentsOf: arrURL[i])
                     audio.enableRate = true
-                    audio.numberOfLoops = -1
                     if i > (numAudio - 1) {
                         audio.rate = self.rate! * steps
                         audio.volume = self.volume! * volumeRate
@@ -552,7 +551,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
     }
     
-    func RecordAudio(){
+    func RecordAudio() {
         if arrURL.count < 4 {
             recordPermission()
             if audioRecorder == nil {
@@ -771,7 +770,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     // MARK: Rewrite func for TrimmerView
-    
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
         
         for audio in Audios {
