@@ -233,9 +233,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
             trimmerView.seek(toTime: start)
             changeIconBtnPlay()
         } else {
-//            delayTime = playBackTime
+            delayTime = playBackTime
+            var audioDelayTime: Double!
+            var audioDuration: Double!
             if hasChooseMusic {
-                if !Audios[position].player.isPlaying {
+                audioDelayTime = Double(Audios[position].delayTime)
+                audioDuration = Audios[position].player.duration
+                if !Audios[position].player.isPlaying && ((Double(playBackTime) - audioDelayTime - audioDuration) < 0){
                     setTimeMusic(audio: Audios[position], startTime: playBackTime, play: true)
                     if isOverTimeDelay(startTime: playBackTime, delayTime: Audios[position].delayTime){
                         if videoPlayer.isPlaying {
@@ -245,7 +249,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 }
             } else {
                 for audio in Audios {
-                    if !audio.player.isPlaying {
+                    audioDelayTime = Double(audio.delayTime)
+                    audioDuration = audio.player.duration
+                    if !audio.player.isPlaying && ((Double(playBackTime) - audioDelayTime - audioDuration) < 0) {
                         setTimeMusic(audio: audio, startTime: playBackTime, play: true)
                         if isOverTimeDelay(startTime: playBackTime, delayTime: audio.delayTime){
                             if videoPlayer.isPlaying {
@@ -504,13 +510,17 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     }
     
     func playMedia() {
+        let playbackTime = videoPlayer.currentTime().seconds
+        var audioDelayTime: Double!
         if hasChooseMusic {
-            if (!videoPlayer.isPlaying) && (videoPlayer.currentTime().seconds >= Double(Audios[position].delayTime)) {
+            audioDelayTime = Double(Audios[position].delayTime)
+            if (!videoPlayer.isPlaying) && (playbackTime >= audioDelayTime) && ((playbackTime - audioDelayTime - Audios[position].player.duration) < 0) {
                 Audios[position].player.play()
             }
         } else {
             for audio in Audios {
-                if (!videoPlayer.isPlaying) && (videoPlayer.currentTime().seconds >= Double(audio.delayTime)) {
+                audioDelayTime = Double(audio.delayTime)
+                if (!videoPlayer.isPlaying) && (playbackTime >= audioDelayTime) && ((playbackTime - audioDelayTime - audio.player.duration) < 0){
                     audio.player.play()
                 }
             }
@@ -782,7 +792,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         for audio in Audios {
             // Nếu trimmer chưa kéo tới thời gian add audio vào thì sẽ không thay đổi thời gian bắt đầu của audio đó
             if startTime <= audio.delayTime {
-                audio.player.currentTime = Double(audio.delayTime)
+                audio.player.currentTime = 0
             } else {
                 audio.player.currentTime = Double(startTime)
             }
