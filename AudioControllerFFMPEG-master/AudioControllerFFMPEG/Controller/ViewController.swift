@@ -460,11 +460,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         serialQueue.async {
             MobileFFmpeg.execute(cmd)
             MobileFFmpeg.execute(cmd2)
-            let dupURL = self.fileManage.saveToDocumentDirectory(url: outputDuplicate)
-            let audio = self.Audios[self.position]
-            self.arrURL[self.position] = dupURL
-            self.volume = audio.player.volume / self.volumeRate
-            self.rate = audio.player.rate / self.steps
+            self.arrURL[self.position] = outputDuplicate
+            let audio = try! AVAudioPlayer(contentsOf: outputDuplicate)
+            let audioPosition = self.Audios[self.position]
+            audio.enableRate = true
+            audio.volume = audioPosition.player.volume
+            audio.rate = audioPosition.player.rate
+            self.Audios[self.position].player = audio
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 ZKProgressHUD.dismiss()
@@ -652,7 +654,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
 
                 final = "-i \(outputVideo) -i \(outputAudio) -filter_complex \"[0]adelay=0000|0000[b];[1]adelay=\(delay)|\(delay)[c];[b][c]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputMerge)"
             } else {
-                
+
                 final = "-i \(outputVideo) -i \(outputAudio) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputMerge)"
             }
             MobileFFmpeg.execute(final)
@@ -696,13 +698,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 let delay0 = Audios[0].delayTime * 1000
                 let delay1 = Audios[1].delayTime * 1000
                 let delay2 = Audios[2].delayTime * 1000
-                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -filter_complex \"[0]adelay=\(delay0)|\(delay0)[b];[1]adelay=\(delay1)|\(delay1)[c];[2]adelay=\(delay2)|\(delay2)[d];[b][c][d]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputAudio)"
+                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -filter_complex \"[0]adelay=\(delay0)|\(delay0)[b];[1]adelay=\(delay1)|\(delay1)[c];[2]adelay=\(delay2)|\(delay2)[d];[b][c][d]amix=3[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputAudio)"
             case 4:
                 let delay0 = Audios[0].delayTime * 1000
                 let delay1 = Audios[1].delayTime * 1000
                 let delay2 = Audios[2].delayTime * 1000
                 let delay3 = Audios[3].delayTime * 1000
-                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -i \(url[3]) -filter_complex \"[0]adelay=\(delay0)|\(delay0)[b];[1]adelay=\(delay1)|\(delay1)[c];[2]adelay=\(delay2)|\(delay2)[d];[3]adelay=\(delay3)|\(delay3)[e];[b][c][d][e]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputAudio)"
+                str = "-i \(url[0]) -i \(url[1]) -i \(url[2]) -i \(url[3]) -filter_complex \"[0]adelay=\(delay0)|\(delay0)[b];[1]adelay=\(delay1)|\(delay1)[c];[2]adelay=\(delay2)|\(delay2)[d];[3]adelay=\(delay3)|\(delay3)[e];[b][c][d][e]amix=4[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputAudio)"
             default:
                 print("Default")
             }
