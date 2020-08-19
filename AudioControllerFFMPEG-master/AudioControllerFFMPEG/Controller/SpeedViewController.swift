@@ -75,18 +75,11 @@ class SpeedViewController: UIViewController {
         } catch {
             print("Couldn't load file")
         }
-        player.numberOfLoops = -1
         player.enableRate = true
         initMedia()
     }
     
     func initMedia() {
-        if volume == nil {
-            volume = 60.0
-        }
-        if rate == nil {
-            rate = 4.0
-        }
         player.rate = rate! * steps
         player.volume = volumeRate * volume!
     }

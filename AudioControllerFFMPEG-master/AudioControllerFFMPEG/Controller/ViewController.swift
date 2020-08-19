@@ -16,6 +16,7 @@ import MediaPlayer
 class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerControllerDelegate {
     
     @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var lblDuration: UILabel!
     @IBOutlet weak var lblEndTime: UILabel!
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var btnPlay: UIButton!
@@ -121,7 +122,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 do {
                     let audio = try AVAudioPlayer(contentsOf: arrURL[i])
                     audio.enableRate = true
-                    if i > (numAudio - 1) {
+                    if i <= (numAudio - 1) {
+                        audio.rate = Audios[i].player.rate
+                        audio.volume = Audios[i].player.volume
+                        Audios[i].player = audio
+                    } else {
                         audio.rate = self.rate! * steps
                         audio.volume = self.volume! * volumeRate
                         Audios.append(ArrAudio(player: audio, delayTime: delayTime))
@@ -256,6 +261,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     func setLabelTime() {
         lblStartTime.text = CMTimeMakeWithSeconds(Float64(startTime!), preferredTimescale: 600).positionalTime
         lblEndTime.text = CMTimeMakeWithSeconds(Float64(endTime!), preferredTimescale: 600).positionalTime
+        lblDuration.text = CMTimeMakeWithSeconds(Float64(endTime! - startTime!), preferredTimescale: 600).positionalTime
     }
     
     func initMedia() {
@@ -745,6 +751,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
         videoPlayer.seek(to: CMTime.zero)
         videoPlayer.pause()
+        changeIconBtnPlay()
         
         switch indexPath.row {
         case 0:
@@ -773,7 +780,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
         
         for audio in Audios {
-            // Nếu trimmer chưa kéo tới thời gian add audio vào thì sẽ không thay đổi thời gian bắt đầu của audio ấy
+            // Nếu trimmer chưa kéo tới thời gian add audio vào thì sẽ không thay đổi thời gian bắt đầu của audio đó
             if startTime <= audio.delayTime {
                 audio.player.currentTime = Double(audio.delayTime)
             } else {
@@ -801,6 +808,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             videoPlayer.volume = volume
         } else {
             self.arrURL[position] = url
+            self.Audios[position].player.volume = volume
+            self.Audios[position].player.rate = rate
             self.volume = volume / volumeRate
             self.rate = rate / steps
         }

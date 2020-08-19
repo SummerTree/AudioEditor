@@ -15,6 +15,7 @@ class DeleteViewController: UIViewController {
     
     @IBOutlet weak var screen: UIView!
     @IBOutlet weak var lblEndTime: UILabel!
+    @IBOutlet weak var lblDuration: UILabel!
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
     @IBOutlet weak var btnPlay: UIButton!
@@ -91,6 +92,7 @@ class DeleteViewController: UIViewController {
     func setLabelTime() {
         lblStartTime.text = CMTimeMakeWithSeconds(Float64(startTime!), preferredTimescale: 600).positionalTime
         lblEndTime.text = CMTimeMakeWithSeconds(Float64(endTime!), preferredTimescale: 600).positionalTime
+        lblDuration.text = CMTimeMakeWithSeconds(Float64(endTime! - startTime!), preferredTimescale: 600).positionalTime
     }
     
     func initMedia() {

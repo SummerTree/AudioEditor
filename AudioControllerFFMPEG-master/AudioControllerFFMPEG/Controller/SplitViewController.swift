@@ -16,6 +16,7 @@ class SplitViewController: UIViewController {
     @IBOutlet weak var btnPlay: UIButton!
     @IBOutlet weak var lblStartTime: UILabel!
     @IBOutlet weak var lblEndTime: UILabel!
+    @IBOutlet weak var lblDuration: UILabel!
     @IBOutlet weak var trimmerView: ICGVideoTrimmerView!
     
     var delegate: TransformDataDelegate!
@@ -39,6 +40,16 @@ class SplitViewController: UIViewController {
         
         addScreenTap(screen: self.screen)
     }
+    
+//    func trimmerDoubleTap() {
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(trimmerTapped))
+//        tap.numberOfTapsRequired = 2
+//        trimmerView.addGestureRecognizer(tap)
+//    }
+//
+//    @objc func trimmerTapped() {
+//
+//    }
     
     func addScreenTap(screen: UIView) {
         let tap = UITapGestureRecognizer(target: self, action: #selector(screenTapped))
@@ -72,9 +83,8 @@ class SplitViewController: UIViewController {
         setLabelTime()
     }
     
-    // MARK: Prepare audio player to trim audio
+    // MARK: Add Audio player
     
-    /// Add  Audio/ Video Player for playerView
     private func addAudioPlayer(with url: URL) {
         do {
             try player = AVAudioPlayer(contentsOf: url)
@@ -92,6 +102,7 @@ class SplitViewController: UIViewController {
     func setLabelTime() {
         lblStartTime.text = CMTimeMakeWithSeconds(Float64(startTime!), preferredTimescale: 600).positionalTime
         lblEndTime.text = CMTimeMakeWithSeconds(Float64(endTime!), preferredTimescale: 600).positionalTime
+        lblDuration.text = CMTimeMakeWithSeconds(Float64(endTime! - startTime!), preferredTimescale: 600).positionalTime
     }
     
     func initMedia() {
@@ -105,14 +116,14 @@ class SplitViewController: UIViewController {
         player.volume = volumeRate * volume!
     }
     
+    // MARK: Playbacktime checker
     
     func startPlaybackTimeChecker() {
-        stopPlaybackTimeChecker()
+        stopPlaypbackTimeChecker()
         playbackTimeCheckerTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(onPlaybackTimeChecker), userInfo: nil, repeats: true)
-        
     }
     
-    func stopPlaybackTimeChecker(){
+    func stopPlaypbackTimeChecker() {
         playbackTimeCheckerTimer?.invalidate()
         playbackTimeCheckerTimer = nil
     }
@@ -124,7 +135,6 @@ class SplitViewController: UIViewController {
         
         let playbackTime = CGFloat(player.currentTime)
         trimmerView.seek(toTime: playbackTime)
-        
         
         if Float(playbackTime) >= Float(end) {
             player.currentTime = Double(start)
@@ -160,7 +170,7 @@ class SplitViewController: UIViewController {
         player.currentTime = Double(startTime!)
         if player.isPlaying {
             player.pause()
-            stopPlaybackTimeChecker()
+            stopPlaypbackTimeChecker()
         } else {
             player.play()
             startPlaybackTimeChecker()
@@ -169,7 +179,7 @@ class SplitViewController: UIViewController {
     }
     
     @IBAction func split(_ sender: Any) {
-        
+        player.pause()
         let name = Date().toString(dateFormat: "HH:mm:ss")
         let type = ".mp3" 
         let output = fileManage.createUrlInApp(name: "\(name)\(type)")
