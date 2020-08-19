@@ -348,7 +348,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     // MARK: Navigate to another view
     
     func MusicInApp(){
-        self.delayTime = CGFloat(videoPlayer.currentTime().seconds)
+//        self.delayTime = CGFloat(videoPlayer.currentTime().seconds)
         if arrURL.count < 4 {
             let MusicView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AppMusic") as! AppMusicViewController
             MusicView.delegate = self
@@ -637,19 +637,24 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         let extract = "-i \(path) -af \"volume=\(videoPlayer.volume)\" \(outputVideo)"
         MobileFFmpeg.execute(extract)
         
-        var isEmpty: Bool
         var outputAudio: URL
-        
-        (outputAudio, isEmpty) = mergeAllOfAudioURL()
         
         // Merge audio file
         
-        if isEmpty {
+        if arrURL.count == 0 {
             fileManage.clearTempDirectory()
             return urlVideo
         } else {
-            let final = "-i \(outputVideo) -i \(outputAudio) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputMerge)"
+            var final = ""
+            outputAudio = mergeAllOfAudioURL()
+            if arrURL.count == 1 {
+                let delay = Audios[0].delayTime * 1000
 
+                final = "-i \(outputVideo) -i \(outputAudio) -filter_complex \"[0]adelay=0000|0000[b];[1]adelay=\(delay)|\(delay)[c];[b][c]amerge[a]\" -map \"[a]\" -c:a libmp3lame -q:a 4 \(outputMerge)"
+            } else {
+                
+                final = "-i \(outputVideo) -i \(outputAudio) -filter_complex amerge -c:a libmp3lame -q:a 4 \(outputMerge)"
+            }
             MobileFFmpeg.execute(final)
 
             // Merge audio file with video
@@ -664,10 +669,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
     }
     
-    func mergeAllOfAudioURL() -> (URL, Bool) {
+    func mergeAllOfAudioURL() -> (URL) {
         var url = [URL]()
         let urlNum = arrURL.count
-        let outputAudio = fileManage.createUrlInApp(name: "OutputAudio.mp3")
+        var outputAudio = fileManage.createUrlInApp(name: "OutputAudio.mp3")
         if arrURL.count > 0 {
             for i in 0 ..< urlNum {
                 let output = fileManage.createUrlInApp(name: "\(i).mp3")
@@ -678,12 +683,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
         }
         
         let urlConvert = url.count
-        if urlConvert > 0 {
+        if urlConvert >= 1 {
             var str = ""
             switch urlConvert {
             case 1:
-                let delay0 = Audios[0].delayTime * 1000
-                str = "-i \(url[0]) -af adelay=\(delay0) -c:a libmp3lame \(outputAudio)"
+                outputAudio = url[0]
             case 2:
                 let delay0 = Audios[0].delayTime * 1000
                 let delay1 = Audios[1].delayTime * 1000
@@ -703,11 +707,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
                 print("Default")
             }
             MobileFFmpeg.execute(str)
-            return (outputAudio, false)
         }
-        else {
-            return (outputAudio, true)
-        }
+        return outputAudio
     }
     
 }
@@ -820,8 +821,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             self.arrURL[position] = url
             self.Audios[position].player.volume = volume
             self.Audios[position].player.rate = rate
-            self.volume = volume / volumeRate
-            self.rate = rate / steps
         }
         isReload = true
         viewDidAppear(true)
@@ -838,8 +837,15 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func isRemove(isRemove: Bool) {
-        if arrURL.count > 0 {
+        let count = arrURL.count - 1
+        if count >= 0 {
             if isRemove {
+                if position < count {
+                    for i in position ..< count {
+                        Audios[i].player = Audios[i+1].player
+                        Audios[i].delayTime = Audios[i+1].delayTime
+                    }
+                }
                 arrURL.remove(at: position)
                 Audios.remove(at: position)
             }
@@ -908,13 +914,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             }
             collectionView.reloadData()
             changeIconBtnPlay()
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            arrURL.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
 }
