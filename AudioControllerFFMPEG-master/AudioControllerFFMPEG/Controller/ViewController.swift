@@ -715,9 +715,109 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, MPMediaPickerCo
     
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ICGVideoTrimmerDelegate, TransformDataDelegate {
+// MARK: Extension Trimmer View
+extension ViewController: ICGVideoTrimmerDelegate {
     
-    // MARK: Rewrite func for CollectionView
+        func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
+            
+            for audio in Audios {
+                // Nếu trimmer chưa kéo tới thời gian add audio vào thì sẽ không thay đổi thời gian bắt đầu của audio đó
+                if startTime <= audio.delayTime {
+                    audio.player.currentTime = 0
+                } else {
+                    audio.player.currentTime = Double(startTime)
+                }
+                audio.player.pause()
+            }
+            
+            videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 600), toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+            videoPlayer.pause()
+            changeIconBtnPlay()
+            
+            trimmerView.seek(toTime: startTime)
+    //        delayTime = startTime
+            
+            self.startTime = startTime
+            self.endTime = endTime
+            setLabelTime()
+        }
+}
+
+
+//MARK: Protocol
+extension ViewController: TransformDataDelegate {
+    
+    func transform(url: URL, volume: Float, rate: Float) {
+        if isVideo {
+            videoPlayer.volume = volume
+        } else {
+            self.arrURL[position] = url
+            
+            let audio = try! AVAudioPlayer(contentsOf: url)
+
+            audio.enableRate = true
+            audio.volume = volume
+            audio.rate = rate
+            self.Audios[self.position].player = audio
+        }
+        self.volume = volume
+        self.rate = rate
+        isReload = true
+        resetVariable()
+    }
+    
+    func transformQuality(quality: String) {
+        self.quality = quality
+    }
+    
+    func transformSplitMusic(url: URL) {
+        self.arrURL[position] = url
+        isReload = true
+        resetVariable()
+    }
+    
+    func isRemove(isRemove: Bool) {
+        let count = arrURL.count - 1
+        if count >= 0 {
+            if isRemove {
+                if position < count {
+                    for i in position ..< count {
+                        Audios[i].player = Audios[i+1].player
+                        Audios[i].delayTime = Audios[i+1].delayTime
+                    }
+                }
+                arrURL.remove(at: position)
+                Audios.remove(at: position)
+            }
+            tableView.reloadData()
+            collectionView.reloadData()
+        }
+        position = -1
+        hasChooseMusic = false
+    }
+    
+    func isGetMusic(state: Bool) {
+        if state {
+            tableView.reloadData()
+        }
+    }
+    
+    func transformMusicPath(path: String) {
+        if(arrURL.count < 4) {
+            self.arrURL.append(URL(fileURLWithPath: path))
+        } else {
+            print("Number of audio file more than 4")
+        }
+    }
+    
+    func delayTime(delayTime: CGFloat) {
+        self.delayTime = delayTime
+    }
+}
+
+// MARK: Extension Collection View
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, TransformDataDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arr.count
     }
@@ -788,105 +888,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             print(indexPath.row)
         }
     }
-    
-    // MARK: Rewrite func for TrimmerView
-    func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
-        
-        for audio in Audios {
-            // Nếu trimmer chưa kéo tới thời gian add audio vào thì sẽ không thay đổi thời gian bắt đầu của audio đó
-            if startTime <= audio.delayTime {
-                audio.player.currentTime = 0
-            } else {
-                audio.player.currentTime = Double(startTime)
-            }
-            audio.player.pause()
-        }
-        
-        videoPlayer.seek(to: CMTimeMakeWithSeconds(Float64(startTime), preferredTimescale: 600), toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-        videoPlayer.pause()
-        changeIconBtnPlay()
-        
-        trimmerView.seek(toTime: startTime)
-//        delayTime = startTime
-        
-        self.startTime = startTime
-        self.endTime = endTime
-        setLabelTime()
-    }
-    
-    //MARK: Rewirite function for userdefine Protocol
-    
-    func transform(url: URL, volume: Float, rate: Float) {
-        if isVideo {
-            videoPlayer.volume = volume
-        } else {
-            self.arrURL[position] = url
-            
-            let audio = try! AVAudioPlayer(contentsOf: url)
-
-            audio.enableRate = true
-            audio.volume = volume
-            audio.rate = rate
-            self.Audios[self.position].player = audio
-        }
-        self.volume = volume
-        self.rate = rate
-        isReload = true
-        resetVariable()
-    }
-    
-    func transformQuality(quality: String) {
-        self.quality = quality
-    }
-    
-    func transformSplitMusic(url: URL) {
-        self.arrURL[position] = url
-        isReload = true
-        resetVariable()
-    }
-    
-    func isRemove(isRemove: Bool) {
-        let count = arrURL.count - 1
-        if count >= 0 {
-            if isRemove {
-                if position < count {
-                    for i in position ..< count {
-                        Audios[i].player = Audios[i+1].player
-                        Audios[i].delayTime = Audios[i+1].delayTime
-                    }
-                }
-                arrURL.remove(at: position)
-                Audios.remove(at: position)
-            }
-            tableView.reloadData()
-            collectionView.reloadData()
-        }
-        position = -1
-        hasChooseMusic = false
-    }
-    
-    func isGetMusic(state: Bool) {
-        if state {
-            tableView.reloadData()
-        }
-    }
-    
-    func transformMusicPath(path: String) {
-        if(arrURL.count < 4) {
-            self.arrURL.append(URL(fileURLWithPath: path))
-        } else {
-            print("Number of audio file more than 4")
-        }
-    }
-    
-    func delayTime(delayTime: CGFloat) {
-        self.delayTime = delayTime
-    }
 }
 
+
+//MARK: Extension Table View
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    //MARK: Rewrite func for TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrURL.count
