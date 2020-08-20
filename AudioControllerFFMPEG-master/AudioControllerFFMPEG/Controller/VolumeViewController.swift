@@ -198,8 +198,7 @@ extension VolumeViewController: ICGVideoTrimmerDelegate {
     func trimmerView(_ trimmerView: ICGVideoTrimmerView!, didChangeLeftPosition startTime: CGFloat, rightPosition endTime: CGFloat) {
         player.pause()
         changeIconBtnPlay()
-        player.currentTime = Double(startTime)
-        
+        player.currentTime = Double(startTime) 
         self.startTime = startTime
         self.endTime = endTime
         setLabelTime()

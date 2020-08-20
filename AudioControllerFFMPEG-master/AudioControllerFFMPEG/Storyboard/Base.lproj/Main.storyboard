@@ -147,21 +147,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wQv-rK-zko">
                                 <rect key="frame" x="0.0" y="44" width="414" height="409"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jq4-5I-49h" userLabel="View Player">
-                                        <rect key="frame" x="0.0" y="-5" width="414" height="414"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Jq4-5I-49h" secondAttribute="height" id="JpC-6E-17s"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Jq4-5I-49h" secondAttribute="trailing" id="Dy5-AE-oUQ"/>
-                                    <constraint firstItem="Jq4-5I-49h" firstAttribute="leading" secondItem="wQv-rK-zko" secondAttribute="leading" id="IEz-pB-GK8"/>
-                                    <constraint firstAttribute="bottom" secondItem="Jq4-5I-49h" secondAttribute="bottom" id="PFy-Lq-UDM"/>
-                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fk-KM-FlR" userLabel="Play">
                                 <rect key="frame" x="0.0" y="453" width="414" height="50"/>
@@ -219,12 +205,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="wQv-rK-zko" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.5" id="3RG-uo-IJI"/>
                             <constraint firstItem="2fk-KM-FlR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DF0-HY-mqo"/>
                             <constraint firstItem="wQv-rK-zko" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Hcs-oK-tcG"/>
                             <constraint firstItem="KuY-jt-Gfg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="P6z-we-HtO"/>
                             <constraint firstItem="2fk-KM-FlR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="X9f-zE-qKb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wQv-rK-zko" secondAttribute="trailing" id="ajk-gh-cVE"/>
+                            <constraint firstItem="wQv-rK-zko" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.5" id="cMg-uz-StG"/>
                             <constraint firstItem="KuY-jt-Gfg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="k9X-EZ-oZO"/>
                             <constraint firstItem="KuY-jt-Gfg" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nwT-j7-CtM"/>
                             <constraint firstItem="wQv-rK-zko" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="q0q-1v-3C4"/>
@@ -241,7 +227,7 @@
                         <outlet property="lblDuration" destination="M83-0e-BQj" id="1Ze-JE-3Rn"/>
                         <outlet property="lblEndTime" destination="Paz-Oh-SIC" id="5Ix-d8-DgU"/>
                         <outlet property="lblStartTime" destination="NgH-Mh-KHl" id="Ujg-0m-WBM"/>
-                        <outlet property="playerView" destination="Jq4-5I-49h" id="6dV-Fv-SSX"/>
+                        <outlet property="playerView" destination="wQv-rK-zko" id="AMC-GZ-ToB"/>
                         <outlet property="tableView" destination="MDW-uc-Ruq" id="AOa-tn-Z8q"/>
                         <outlet property="trimmerView" destination="fFi-Kv-udz" id="9fr-FJ-gRe"/>
                     </connections>

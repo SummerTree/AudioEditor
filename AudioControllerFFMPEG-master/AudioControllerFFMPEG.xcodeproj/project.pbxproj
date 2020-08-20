@@ -19,6 +19,7 @@
 		8F48947924C82EE900427B50 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947824C82EE900427B50 /* SplitViewController.swift */; };
 		8F48947B24C84A5300427B50 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F48947A24C84A5300427B50 /* Time.swift */; };
 		8F51D07424D568170008EC35 /* AB.mov in Resources */ = {isa = PBXBuildFile; fileRef = 8F51D07324D568170008EC35 /* AB.mov */; };
+		8FA45E2C24ED2EED00012663 /* AssetSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA45E2B24ED2EED00012663 /* AssetSelection.swift */; };
 		8FB8D5E124E24B0900FC8A2C /* m4a.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8FB8D5E024E24B0900FC8A2C /* m4a.m4a */; };
 		8FB9961B24C59B74009FE54D /* gene.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8FB9961A24C59B74009FE54D /* gene.mp3 */; };
 		8FBB4C7624DD059000EB1692 /* MyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBB4C7524DD059000EB1692 /* MyProtocol.swift */; };
@@ -76,6 +77,7 @@
 		8F48947824C82EE900427B50 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		8F48947A24C84A5300427B50 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		8F51D07324D568170008EC35 /* AB.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = AB.mov; sourceTree = "<group>"; };
+		8FA45E2B24ED2EED00012663 /* AssetSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetSelection.swift; sourceTree = "<group>"; };
 		8FB8D5E024E24B0900FC8A2C /* m4a.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = m4a.m4a; sourceTree = "<group>"; };
 		8FB9961A24C59B74009FE54D /* gene.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gene.mp3; sourceTree = "<group>"; };
 		8FBB4C7524DD059000EB1692 /* MyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProtocol.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				181544CC24E1331300F13077 /* SongQuery.swift */,
 				8F48947A24C84A5300427B50 /* Time.swift */,
 				8FBB4C7524DD059000EB1692 /* MyProtocol.swift */,
+				8FA45E2B24ED2EED00012663 /* AssetSelection.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -301,8 +304,8 @@
 		8FFB831A24BD47320045C6CF /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				8FDCDC9924BC561600BA003D /* LaunchScreen.storyboard */,
 				8FDCDC9424BC561400BA003D /* Main.storyboard */,
+				8FDCDC9924BC561600BA003D /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				8FD6867824DAA99D00948620 /* Media.swift in Sources */,
 				8FDCDC9324BC561400BA003D /* ViewController.swift in Sources */,
 				18566CE924E52AE4000A0655 /* MusicCell.swift in Sources */,
+				8FA45E2C24ED2EED00012663 /* AssetSelection.swift in Sources */,
 				8F48947924C82EE900427B50 /* SplitViewController.swift in Sources */,
 				8FBB4C7624DD059000EB1692 /* MyProtocol.swift in Sources */,
 				8FFB832624BD50840045C6CF /* VolumeViewController.swift in Sources */,
